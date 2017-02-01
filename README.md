@@ -1,2 +1,6 @@
-# SukufesuAC
-Web App for School Idol Festival Arcade
+# スクフェスAC部活帳
+
+「スクールアイドルフェスティバル　AfterSchoolActivity」（通称スクフェスAC、またはアケフェス）を
+快適にプレイするための Web アプリです。
+
+現在作成中。
