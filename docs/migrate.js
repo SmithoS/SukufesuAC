@@ -27,5 +27,13 @@ Migrate = [
         skill_mark: "skill_dia"
       });
     }
+  },
+  {
+    dbver: "1.00.01",
+    msg: "設定項目を追加しました。",
+    upd : function(db) {
+      //設定
+      db.saveSetting("name_display_type", "name_display_short");
+    }
   }
 ];

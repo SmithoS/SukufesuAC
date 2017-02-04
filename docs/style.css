@@ -751,8 +751,6 @@ h2 {
 }
 
 
-
-
 /* スキルを示すマーク */
 
 /* ハート */
@@ -785,4 +783,18 @@ h2 {
   width: 14px;
   height: 14px;
   transform: rotate(45deg);
+}
+
+/* 一覧で表示する名称 */
+#wrapper.name_display_full .nameShort,
+#wrapper.name_display_full .name1Char {
+  display: none;
+}
+#wrapper.name_display_short .nameFull,
+#wrapper.name_display_short .name1Char {
+  display: none;
+}
+#wrapper.name_display_c1 .nameFull,
+#wrapper.name_display_c1 .nameShort {
+  display: none;
 }

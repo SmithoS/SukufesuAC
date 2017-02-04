@@ -35,15 +35,15 @@ var DB = (function(){
   var d = {};
   var LS = localStorage;
   var _member = [
-    {id: "m01", nm: "高坂穂乃果", birthday:"8/3"},
-    {id: "m02", nm: "絢瀬絵里", birthday:"10/21"},
-    {id: "m03", nm: "南ことり", birthday:"9/12"},
-    {id: "m04", nm: "園田海未", birthday:"3/15"},
-    {id: "m05", nm: "星空凛", birthday:"11/1"},
-    {id: "m06", nm: "西木野真姫", birthday:"4/19"},
-    {id: "m07", nm: "東條希", birthday:"6/9"},
-    {id: "m08", nm: "小泉花陽", birthday:"1/17"},
-    {id: "m09", nm: "矢沢にこ", birthday:"7/22"}
+    {id: "m01", nm: "高坂穂乃果", snm: "穂乃果", c1nm:"ほ" , birthday:"8/3"},
+    {id: "m02", nm: "絢瀬絵里", snm: "絵里", c1nm:"え" , birthday:"10/21"},
+    {id: "m03", nm: "南ことり", snm: "ことり", c1nm:"こ" , birthday:"9/12"},
+    {id: "m04", nm: "園田海未", snm: "海未", c1nm:"う" , birthday:"3/15"},
+    {id: "m05", nm: "星空凛", snm: "凛", c1nm:"り" , birthday:"11/1"},
+    {id: "m06", nm: "西木野真姫", snm: "真姫", c1nm:"ま" , birthday:"4/19"},
+    {id: "m07", nm: "東條希", snm: "希", c1nm:"の" , birthday:"6/9"},
+    {id: "m08", nm: "小泉花陽", snm: "花陽", c1nm:"は" , birthday:"1/17"},
+    {id: "m09", nm: "矢沢にこ", snm: "にこ", c1nm:"に" , birthday:"7/22"}
   ];
 
   function setJson(id, obj) {
@@ -122,6 +122,9 @@ var DB = (function(){
   d.getSkill = function(id) {
     return getJson(id);
   };
+  d.getMemberList = function() {
+    return _member;
+  }
   d.getCostumeList = function() {
     return getList("c", null);
   };
@@ -194,11 +197,17 @@ var ListView = (function(){
   var skillView;
   var memCosView;
   v.showCostume = function() {
-    cosView = riot.mount("costume", {"cos": DB.getCostumeList()});
+    cosView = riot.mount("costume", {
+      "cos": DB.getCostumeList(),
+      "mem": DB.getMemberList()
+    });
   };
   v.showSkill = function() {
     var dt = DB.getSkillList();
-    skillView = riot.mount("skill", {"skill": DB.getSkillList()});
+    skillView = riot.mount("skill", {
+      "skill": DB.getSkillList(),
+      "mem": DB.getMemberList()
+    });
   };
 
   v.updateCostume = function() {
@@ -215,6 +224,9 @@ var ListView = (function(){
   };
   v.setMemberSkill = function(memId) {
     riot.mount("member-skill", {"skill": DB.getMemberSkillList(memId)});
+  };
+  v.setMemberList = function () {
+    riot.mount("member-list", {"mem": DB.getMemberList()});
   };
   v.setMemberStatus = function(memId) {
     riot.mount("member-profile", DB.getMember(memId));
@@ -436,7 +448,7 @@ function setEventListener() {
         mem: $(this).attr("data-mem")
       });
     });
-    $("#statusMemberList a").on("click", function() {
+    $(document).on("click", "#statusMemberList a", function() {
       ListView.setMemberStatus($(this).attr("data-id"));
     });
     $("#dialogCloseBtn").on("click", function() {
@@ -497,6 +509,7 @@ $(function(){
 
 
   //表示処理
+  ListView.setMemberList();
   ListView.showCostume();
   ListView.showSkill();
   ListView.setSetting();
