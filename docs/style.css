@@ -32,7 +32,6 @@ h2 {
 /* メニュー */
 #menu_key {
 	position: fixed;
-	display: block;
 	text-decoration: none;
 	top: 5px;
 	right: 5px;
@@ -797,4 +796,28 @@ h2 {
 #wrapper.name_display_c1 .nameFull,
 #wrapper.name_display_c1 .nameShort {
   display: none;
+}
+
+/* メニュー表示方法 */
+/* 隠す */
+#wrapper.menu_show_fixed #menu_key {
+  display: block;
+}
+#wrapper.menu_show_fixed #menuSpacer {
+  display: none;
+}
+#wrapper.menu_show_fixed #menu {
+  bottom: -50px;
+}
+
+/* 固定表示 */
+#wrapper.menu_show_fixed #menu_key {
+  display: none;
+}
+#wrapper.menu_show_fixed #menuSpacer {
+  height: 50px;
+  display: block;
+}
+#wrapper.menu_show_fixed #menu {
+  bottom: 0 !important; /* Javascriptで表示位置をDOMに直接している可能性があるため */
 }

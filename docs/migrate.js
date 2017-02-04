@@ -32,8 +32,10 @@ Migrate = [
     dbver: "1.00.01",
     msg: "設定項目を追加しました。",
     upd : function(db) {
-      //設定
+      //名前表示タイプ
       db.saveSetting("name_display_type", "name_display_short");
+      //メニュー表示形式
+      db.saveSetting("menu_show_type", "menu_show_hide");
     }
   }
 ];
