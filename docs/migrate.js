@@ -36,6 +36,10 @@ Migrate = [
       db.saveSetting("name_display_type", "name_display_short");
       //メニュー表示形式
       db.saveSetting("menu_show_type", "menu_show_hide");
+      //ブレザーズハット名前修正
+      var cos = db.getCostume("c007");
+      cos.nm = "ブレザーズ・ハット";
+      db.save("c007", cos);
     }
   }
 ];
