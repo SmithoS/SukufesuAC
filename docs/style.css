@@ -331,28 +331,7 @@ h2 {
   width: 80px;
   height: 72px;
 }
-.dialog .costumeedit input:checked + label:before,
-.dialog .costumeedit input:checked + label:after {
-  position: absolute;
-  content: "";
-  top: 0;
-  width: 40px;
-  height: 64px;
-  /*
-  background-image: linear-gradient(to top left, #F7DE05, #DA8E00, #EDAC06, #F7DE05, #ECB802, #DAAF08, #B67B03);
-      */
-  border-radius: 40px 40px 0 0;
-}
-.dialog .costumeedit input:checked + label:before {
-  left: 40px;
-  transform: rotate(-45deg);
-  transform-origin: 0 100%;
-}
-.dialog .costumeedit input:checked + label:after {
-  left: 0;
-  transform: rotate(45deg);
-  transform-origin: 100% 100%;
-}
+
 .dialog .costumeedit input:checked + label .rareTxt {
   position: absolute;
   top:0;
@@ -568,9 +547,6 @@ h2 {
 
 /* 設定画面 */
 
-
-
-
 .page_setting label {
   display: inline-block;
   width: 100%;
@@ -711,7 +687,8 @@ h2 {
 /* 所有衣装のマーク */
 
 /* ダイア */
-#wrapper.cos_dia .page.costume .owned .rareMark::before {
+#wrapper.cos_dia .page.costume .owned .rareMark::before,
+#wrapper.cos_dia .dialog .costumeedit input:checked + label:before {
   position: absolute;
   content: "";
   top: 0;
@@ -719,34 +696,63 @@ h2 {
   left: 0;
   right: 0;
   margin: auto;
+  transform: rotate(-45deg);
+}
+#wrapper.cos_dia .page.costume .owned .rareMark::before {
   width: 20px;
   height:20px;
-  transform: rotate(-45deg);
 }
 #wrapper.cos_dia .owned .rareMark .rareTxt {
   top: 6px;
 }
+#wrapper.cos_dia .dialog .costumeedit input:checked + label:before {
+  width: 57px;
+  height:57px;
+}
+#wrapper.cos_dia .dialog .costumeedit input:checked + label .rareTxt {
+  top: 10px;
+}
 
 /* ハート */
 #wrapper.cos_hart .page.costume .owned .rareMark::before,
+#wrapper.cos_hart .page.costume .owned .rareMark::after,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:after {
+  position: absolute;
+  content: "";
+  top: 0;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::before,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before {
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::after,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::before,
 #wrapper.cos_hart .page.costume .owned .rareMark::after {
-	position: absolute;
-	content: "";
-	top: 0;
 	width: 15px;
 	height: 24px;
 	border-radius: 15px 15px 0 0;
 }
 #wrapper.cos_hart .page.costume .owned .rareMark::before {
 	left: 15px;
-	transform: rotate(-45deg);
-	transform-origin: 0 100%;
 }
-#wrapper.cos_hart .page.costume .owned .rareMark::after {
-	left: 0;
-	transform: rotate(45deg);
-	transform-origin: 100% 100%;
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:after {
+  width: 40px;
+  height: 64px;
+  border-radius: 40px 40px 0 0;
 }
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before {
+  left: 40px;
+}
+
+
 
 
 /* スキルを示すマーク */
