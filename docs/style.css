@@ -42,6 +42,7 @@ h2 {
 	border: 1px solid white;
 	border-radius: 7px;
 	padding: 3px;
+  z-index: 100;
 }
 #menu_key .btn {
 	color: white;
