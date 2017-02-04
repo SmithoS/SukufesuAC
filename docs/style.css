@@ -528,11 +528,9 @@ h2 {
 .page.skill .skilnm.st2 span:before, .page.skill .skilnm.st2 span:after {background-color: #7070ff;}
 .page.skill .skilnm.st3 span:before, .page.skill .skilnm.st3 span:after {background-color: #30cc30;}
 
-
-
-.page_skill td {color: black;}
-.page_skill td.ov5 {font-weight: bold;color: deeppink;}
-.page_skill td.ovA {font-weight: bold;
+.page.skill td {color: black;}
+.page.skill td.ov5 {font-weight: bold;color: deeppink;}
+.page.skill td.ovA {font-weight: bold;
 	color: yellow;
 	text-shadow: 0 1px 0 gray,
 							0 -1px 0 gray,
