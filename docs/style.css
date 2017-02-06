@@ -28,6 +28,70 @@ h2 {
 }
 
 
+/* ボタン */
+.button {
+  display: inline-block;
+  background-color: transparent;
+  text-decoration: none;
+  position: relative;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  padding: 2px 2px 7px 2px;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+}
+.button .txt2 {
+  display: inline-block;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  height: calc(100% - 5px);
+  padding-top: 5px;
+}
+.button.ok .txt2 {
+  background-color: #FF7766;
+}
+.button .txt1 {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height:0;
+  top: 0;
+  left: 0;
+}
+.button .txt1.f {
+  border: 10px solid transparent;
+  border-left: 10px solid white;
+  border-top: 10px solid white;
+}
+.button .txt1.b {
+  border: 8px solid transparent;
+  border-left-width: 8px;
+  border-top-width: 8px;
+  border-left-style: solid;
+  border-top-style: solid;
+}
+.button .txt3 {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height:0;
+  right: 0;
+  bottom: 0;
+}
+/* 影が不自然になるので
+.button .txt3.f {
+  border: 10px solid transparent;
+  border-right: 10px solid white;
+  border-bottom: 10px solid white;
+}
+.button .txt3.b {
+  border: 8px solid transparent;
+  border-right: 8px solid #969bA0;
+  border-bottom: 8px solid #969bA0;
+}
+*/
 
 /* メニュー */
 #menu_key {
@@ -185,68 +249,11 @@ h2 {
 .dialog .description p {
   font-size: 1.4em;
 }
-/* ダイアログボタン */
-.dialog .button {
-  display: inline-block;
-  background-color: transparent;
-  text-decoration: none;
-  position: relative;
-  width: 100px;
-  height: 50px;
-  text-align: center;
-  padding: 2px 2px 7px 2px;
-  background-color: white;
-  box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
-}
-.dialog .button .txt2 {
-  display: inline-block;
-  color: white;
-  font-weight: bold;
-  width: 100%;
-  height: calc(100% - 5px);
-  padding-top: 5px;
-}
-.dialog .button.ok .txt2 {
-  background-color: #FF7766;
-}
-.dialog .button .txt1 {
-  position: absolute;
-  display: inline-block;
-  width: 0;
-  height:0;
-  top: 0;
-  left: 0;
-}
-.dialog .button .txt1.f {
-  border: 10px solid transparent;
-  border-left: 10px solid white;
-  border-top: 10px solid white;
-}
 .dialog .button .txt1.b {
   border: 8px solid transparent;
-  border-left: 8px solid aliceblue;
-  border-top: 8px solid aliceblue;
+  border-left-color: aliceblue;
+  border-top-color: aliceblue;
 }
-.dialog .button .txt3 {
-  position: absolute;
-  display: inline-block;
-  width: 0;
-  height:0;
-  right: 0;
-  bottom: 0;
-}
-/* 影が不自然になるので
-.button .txt3.f {
-  border: 10px solid transparent;
-  border-right: 10px solid white;
-  border-bottom: 10px solid white;
-}
-.button .txt3.b {
-  border: 8px solid transparent;
-  border-right: 8px solid #969bA0;
-  border-bottom: 8px solid #969bA0;
-}
-*/
 
 /* ダイアログ（スキル編集） */
 .dialog .skiledit {
@@ -544,13 +551,13 @@ h2 {
 
 /* 設定画面 */
 
-.page_setting label {
+.page_setting .slct {
   display: inline-block;
   width: 100%;
   height: 100%;
   position: relative;
 }
-.page_setting label::after {
+.page_setting .slct::after {
   content: "▼";
   pointer-events: none;
   display: block;
@@ -562,6 +569,51 @@ h2 {
 .page_setting select {
   width: calc(100% - 2em);
   height: 100%;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+.page_setting .list.itm {
+  display: none;
+}
+#settingItemList {
+  margin: 0;
+  padding: 0;
+}
+#settingItemList li {
+  list-style: none;
+  display: inline-block;
+  border: 1px solid #6060ff;
+  background-color: #8080ff;
+  border-radius: 10px;
+  width: 8em;
+  margin: 5px;
+}
+#settingItemList a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  color: #ffffff;
+}
+.page_setting .list.itm .sortable {
+  padding-right: 25px;
+}
+.page_setting .list.itm .sortable li {
+  margin-bottom: 5px;
+}
+.page_setting .list.itm .sortable li.sortable-drag {
+  list-style: none;
+}
+.page_setting .list.itm .sortable li label {
+  text-align: left;
+  display: block;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 3px 0 3px 10px;
+}
+.page_setting .button .txt1.b {
+  border-left-color: #fff9ff;
+  border-top-color: #fff9ff;
 }
 
 /******************

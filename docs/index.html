@@ -9,15 +9,10 @@
 	<link rel="stylesheet" type="text/css" href="./sanitize.css">
 	<link rel="stylesheet" type="text/css" href="./style.css">
 
-
 	<!-- script -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/riot/3.0/riot+compiler.min.js"></script>
-
-	<!--
-	<script src="./jquery-3.1.1.min.js"></script>
-	<script src="./riotCompiler.js"></script>
--->
+	<script src="./js/Sortable.min.js"></script>
 	<script src="./migrate.js"></script>
 	<script src="./program.js"></script>
 </head>
@@ -74,15 +69,25 @@
 
 			</div>
 		</div>
-		<div class="page page_setting">
+		<div class="page skill page_setting" id="settingPage">
 			<h2>設定</h2>
 			<div class="list">
-				<h3>設定値</h3>
+				<div>
+					<ul id="settingItemList">
+						<li><a href="javascript:void(0)" data-itm="design">デザイン</a></li>
+						<li><a href="javascript:void(0)" data-itm="orderCostume">衣装並び順</a></li>
+						<li><a href="javascript:void(0)" data-itm="orderSkill">スキル並び順</a></li>
+						<li><a href="javascript:void(0)" data-itm="sysInfo">システム情報</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="list itm design">
+				<h3>デザイン設定</h3>
 				<table class="tbl2" id="settingTbl">
 					<tr>
 						<th>衣装所有マーク</th>
 						<td>
-							<label>
+							<label class="slct">
 								<select id="cos_mark" name="cos_mark">
 									<option value="cos_hart">ハート</option>
 									<option value="cos_dia">ダイア</option>
@@ -93,7 +98,7 @@
 					<tr>
 						<th>衣装所有色（HR）</th>
 						<td>
-							<label>
+							<label class="slct">
 								<select id="cos_hr_color" name="cos_hr_color">
 									<option value="cos_hr_orange">オレンジ</option>
 									<option value="cos_hr_lightblue">薄青</option>
@@ -111,7 +116,7 @@
 					<tr>
 						<th>衣装所有色（R）</th>
 						<td>
-							<label>
+							<label class="slct">
 								<select id="cos_r_color" name="cos_r_color">
 									<option value="cos_r_orange">オレンジ</option>
 									<option value="cos_r_lightblue">薄青</option>
@@ -129,7 +134,7 @@
 					<tr>
 						<th>スキル種類表示方法</th>
 						<td>
-							<label>
+							<label class="slct">
 								<select id="skill_mark" name="skill_mark">
 									<option value="skill_hart">ハート</option>
 									<option value="skill_dia">ダイア</option>
@@ -140,7 +145,7 @@
 					<tr>
 						<th>一覧の部員名称の表示方法</th>
 						<td>
-							<label>
+							<label class="slct">
 								<select id="name_display_type" name="name_display_type">
 									<option value="name_display_full">名字 + 名前</option>
 									<option value="name_display_short">名前</option>
@@ -152,7 +157,7 @@
 					<tr>
 						<th>メニュー表示方法</th>
 						<td>
-							<label>
+							<label class="slct">
 								<select id="menu_show_type" name="menu_show_type">
 									<option value="menu_show_hide">隠す</option>
 									<option value="menu_show_fixed">画面下に固定</option>
@@ -160,11 +165,31 @@
 							</label>
 						</td>
 					</tr>
-
-
 				</table>
 			</div>
-			<div class="list">
+			<div class="list itm orderCostume">
+				<h3>衣装並び順設定</h3>
+				<costume-sort-list></costume-sort-list>
+				<div>
+					<a href="javascript:void(0)" id="saveCosOrderbtn" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">ＯＫ</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm orderSkill">
+				<h3>スキル並び順設定</h3>
+				<skill-sort-list></skill-sort-list>
+				<div>
+					<a href="javascript:void(0)" id="saveSkillOrderbtn" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">ＯＫ</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm sysInfo">
 				<h3>システム値</h3>
 				<table class="tbl2">
 					<tr>
@@ -330,6 +355,16 @@
 				</tr>
 			</table>
 		</member-skill>
+		<costume-sort-list>
+			<ol id="sortableCostumes" class="sortable">
+				<li each={ c in opts.cos } data-id="{ c.id }"><label>{ c.nm }</label></li>
+			</ol>
+		</costume-sort-list>
+		<skill-sort-list>
+			<ol id="sortableSkills" class="sortable">
+				<li each={ s in opts.skill } data-id="{ s.id }" class="skilnm { s.st }"><label><span></span>{ s.nm }</label></li>
+			</ol>
+		</skill-sort-list>
 	</script>
 </div>
 </body>

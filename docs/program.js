@@ -63,7 +63,9 @@ var DB = (function(){
     // 並び替え
     if (sortFunc == null) {
       sortFunc = function(o1, o2) {
-        return o1.so - o2.so;
+        var o1odr = o1.co != null ? o1.co : o1.so;
+        var o2odr = o2.co != null ? o2.co : o2.so;
+        return o1odr - o2odr;
       };
     }
     l.sort(sortFunc);
@@ -240,6 +242,18 @@ var ListView = (function(){
     for (var k in st) {
       $settingTbl.find('[name="' + k + '"]').val(st[k]).trigger("change");
     }
+  };
+  v.setSortCostume = function() {
+    riot.mount("costume-sort-list", {cos: DB.getCostumeList()});
+    //ソートできるように処理をバインド
+    var cl = document.getElementById("sortableCostumes");
+    Sortable.create(cl);
+  };
+  v.setSortSkill = function() {
+    riot.mount("skill-sort-list", {skill: DB.getSkillList()});
+    //ソートできるように処理をバインド
+    var sl = document.getElementById("sortableSkills");
+    Sortable.create(sl);
   };
   v.setVersion = function () {
     $(document.getElementById("sysVer")).text(SysVer);
@@ -428,7 +442,16 @@ function setEventListener() {
         if ($(elm).hasClass(showpage)) $(elm).show();
         else $(elm).hide();
       });
-      if (showpage == "page_member") $(document.getElementById("memStatus")).hide();
+      switch (showpage) {
+        case "page_member":
+          jq("memStatus").hide();
+          break;
+        case "page_setting":
+          jq("settingPage").find(".itm").hide();
+          break;
+        default:
+          break;
+      }
       Menu.close();
     });
 
@@ -488,6 +511,42 @@ function setEventListener() {
       DB.saveSetting(sKey, sVal);
     });
 
+    $("#settingItemList a").on("click", function() {
+      var itm = $(this).attr("data-itm");
+      jq("settingPage").find(".itm").each(function(i, elm) {
+        if ($(elm).hasClass(itm)) $(elm).show();
+        else $(elm).hide();
+      });
+      switch (itm) {
+        case "orderCostume":
+          ListView.setSortCostume();
+          break;
+        case "orderSkill":
+          ListView.setSortSkill();
+          break;
+        default:
+          break;
+      }
+    });
+
+    jq("saveCosOrderbtn").on("click", function(){
+      jq("sortableCostumes").find("li").each(function(i, elm) {
+        var id = $(elm).attr("data-id");
+        var cos = DB.getCostume(id);
+        cos["co"] = i;
+        DB.save(id, cos);
+      });
+      ListView.updateCostume();
+    });
+    jq("saveSkillOrderbtn").on("click", function(){
+      jq("sortableSkills").find("li").each(function(i, elm) {
+        var id = $(elm).attr("data-id");
+        var ski = DB.getSkill(id);
+        ski["co"] = i;
+        DB.save(id, ski);
+      });
+      ListView.updateSkill();
+    });
 }
 
 
