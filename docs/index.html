@@ -150,6 +150,7 @@
 									<option value="name_display_full">名字 + 名前</option>
 									<option value="name_display_short">名前</option>
 									<option value="name_display_c1">一文字</option>
+									<option value="name_display_c2">二文字</option>
 								</select>
 							</label>
 						</td>
@@ -256,7 +257,6 @@
 		</div>
 	</div>
 
-	<!-- ローカルの開発ではクロスドメイン制約にひっかかるので、ここに記載しています -->
 	<script type="riot/tag">
 		<costume>
 		  <div class="itm" each={ c in opts.cos } data-editId="{ c.id }">
@@ -270,6 +270,7 @@
 							<span class="nameFull">{ m.nm }</span>
 							<span class="nameShort">{ m.snm }</span>
 							<span class="name1Char">{ m.c1nm }</span>
+							<span class="name2Char">{ m.c2nm }</span>
 						</th>
 		      </tr>
 		      <tr class="hr">
@@ -297,6 +298,7 @@
 							<span class="nameFull">{ m.nm }</span>
 							<span class="nameShort">{ m.snm }</span>
 							<span class="name1Char">{ m.c1nm }</span>
+							<span class="name2Char">{ m.c2nm }</span>
 						</th>
 					</tr>
 					<tr>
@@ -309,12 +311,13 @@
 		</skill>
 		<member-list>
 			<table id="statusMemberList" class="tbl1 line1">
-				<tr>
+				<tr class="mem">
 					<th each={ m in opts.mem } class="{ m.id }">
 						<a href="javascript:void(0)" data-id="{ m.id }">
 							<span class="nameFull">{ m.nm }</span>
 							<span class="nameShort">{ m.snm }</span>
 							<span class="name1Char">{ m.c1nm }</span>
+							<span class="name2Char">{ m.c2nm }</span>
 						</a>
 					</th>
 				</tr>

@@ -838,15 +838,23 @@ h2 {
 
 /* 一覧で表示する名称 */
 #wrapper.name_display_full .nameShort,
-#wrapper.name_display_full .name1Char {
+#wrapper.name_display_full .name1Char,
+#wrapper.name_display_full .name2Char {
   display: none;
 }
 #wrapper.name_display_short .nameFull,
-#wrapper.name_display_short .name1Char {
+#wrapper.name_display_short .name1Char,
+#wrapper.name_display_short .name2Char {
   display: none;
 }
 #wrapper.name_display_c1 .nameFull,
-#wrapper.name_display_c1 .nameShort {
+#wrapper.name_display_c1 .nameShort,
+#wrapper.name_display_c1 .name2Char {
+  display: none;
+}
+#wrapper.name_display_c2 .nameFull,
+#wrapper.name_display_c2 .nameShort,
+#wrapper.name_display_c2 .name1Char {
   display: none;
 }
 

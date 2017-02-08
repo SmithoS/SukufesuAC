@@ -35,15 +35,15 @@ var DB = (function(){
   var d = {};
   var LS = localStorage;
   var _member = [
-    {id: "m01", nm: "高坂穂乃果", snm: "穂乃果", c1nm:"ほ" , birthday:"8/3"},
-    {id: "m02", nm: "絢瀬絵里", snm: "絵里", c1nm:"え" , birthday:"10/21"},
-    {id: "m03", nm: "南ことり", snm: "ことり", c1nm:"こ" , birthday:"9/12"},
-    {id: "m04", nm: "園田海未", snm: "海未", c1nm:"う" , birthday:"3/15"},
-    {id: "m05", nm: "星空凛", snm: "凛", c1nm:"り" , birthday:"11/1"},
-    {id: "m06", nm: "西木野真姫", snm: "真姫", c1nm:"ま" , birthday:"4/19"},
-    {id: "m07", nm: "東條希", snm: "希", c1nm:"の" , birthday:"6/9"},
-    {id: "m08", nm: "小泉花陽", snm: "花陽", c1nm:"は" , birthday:"1/17"},
-    {id: "m09", nm: "矢沢にこ", snm: "にこ", c1nm:"に" , birthday:"7/22"}
+    {id: "m01", nm: "高坂穂乃果", snm: "穂乃果", c1nm:"ほ", c2nm:"ほの", birthday:"8/3"},
+    {id: "m02", nm: "絢瀬絵里", snm: "絵里", c1nm:"え", c2nm:"えり", birthday:"10/21"},
+    {id: "m03", nm: "南ことり", snm: "ことり", c1nm:"こ", c2nm:"こと", birthday:"9/12"},
+    {id: "m04", nm: "園田海未", snm: "海未", c1nm:"う", c2nm:"うみ", birthday:"3/15"},
+    {id: "m05", nm: "星空凛", snm: "凛", c1nm:"り", c2nm:"りん", birthday:"11/1"},
+    {id: "m06", nm: "西木野真姫", snm: "真姫", c1nm:"ま", c2nm:"まき", birthday:"4/19"},
+    {id: "m07", nm: "東條希", snm: "希", c1nm:"の", c2nm:"のぞ", birthday:"6/9"},
+    {id: "m08", nm: "小泉花陽", snm: "花陽", c1nm:"は", c2nm:"ぱな", birthday:"1/17"},
+    {id: "m09", nm: "矢沢にこ", snm: "にこ", c1nm:"に", c2nm:"にこ", birthday:"7/22"}
   ];
 
   function setJson(id, obj) {
