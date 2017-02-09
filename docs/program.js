@@ -237,7 +237,7 @@ var ListView = (function(){
     $(document.getElementById("memStatus")).show();
   };
   v.setSetting = function () {
-    var $settingTbl = $(document.getElementById("settingTbl"));
+    var $settingTbl = jq("settingTbl");
     var st = DB.getAllSetting();
     for (var k in st) {
       $settingTbl.find('[name="' + k + '"]').val(st[k]).trigger("change");
@@ -256,8 +256,8 @@ var ListView = (function(){
     Sortable.create(sl);
   };
   v.setVersion = function () {
-    $(document.getElementById("sysVer")).text(SysVer);
-    $(document.getElementById("dataVer")).text(DB.getLastUpdVersion());
+    jq("sysVer").text(SysVer);
+    jq("dataVer").text(DB.getLastUpdVersion());
   };
 
   return v;
@@ -276,31 +276,30 @@ var Dialog = (function(){
   }
 
   function editCostume(prm) {
-    var $dialog = $(document.getElementById("dialog"));
-    $dialog.find(".descArea .edritDesc").show();
-    $dialog.find(".descArea p").show();
-    $dialog.find(".costumeedit").show();
-    $dialog.find(".skiledit").hide();
-    $dialog.find(".confirm").hide();
-
+    var $dialog = jq("dialog");
+    $dialog.find(".descArea").show();
+    $dialog.find(".editArea").show();
+    $dialog.find(".confirmArea").hide();
+    $dialog.find(".editArea .costumeedit").show();
+    $dialog.find(".editArea .skiledit").hide();
     // 名前表示
     var member = DB.getMember(prm.mem);
-    $(document.getElementById("editMember")).text(member.nm).attr("data-memid", member.id);
+    jq("editMember").text(member.nm).attr("data-memid", member.id);
 
     //衣装表示
     var costume = DB.getCostume(prm.editId);
-    $(document.getElementById("editTgt")).text(costume.nm).attr("data-tgtid", costume.id);
-    $(document.getElementById("edit_hr")).prop("checked", costume.hr[member.id]);
-    $(document.getElementById("edit_r")).prop("checked", costume.r[member.id]);
+    jq("editTgt").text(costume.nm).attr("data-tgtid", costume.id);
+    jq("edit_hr").prop("checked", costume.hr[member.id]);
+    jq("edit_r").prop("checked", costume.r[member.id]);
 
     //保存処理の設置
     okCallback = function() {
       //保存値の取得
-      var isHr = $(document.getElementById("edit_hr")).prop("checked");
-      var isR = $(document.getElementById("edit_r")).prop("checked");
+      var isHr = jq("edit_hr").prop("checked");
+      var isR = jq("edit_r").prop("checked");
       //キーの取得
-      var memId = $(document.getElementById("editMember")).attr("data-memid");
-      var tgtId = $(document.getElementById("editTgt")).attr("data-tgtid");
+      var memId = jq("editMember").attr("data-memid");
+      var tgtId = jq("editTgt").attr("data-tgtid");
 
       DB.saveCostume(tgtId, memId, isHr, isR);
       ListView.updateCostume();
@@ -309,30 +308,30 @@ var Dialog = (function(){
 
 
   function editSkill(prm) {
-    var $dialog = $(document.getElementById("dialog"));
-    $dialog.find(".descArea .edritDesc").show();
-    $dialog.find(".descArea p").show();
-    $dialog.find(".costumeedit").hide();
-    $dialog.find(".skiledit").show();
-    $dialog.find(".confirm").hide();
+    var $dialog = jq("dialog");
+    $dialog.find(".descArea").show();
+    $dialog.find(".editArea").show();
+    $dialog.find(".confirmArea").hide();
+    $dialog.find(".editArea .costumeedit").hide();
+    $dialog.find(".editArea .skiledit").show();
 
     // 名前表示
     var member = DB.getMember(prm.mem);
-    $(document.getElementById("editMember")).text(member.nm).attr("data-memid", member.id);
+    jq("editMember").text(member.nm).attr("data-memid", member.id);
 
     //衣装表示
     var skill = DB.getSkill(prm.editId);
-    $(document.getElementById("editTgt")).text(skill.nm).attr("data-tgtid", skill.id);
-    $(document.getElementById("inpNumVal")).text(skill.val[member.id]);
+    jq("editTgt").text(skill.nm).attr("data-tgtid", skill.id);
+    jq("inpNumVal").text(skill.val[member.id]);
 
     okCallback = function() {
       //保存値の取得
-      var val = $(document.getElementById("inpNumVal")).text();
+      var val = jq("inpNumVal").text();
       val = val == "MAX" ? 10 : Number(val);
 
       //キーの取得
-      var memId = $(document.getElementById("editMember")).attr("data-memid");
-      var tgtId = $(document.getElementById("editTgt")).attr("data-tgtid");
+      var memId = jq("editMember").attr("data-memid");
+      var tgtId = jq("editTgt").attr("data-tgtid");
 
       DB.saveSkill(tgtId, memId, val);
       ListView.updateSkill();
@@ -340,7 +339,7 @@ var Dialog = (function(){
   }
 
   d.open = function(prm){
-    var $dialog = $(document.getElementById("dialog"));
+    var $dialog = jq("dialog");
     //表示内容の切り替え
     if (prm.type == "edit") {
       // 名前表示
@@ -354,13 +353,11 @@ var Dialog = (function(){
       }
 
     } else if (prm.type == "confirm") {
-      $dialog.find(".descArea .edritDesc").hide();
-      $dialog.find(".descArea p").show();
-      $dialog.find(".costumeedit").hide();
-      $dialog.find(".skiledit").hide();
-      $dialog.find(".confirm").show();
-      $("#dialog .descArea p").append(prm.text1);
-      $("#dialog .confirm p").append(prm.text2);
+      $dialog.find(".descArea").hide();
+      $dialog.find(".editArea").hide();
+      $dialog.find(".confirmArea").show();
+      $dialog.find(".confirmArea .confirmTxt1").append(prm.text1);
+      $dialog.find(".confirmArea .confirmTxt2").append(prm.text2);
       okCallback = prm.okCallback;
     }
 
@@ -373,7 +370,7 @@ var Dialog = (function(){
   };
 
   d.close = function(){
-    var $dialog = $(document.getElementById("dialog"));
+    var $dialog = jq("dialog");
     $dialog.stop()
     .animate(
       _getVanishPointCss(),
@@ -431,7 +428,7 @@ var Menu = (function() {
 function setEventListener() {
 
 
-    $("#menu_key").on("click", function(){
+    jq("menu_key").on("click", function(){
       Menu.toggle();
     });
 
@@ -474,14 +471,14 @@ function setEventListener() {
     $(document).on("click", "#statusMemberList a", function() {
       ListView.setMemberStatus($(this).attr("data-id"));
     });
-    $("#dialogCloseBtn").on("click", function() {
+    jq("dialogCloseBtn").on("click", function() {
       Dialog.close();
     });
-    $("#okbtn").on("click", function() {
+    jq("okbtn").on("click", function() {
       Dialog.ok();
     });
 
-    $("#btnNumMinus").on("click", function() {
+    jq("btnNumMinus").on("click", function() {
       var val = $("#inpNumVal").text();
       val = (val == "MAX") ? 10 : Number(val);
       val = val - 1;
@@ -489,7 +486,7 @@ function setEventListener() {
       if (val <= 0) val = 0;
       $("#inpNumVal").text(val);
     });
-    $("#btnNumPlus").on("click", function() {
+    jq("btnNumPlus").on("click", function() {
       var val = $("#inpNumVal").text();
       val = (val == "MAX") ? 10 : Number(val);
       val = val + 1;

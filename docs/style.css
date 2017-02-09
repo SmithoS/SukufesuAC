@@ -189,11 +189,6 @@ h2 {
 }
 
 /* ダイアログ */
-.dialog .thumb,
-.dialog .description {
-  display: inline-block;
-  width: 240px;
-}
 #dialog {
   display: none;
   z-index: 100;
@@ -239,6 +234,9 @@ h2 {
 }
 .dialog .editArea {
   height: 30%;
+}
+.dialog .confirmArea {
+  height: 80%;
 }
 .dialog .bntarea {
   text-align: center;
@@ -417,6 +415,10 @@ h2 {
 .list .tbl2 th,
 .list .tbl2 td {
 	border-top: 1px solid gray;
+}
+.list .tbl2 th {
+  width: 65%;
+  font-size: 95%;
 }
 .list .tbl2 td {
   border-left: 1px solid gray;
@@ -600,6 +602,7 @@ h2 {
 }
 .page_setting .list.itm .sortable li {
   margin-bottom: 5px;
+  cursor: pointer;
 }
 .page_setting .list.itm .sortable li.sortable-drag {
   list-style: none;
