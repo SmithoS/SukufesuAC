@@ -88,8 +88,8 @@ var DB = (function(){
 
       Dialog.open({
         type: "confirm",
-        text1: currentMig.msg,
-        text2: "データを更新してもいいですか？",
+        text1: "データ更新",
+        text2: currentMig.msg + "データを更新します。",
         okCallback: function() {
           for (var i = 0; i < migLen; i++) {
             var migData = Migrate[i];
@@ -176,6 +176,36 @@ var DB = (function(){
     }
     return JSON.stringify(dt);
   };
+  d.getInvitationWarning = function() {
+    //Deep Copy
+    var mem = JSON.parse(JSON.stringify(_member));
+    //勧誘すべきでないデータの入れる枠を用意
+    var len = mem.length;
+    for (var i = 0; i < len; i++) {
+      mem[i].maxSkill = [];
+    }
+
+    var skiList = d.getSkillList();
+    var skiLen = skiList.length;
+    for (var i = 0; i < skiLen; i++) {
+      var ski = skiList[i];
+      var skiVal = ski.val;
+      for (var mid in skiVal) {
+        if (skiVal[mid] >= 10) {
+          var m = mem.find(function(e, i, a) {
+            return e.id == mid;
+          });
+          m.maxSkill.push({
+            id: ski.id,
+            nm: ski.nm,
+            st: ski.st
+          });
+        }
+      }
+    }
+
+    return mem;
+  };
 
   d.save = function (id, data) {
     setJson(id, data);
@@ -251,6 +281,9 @@ var ListView = (function(){
     v.setMemberCostume(memId);
     v.setMemberSkill(memId);
     $(document.getElementById("memStatus")).show();
+  };
+  v.setInvitation = function() {
+    riot.mount("invitation-waring", {mem: DB.getInvitationWarning()});
   };
   v.setSetting = function () {
     var $settingTbl = jq("settingTbl");
@@ -461,6 +494,9 @@ function setEventListener() {
           break;
         case "page_setting":
           jq("settingPage").find(".itm").hide();
+          break;
+        case "page_invitation":
+          ListView.setInvitation();
           break;
         default:
           break;

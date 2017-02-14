@@ -1,5 +1,5 @@
 /* 初期表示 */
-.page_skill, .page_costume, .page_setting {
+.page_skill, .page_costume, .page_setting, .page_invitation {
   display: none;
 }
 
@@ -132,16 +132,18 @@ h2 {
 	border-radius: 15px 15px 0 0;
 	background-color: #fff9ff;
 	z-index: 100;
+  overflow: scroll;
 }
 #menu table {
 	margin: 0;
 	padding: 0;
-	width: 100%;
+	width: 400px;
 	height: 100%;
   table-layout: fixed;
 }
 #menu td {
 	padding: 0 3px;
+  width: 70px;
 }
 #menu td .wrap {
 	display: inline-block;
@@ -165,6 +167,7 @@ h2 {
 #menu td .wrap.w2 {background-color: #70ff70;}
 #menu td .wrap.w3 {background-color: #b770ff;}
 #menu td .wrap.w4 {background-color: #70b7ff;}
+#menu td .wrap.w5 {background-color: #ff60ff;}
 #menu td .bg {
 	position: absolute;
 	display: inline-block;
@@ -550,6 +553,21 @@ h2 {
 							-1px 1px 0 gray;
 }
 
+
+/* 勧誘画面 */
+.page_invitation .list .tbl2 th {
+  width: 35%;
+}
+.page_invitation .list .tbl2 td {
+  font-size: 95%;
+}
+.page_invitation ul {
+  margin: 0;
+  padding: 0;
+}
+.page_invitation li {
+  list-style: none;
+}
 
 /* 設定画面 */
 

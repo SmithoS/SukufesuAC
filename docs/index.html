@@ -28,6 +28,7 @@
 				<td data-page="page_member"><span class="wrap w1"><span class="bg f"></span><span class="bg b"></span><span class="txt">部員</span></span></td>
 				<td data-page="page_costume"><span class="wrap w2"><span class="bg f"></span><span class="bg b"></span><span class="txt">衣装</span></span></td>
 				<td data-page="page_skill"><span class="wrap w3"><span class="bg f"></span><span class="bg b"></span><span class="txt">スキル</span></span></td>
+				<td data-page="page_invitation"><span class="wrap w5"><span class="bg f"></span><span class="bg b"></span><span class="txt">勧誘</span></span></td>
 				<td data-page="page_setting"><span class="wrap w4"><span class="bg f"></span><span class="bg b"></span><span class="txt">設定</span></span></td>
 			</tr>
 		</table>
@@ -66,6 +67,15 @@
 			<div id="skill_list" class="list">
 
 				<skill></skill>
+
+			</div>
+		</div>
+		<div class="page skill page_invitation">
+			<h2>勧誘</h2>
+			<div class="list">
+				<p>スキルレベルがMAXの部員とスキル一覧</p>
+
+				<invitation-waring></invitation-waring>
 
 			</div>
 		</div>
@@ -371,6 +381,20 @@
 				</tr>
 			</table>
 		</member-costume>
+		<invitation-waring>
+			<table class="tbl2">
+				<tr each={ m in opts.mem }>
+					<th>{ m.nm }</th>
+					<td>
+						<ul>
+							<li each={ s in m.maxSkill } class="skilnm { s.st }">
+								<span></span>{ s.nm }
+							</li>
+						</ul>
+					</td>
+				</div>
+			</table>
+		</invitation-waring>
 		<member-skill>
 			<h4>スキル</h4>
 			<table class="tbl2">
