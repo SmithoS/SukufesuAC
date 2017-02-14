@@ -166,6 +166,16 @@ var DB = (function(){
   d.getAllSetting = function () {
     return getJson(SETTING_KEY);
   };
+  d.getExportData = function() {
+    var len = LS.length;
+    var dt = {};
+    var k = null;
+    for (var i = 0; i < len; i++) {
+      k = LS.key(i);
+      dt[k] = getJson(k);
+    }
+    return JSON.stringify(dt);
+  };
 
   d.save = function (id, data) {
     setJson(id, data);
@@ -188,6 +198,12 @@ var DB = (function(){
     var settingData = d.getAllSetting(settingId);
     settingData[settingId] = val;
     setJson(SETTING_KEY, settingData);
+  };
+  d.loadInportData = function(str) {
+    var dt = JSON.parse(str);
+    for (var k in dt) {
+      setJson(k, dt[k]);
+    }
   };
 
   return d;
@@ -356,8 +372,8 @@ var Dialog = (function(){
       $dialog.find(".descArea").hide();
       $dialog.find(".editArea").hide();
       $dialog.find(".confirmArea").show();
-      $dialog.find(".confirmArea .confirmTxt1").append(prm.text1);
-      $dialog.find(".confirmArea .confirmTxt2").append(prm.text2);
+      $dialog.find(".confirmArea .confirmTxt1").text(prm.text1);
+      $dialog.find(".confirmArea .confirmTxt2").text(prm.text2);
       okCallback = prm.okCallback;
     }
 
@@ -521,6 +537,12 @@ function setEventListener() {
         case "orderSkill":
           ListView.setSortSkill();
           break;
+        case "export":
+          jq("exportData").val("");
+          break;
+        case "inport":
+          jq("inportData").val("");
+          break;
         default:
           break;
       }
@@ -534,6 +556,11 @@ function setEventListener() {
         DB.save(id, cos);
       });
       ListView.updateCostume();
+      Dialog.open({
+        "type": "confirm",
+        "text1": "変更完了",
+        "text2": "衣装の並び順を変更しました。"
+      });
     });
     jq("saveSkillOrderbtn").on("click", function(){
       jq("sortableSkills").find("li").each(function(i, elm) {
@@ -543,6 +570,38 @@ function setEventListener() {
         DB.save(id, ski);
       });
       ListView.updateSkill();
+      Dialog.open({
+        "type": "confirm",
+        "text1": "変更完了",
+        "text2": "スキルの並び順を変更しました。"
+      });
+
+    });
+
+    jq("writeExportData").on("click", function(){
+      jq("exportData").val(DB.getExportData());
+    });
+    jq("loadInportData").on("click", function(){
+      var str = jq("inportData").val();
+      if (str != null && str != "") {
+        try {
+          DB.loadInportData(str);
+          Dialog.open({
+            "type": "confirm",
+            "text1": "インポート完了",
+            "text2": "データのインポートが完了しました。画面を再読込します",
+            "okCallback": function() {
+              location.reload();
+            }
+          });
+        } catch (e) {
+          Dialog.open({
+            "type": "confirm",
+            "text1": "エラー",
+            "text2": "入力したデータを解析できませんでした。"
+          });
+        }
+      }
     });
 }
 

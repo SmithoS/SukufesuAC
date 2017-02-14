@@ -77,6 +77,8 @@
 						<li><a href="javascript:void(0)" data-itm="design">デザイン</a></li>
 						<li><a href="javascript:void(0)" data-itm="orderCostume">衣装並び順</a></li>
 						<li><a href="javascript:void(0)" data-itm="orderSkill">スキル並び順</a></li>
+						<li><a href="javascript:void(0)" data-itm="export">エクスポート</a></li>
+						<li><a href="javascript:void(0)" data-itm="inport">インポート</a></li>
 						<li><a href="javascript:void(0)" data-itm="sysInfo">システム情報</a></li>
 					</ul>
 				</div>
@@ -190,6 +192,28 @@
 					</a>
 				</div>
 			</div>
+			<div class="list itm export">
+				<h3>エクスポート</h3>
+				<textarea id="exportData"></textarea>
+				<div>
+					<a href="javascript:void(0)" id="writeExportData" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">出力</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm inport">
+				<h3>インポート</h3>
+				<textarea id="inportData"></textarea>
+				<div>
+					<a href="javascript:void(0)" id="loadInportData" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">取込</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
 			<div class="list itm sysInfo">
 				<h3>システム値</h3>
 				<table class="tbl2">
@@ -203,9 +227,10 @@
 					</tr>
 				</table>
 			</div>
-	</div>
+		</div>
 
-	<di id="menuSpacer">&nbsp;</div>
+		<div id="menuSpacer">&nbsp;</div>
+	</div>
 
 	<div class="dialogwrapper" id="dialog">
 		<div class="dialog">
