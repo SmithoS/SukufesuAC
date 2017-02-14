@@ -48,5 +48,15 @@ Migrate = [
     upd : function(db) {
       db.save("s008", {id: "s008",so: 8,nm: "ジャッジサポート♪",st: "st1",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
     }
+  },
+  {
+    dbver: "1.00.03",
+    msg: "衣装名「僕らは今のなかで」を修正しました。",
+    upd : function(db) {
+      //名前修正
+      var cos = db.getCostume("c001");
+      cos.nm = "僕らは今のなかで";
+      db.save("c001", cos);
+    }
   }
 ];
