@@ -286,10 +286,10 @@ var ListView = (function(){
     riot.mount("invitation-waring", {mem: DB.getInvitationWarning()});
   };
   v.setSetting = function () {
-    var $settingTbl = jq("settingTbl");
+    var $settingPg = jq("settingPage");
     var st = DB.getAllSetting();
     for (var k in st) {
-      $settingTbl.find('[name="' + k + '"]').val(st[k]).trigger("change");
+      $settingPg.find('[name="' + k + '"]').val(st[k]).trigger("change");
     }
   };
   v.setSortCostume = function() {
@@ -547,7 +547,7 @@ function setEventListener() {
       $("#inpNumVal").text(val);
     });
 
-    $("#settingTbl select").on("change", function() {
+    $("#settingPage select").on("change", function() {
       var $wrapper = $(document.getElementById("wrapper"));
       var sKey = $(this).attr("name")
       var sVal = $(this).val();

@@ -79,7 +79,7 @@
 
 			</div>
 		</div>
-		<div class="page skill page_setting" id="settingPage">
+		<div class="page costume skill page_setting" id="settingPage">
 			<h2>設定</h2>
 			<div class="list">
 				<div>
@@ -89,96 +89,126 @@
 						<li><a href="javascript:void(0)" data-itm="orderSkill">スキル並び順</a></li>
 						<li><a href="javascript:void(0)" data-itm="export">エクスポート</a></li>
 						<li><a href="javascript:void(0)" data-itm="inport">インポート</a></li>
-						<li><a href="javascript:void(0)" data-itm="sysInfo">システム情報</a></li>
+						<li><a href="javascript:void(0)" data-itm="help">ヘルプ</a></li>
 					</ul>
 				</div>
 			</div>
 			<div class="list itm design">
 				<h3>デザイン設定</h3>
-				<table class="tbl2" id="settingTbl">
-					<tr>
-						<th>衣装所有マーク</th>
-						<td>
-							<label class="slct">
-								<select id="cos_mark" name="cos_mark">
-									<option value="cos_hart">ハート</option>
-									<option value="cos_dia">ダイア</option>
-								</select>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th>衣装所有色（HR）</th>
-						<td>
-							<label class="slct">
-								<select id="cos_hr_color" name="cos_hr_color">
-									<option value="cos_hr_orange">オレンジ</option>
-									<option value="cos_hr_lightblue">薄青</option>
-									<option value="cos_hr_lightgreen">薄緑</option>
-									<option value="cos_hr_blue">青</option>
-									<option value="cos_hr_yellow">黄</option>
-									<option value="cos_hr_red">赤</option>
-									<option value="cos_hr_purple">紫</option>
-									<option value="cos_hr_green">緑</option>
-									<option value="cos_hr_pink">ピンク</option>
-								</select>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th>衣装所有色（R）</th>
-						<td>
-							<label class="slct">
-								<select id="cos_r_color" name="cos_r_color">
-									<option value="cos_r_orange">オレンジ</option>
-									<option value="cos_r_lightblue">薄青</option>
-									<option value="cos_r_lightgreen">薄緑</option>
-									<option value="cos_r_blue">青</option>
-									<option value="cos_r_yellow">黄</option>
-									<option value="cos_r_red">赤</option>
-									<option value="cos_r_purple">紫</option>
-									<option value="cos_r_green">緑</option>
-									<option value="cos_r_pink">ピンク</option>
-								</select>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th>スキル種類表示マーク</th>
-						<td>
-							<label class="slct">
-								<select id="skill_mark" name="skill_mark">
-									<option value="skill_hart">ハート</option>
-									<option value="skill_dia">ダイア</option>
-								</select>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th>一覧の部員名称の表示方法</th>
-						<td>
-							<label class="slct">
-								<select id="name_display_type" name="name_display_type">
-									<option value="name_display_full">名字 + 名前</option>
-									<option value="name_display_short">名前</option>
-									<option value="name_display_c1">一文字</option>
-									<option value="name_display_c2">二文字</option>
-								</select>
-							</label>
-						</td>
-					</tr>
-					<tr>
-						<th>メニュー表示方法</th>
-						<td>
-							<label class="slct">
-								<select id="menu_show_type" name="menu_show_type">
-									<option value="menu_show_hide">隠す</option>
-									<option value="menu_show_fixed">画面下に固定</option>
-								</select>
-							</label>
-						</td>
-					</tr>
-				</table>
+				<div class="ptn">
+					<h4>衣装</h4>
+					<div class="sample">
+						<span class="hr">
+							<span class="owned">
+								<span class="rareMark"><span class="rareTxt">HR</span></span>
+							</span>
+						</span>
+						<span class="r">
+							<span class="owned">
+								<span class="rareMark"><span class="rareTxt">R</span></span>
+							</span>
+						</span>
+					</div>
+					<table class="tbl2" id="settingTbl">
+						<tr>
+							<th>衣装所有マーク</th>
+							<td>
+								<label class="slct">
+									<select id="cos_mark" name="cos_mark">
+										<option value="cos_hart">ハート</option>
+										<option value="cos_dia">ダイア</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>衣装所有色（HR）</th>
+							<td>
+								<label class="slct">
+									<select id="cos_hr_color" name="cos_hr_color">
+										<option value="cos_hr_orange">オレンジ</option>
+										<option value="cos_hr_lightblue">薄青</option>
+										<option value="cos_hr_lightgreen">薄緑</option>
+										<option value="cos_hr_blue">青</option>
+										<option value="cos_hr_yellow">黄</option>
+										<option value="cos_hr_red">赤</option>
+										<option value="cos_hr_purple">紫</option>
+										<option value="cos_hr_green">緑</option>
+										<option value="cos_hr_pink">ピンク</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>衣装所有色（R）</th>
+							<td>
+								<label class="slct">
+									<select id="cos_r_color" name="cos_r_color">
+										<option value="cos_r_orange">オレンジ</option>
+										<option value="cos_r_lightblue">薄青</option>
+										<option value="cos_r_lightgreen">薄緑</option>
+										<option value="cos_r_blue">青</option>
+										<option value="cos_r_yellow">黄</option>
+										<option value="cos_r_red">赤</option>
+										<option value="cos_r_purple">紫</option>
+										<option value="cos_r_green">緑</option>
+										<option value="cos_r_pink">ピンク</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ptn">
+					<h4>スキル</h4>
+					<div class="sample">
+						<span class="skilnm st1"><span></span>スコア</span>
+						<span class="skilnm st2"><span></span>カメラ</span>
+						<span class="skilnm st3"><span></span>演出</span>
+					</div>
+					<table class="tbl2">
+						<tr>
+							<th>スキル種類マーク</th>
+							<td>
+								<label class="slct">
+									<select id="skill_mark" name="skill_mark">
+										<option value="skill_hart">ハート</option>
+										<option value="skill_dia">ダイア</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ptn">
+					<h4>その他</h4>
+					<table class="tbl2">
+						<tr>
+							<th>一覧の部員名称</th>
+							<td>
+								<label class="slct">
+									<select id="name_display_type" name="name_display_type">
+										<option value="name_display_full">名字 + 名前</option>
+										<option value="name_display_short">名前</option>
+										<option value="name_display_c2">二文字</option>
+										<option value="name_display_c1">一文字</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>メニュー表示方法</th>
+							<td>
+								<label class="slct">
+									<select id="menu_show_type" name="menu_show_type">
+										<option value="menu_show_hide">隠す</option>
+										<option value="menu_show_fixed">画面下に固定</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 			<div class="list itm orderCostume">
 				<h3>衣装並び順設定</h3>
@@ -224,18 +254,21 @@
 					</a>
 				</div>
 			</div>
-			<div class="list itm sysInfo">
-				<h3>システム値</h3>
-				<table class="tbl2">
-					<tr>
-						<th>システムバージョン</th>
-						<td id="sysVer"></td>
-					</tr>
-					<tr>
-						<th>データバージョン</th>
-						<td id="dataVer"></td>
-					</tr>
-				</table>
+			<div class="list itm help">
+				<h3>ヘルプ</h3>
+				<div>
+					<h4>システム情報</h4>
+					<table class="tbl2">
+						<tr>
+							<th>システムバージョン</th>
+							<td id="sysVer"></td>
+						</tr>
+						<tr>
+							<th>データバージョン</th>
+							<td id="dataVer"></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 

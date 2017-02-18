@@ -132,18 +132,19 @@ h2 {
 	border-radius: 15px 15px 0 0;
 	background-color: #fff9ff;
 	z-index: 100;
-  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 #menu table {
 	margin: 0;
 	padding: 0;
-	width: 400px;
+	min-width: 400px;
+  width: 100%;
 	height: 100%;
   table-layout: fixed;
 }
 #menu td {
 	padding: 0 3px;
-  width: 70px;
 }
 #menu td .wrap {
 	display: inline-block;
@@ -152,7 +153,6 @@ h2 {
 	text-align: center;
 	color: white;
 	font-weight: bold;
-	background-color: green;
 	position: relative;
   text-shadow: 0 1px 0 gray,
 							0 -1px 0 gray,
@@ -614,6 +614,9 @@ h2 {
   display: block;
   width: 100%;
   color: #ffffff;
+}
+.page_setting .design .ptn {
+  margin: 10px 0;
 }
 .page_setting .list.itm .sortable {
   padding-right: 25px;
