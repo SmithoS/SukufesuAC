@@ -73,7 +73,7 @@
 		<div class="page skill page_invitation">
 			<h2>勧誘</h2>
 			<div class="list">
-				<p>スキルレベルがMAXの部員とスキル一覧</p>
+				<p>注意する部員とスキル一覧</p>
 
 				<invitation-waring></invitation-waring>
 
@@ -85,6 +85,7 @@
 				<div>
 					<ul id="settingItemList">
 						<li><a href="javascript:void(0)" data-itm="design">デザイン</a></li>
+						<li><a href="javascript:void(0)" data-itm="system">システム</a></li>
 						<li><a href="javascript:void(0)" data-itm="orderCostume">衣装並び順</a></li>
 						<li><a href="javascript:void(0)" data-itm="orderSkill">スキル並び順</a></li>
 						<li><a href="javascript:void(0)" data-itm="export">エクスポート</a></li>
@@ -162,9 +163,9 @@
 				<div class="ptn">
 					<h4>スキル</h4>
 					<div class="sample">
-						<span class="skilnm st1"><span></span>スコア</span>
-						<span class="skilnm st2"><span></span>カメラ</span>
-						<span class="skilnm st3"><span></span>演出</span>
+						<span class="skilnm st1"><b></b>アシスト</span>
+						<span class="skilnm st2"><b></b>カメラ</span>
+						<span class="skilnm st3"><b></b>ステージ</span>
 					</div>
 					<table class="tbl2">
 						<tr>
@@ -209,6 +210,30 @@
 						</tr>
 					</table>
 				</div>
+			</div>
+			<div class="list itm system">
+				<h3>システム設定</h3>
+				<table class="tbl2">
+					<tr>
+						<th>勧誘 スキル注意レベル</th>
+						<td>
+							<label class="slct">
+								<select id="invitation_warn_skill_lv" name="invitation_warn_skill_lv">
+									<option value="10">MAX</option>
+									<option value="9">9</option>
+									<option value="8">8</option>
+									<option value="7">7</option>
+									<option value="6">6</option>
+									<option value="5">5</option>
+									<option value="4">4</option>
+									<option value="3">3</option>
+									<option value="2">2</option>
+									<option value="1">1</option>
+								</select>
+							</label>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="list itm orderCostume">
 				<h3>衣装並び順設定</h3>
@@ -356,7 +381,7 @@
 		</costume>
 		<skill>
 			<div class="itm" each={ s in opts.skill } data-editId="{ s.id }">
-				<h3 class="skilnm { s.st }"><span></span>{ s.nm }</h3>
+				<h3 class="skilnm { s.st }"><b></b>{ s.nm }</h3>
 				<table class="tbl1">
 					<colgroup>
 						<col each={ m in parent.opts.mem } class="{ m.id }" />
@@ -417,11 +442,11 @@
 		<invitation-waring>
 			<table class="tbl2">
 				<tr each={ m in opts.mem }>
-					<th>{ m.nm }</th>
+					<th>{ m.snm }</th>
 					<td>
 						<ul>
 							<li each={ s in m.maxSkill } class="skilnm { s.st }">
-								<span></span>{ s.nm }
+								<b></b>{ s.nm }<span>({ s.val >= 10 ? "MAX" : s.val })</span>
 							</li>
 						</ul>
 					</td>
@@ -432,7 +457,7 @@
 			<h4>スキル</h4>
 			<table class="tbl2">
 				<tr each={ s in opts.skill }>
-					<th class="skilnm { s.st }"><span></span>{ s.nm }</th>
+					<th class="skilnm { s.st }"><b></b>{ s.nm }</th>
 					<td class='{ s.val == 10 ? "ovA" : s.val >= 5 ? "ov5" : "" }'>
 						{ s.val == 10 ? "MAX" : s.val }
 					</td>
@@ -446,7 +471,7 @@
 		</costume-sort-list>
 		<skill-sort-list>
 			<ol id="sortableSkills" class="sortable">
-				<li each={ s in opts.skill } data-id="{ s.id }" class="skilnm { s.st }"><label><span></span>{ s.nm }</label></li>
+				<li each={ s in opts.skill } data-id="{ s.id }" class="skilnm { s.st }"><label><b></b>{ s.nm }</label></li>
 			</ol>
 		</skill-sort-list>
 	</script>

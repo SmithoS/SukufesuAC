@@ -185,20 +185,28 @@ var DB = (function(){
       mem[i].maxSkill = [];
     }
 
+
+    //スキル
+    //警告レベルを取得
+    var warnLv = (d.getAllSetting())["invitation_warn_skill_lv"];
+    if (warnLv == null) warnLv = 10;
+
+    //警告レベルを超えているスキルを抽出
     var skiList = d.getSkillList();
     var skiLen = skiList.length;
     for (var i = 0; i < skiLen; i++) {
       var ski = skiList[i];
       var skiVal = ski.val;
       for (var mid in skiVal) {
-        if (skiVal[mid] >= 10) {
+        if (skiVal[mid] >= warnLv) {
           var m = mem.find(function(e, i, a) {
             return e.id == mid;
           });
           m.maxSkill.push({
             id: ski.id,
             nm: ski.nm,
-            st: ski.st
+            st: ski.st,
+            val: skiVal[mid]
           });
         }
       }
@@ -547,7 +555,7 @@ function setEventListener() {
       $("#inpNumVal").text(val);
     });
 
-    $("#settingPage select").on("change", function() {
+    $("#settingPage .design select").on("change", function() {
       var $wrapper = $(document.getElementById("wrapper"));
       var sKey = $(this).attr("name")
       var sVal = $(this).val();
@@ -556,6 +564,13 @@ function setEventListener() {
         $wrapper.removeClass($(opt).attr("value"));
       });
       $wrapper.addClass($(this).val());
+      //保存
+      DB.saveSetting(sKey, sVal);
+    });
+
+    $("#settingPage .system select").on("change", function() {
+      var sKey = $(this).attr("name")
+      var sVal = $(this).val();
       //保存
       DB.saveSetting(sKey, sVal);
     });

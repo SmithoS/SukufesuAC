@@ -527,7 +527,7 @@ h2 {
 .page_skill .st2::before { content: "カメラ";}
 .page_skill .st3::before { content: "ステージ";}
 */
-.page.skill .skilnm span {
+.page.skill .skilnm b {
   display: inline-block;
   position: relative;
   vertical-align: middle;
@@ -535,9 +535,9 @@ h2 {
   height: 18px;
 }
 
-.page.skill .skilnm.st1 span:before, .page.skill .skilnm.st1 span:after {background-color: #ff5858;}
-.page.skill .skilnm.st2 span:before, .page.skill .skilnm.st2 span:after {background-color: #7070ff;}
-.page.skill .skilnm.st3 span:before, .page.skill .skilnm.st3 span:after {background-color: #30cc30;}
+.page.skill .skilnm.st1 b:before, .page.skill .skilnm.st1 b:after {background-color: #ff5858;}
+.page.skill .skilnm.st2 b:before, .page.skill .skilnm.st2 b:after {background-color: #7070ff;}
+.page.skill .skilnm.st3 b:before, .page.skill .skilnm.st3 b:after {background-color: #30cc30;}
 
 .page.skill td {color: black;}
 .page.skill td.ov5 {font-weight: bold;color: deeppink;}
@@ -555,10 +555,9 @@ h2 {
 
 
 /* 勧誘画面 */
-.page_invitation .list .tbl2 th {
-  width: 35%;
-}
 .page_invitation .list .tbl2 td {
+  width: 75%;
+  min-width: 250px;
   font-size: 95%;
 }
 .page_invitation ul {
@@ -567,6 +566,9 @@ h2 {
 }
 .page_invitation li {
   list-style: none;
+}
+.page_invitation li span {
+  font-size: 75%;
 }
 
 /* 設定画面 */
@@ -837,8 +839,8 @@ h2 {
 /* スキルを示すマーク */
 
 /* ハート */
-#wrapper.skill_hart .page.skill .skilnm span:before,
-#wrapper.skill_hart .page.skill .skilnm span:after {
+#wrapper.skill_hart .page.skill .skilnm b:before,
+#wrapper.skill_hart .page.skill .skilnm b:after {
   position: absolute;
   content: "";
   top: 0;
@@ -846,19 +848,19 @@ h2 {
   height: 16px;
   border-radius: 10px 10px 0 0;
 }
-#wrapper.skill_hart .page.skill .skilnm span:before {
+#wrapper.skill_hart .page.skill .skilnm b:before {
   left: 10px;
   transform: rotate(-45deg);
   transform-origin: 0 100%;
 }
-#wrapper.skill_hart .page.skill .skilnm span:after {
+#wrapper.skill_hart .page.skill .skilnm b:after {
   left: 0;
   transform: rotate(45deg);
   transform-origin: 100% 100%;
 }
 
 /* ダイア */
-#wrapper.skill_dia .page.skill .skilnm span:before {
+#wrapper.skill_dia .page.skill .skilnm b:before {
   position: absolute;
   content: "";
   top: 0;
