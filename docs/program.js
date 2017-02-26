@@ -297,7 +297,7 @@ var ListView = (function(){
     var $settingPg = jq("settingPage");
     var st = DB.getAllSetting();
     for (var k in st) {
-      $settingPg.find('[name="' + k + '"]').val(st[k]).trigger("change");
+      $settingPg.find('[name="' + k + '"]').val(st[k]);
     }
   };
   v.setSortCostume = function() {
@@ -315,6 +315,14 @@ var ListView = (function(){
   v.setVersion = function () {
     jq("sysVer").text(SysVer);
     jq("dataVer").text(DB.getLastUpdVersion());
+  };
+
+  v.init = function() {
+    v.showCostume();
+    v.showSkill();
+    v.setMemberList();
+    v.setSetting();
+    v.setVersion();
   };
 
   return v;
@@ -376,10 +384,11 @@ var Dialog = (function(){
     var member = DB.getMember(prm.mem);
     jq("editMember").text(member.nm).attr("data-memid", member.id);
 
-    //衣装表示
+    //スキル表示
     var skill = DB.getSkill(prm.editId);
     jq("editTgt").text(skill.nm).attr("data-tgtid", skill.id);
-    jq("inpNumVal").text(skill.val[member.id]);
+    var skillVal = skill.val[member.id];
+    jq("inpNumVal").text(skillVal >= 10 ? "MAX" : skillVal);
 
     okCallback = function() {
       //保存値の取得
@@ -491,7 +500,7 @@ function setEventListener() {
 
     $("#menu td").on("click", function(){
       var showpage = $(this).attr("data-page");
-      $contents = $("#contents");
+      $contents = jq("contents");
       $contents.find(".page").each(function(i, elm) {
         if ($(elm).hasClass(showpage)) $(elm).show();
         else $(elm).hide();
@@ -500,6 +509,12 @@ function setEventListener() {
         case "page_member":
           jq("memStatus").hide();
           break;
+        // case "page_costume":
+        //   ListView.showCostume();
+        //   break;
+        // case "page_skill":
+        //   ListView.showSkill();
+        //   break;
         case "page_setting":
           jq("settingPage").find(".itm").hide();
           break;
@@ -538,25 +553,22 @@ function setEventListener() {
       Dialog.ok();
     });
 
-    jq("btnNumMinus").on("click", function() {
-      var val = $("#inpNumVal").text();
+    function addSkillVal(addVal) {
+      var $inv = jq("inpNumVal");
+      var val = $inv.text();
       val = (val == "MAX") ? 10 : Number(val);
-      val = val - 1;
-      if (val >= 10) val = "MAX";
-      if (val <= 0) val = 0;
-      $("#inpNumVal").text(val);
+      val = val + addVal;
+      $inv.text(val >= 10 ? "MAX" : val <= 0 ? 0 : val);
+    }
+    jq("btnNumMinus").on("click", function() {
+      addSkillVal(-1);
     });
     jq("btnNumPlus").on("click", function() {
-      var val = $("#inpNumVal").text();
-      val = (val == "MAX") ? 10 : Number(val);
-      val = val + 1;
-      if (val >= 10) val = "MAX";
-      if (val <= 0) val = 0;
-      $("#inpNumVal").text(val);
+      addSkillVal(1);
     });
 
     $("#settingPage .design select").on("change", function() {
-      var $wrapper = $(document.getElementById("wrapper"));
+      var $wrapper = jq("wrapper");
       var sKey = $(this).attr("name")
       var sVal = $(this).val();
       //画面に設定を反映
@@ -652,6 +664,12 @@ function setEventListener() {
             "text2": "入力したデータを解析できませんでした。"
           });
         }
+      } else {
+        Dialog.open({
+          "type": "confirm",
+          "text1": "エラー",
+          "text2": "インポートするデータが入力されていません。"
+        });
       }
     });
 }
@@ -665,7 +683,7 @@ function setEventListener() {
 $(function(){
 
 
-  //
+  //データ初期処理。マイグレート含む
   DB.init();
 
 
@@ -675,9 +693,10 @@ $(function(){
 
 
   //表示処理
-  ListView.setMemberList();
-  ListView.showCostume();
-  ListView.showSkill();
-  ListView.setSetting();
-  ListView.setVersion();
+  ListView.init();
+
+  //デザイン反映
+  jq("settingPage").find('.design [name]').each(function(){
+    $(this).trigger("change");
+  });
 });
