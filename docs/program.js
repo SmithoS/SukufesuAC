@@ -368,6 +368,9 @@ var Dialog = (function(){
 
       DB.saveCostume(tgtId, memId, isHr, isR);
       ListView.updateCostume();
+      if (prm.isUpdMemberPage) {
+        ListView.setMemberCostume(member.id);
+      }
     };
   }
 
@@ -401,6 +404,9 @@ var Dialog = (function(){
 
       DB.saveSkill(tgtId, memId, val);
       ListView.updateSkill();
+      if (prm.isUpdMemberPage) {
+        ListView.setMemberSkill(member.id);
+      }
     };
   }
 
@@ -545,6 +551,24 @@ function setEventListener() {
     });
     $(document).on("click", "#statusMemberList a", function() {
       ListView.setMemberStatus($(this).attr("data-id"));
+    });
+    $(document).on("click", "#memStatus member-costume tr", function() {
+      Dialog.open({
+        type: "edit",
+        target: "costume",
+        editId: $(this).attr("data-editId"),
+        mem: $("#memStatus h3").attr("data-mem"),
+        isUpdMemberPage: true
+      });
+    });
+    $(document).on("click", "#memStatus member-skill tr", function() {
+      Dialog.open({
+        type: "edit",
+        target: "skill",
+        editId: $(this).attr("data-editId"),
+        mem: $("#memStatus h3").attr("data-mem"),
+        isUpdMemberPage: true
+      });
     });
     jq("dialogCloseBtn").on("click", function() {
       Dialog.close();

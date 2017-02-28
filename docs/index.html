@@ -417,12 +417,12 @@
 			</table>
 		</member-list>
 		<member-profile>
-			<h3>{ opts.nm }</h3>
+			<h3 data-mem="{ opts.id }"}>{ opts.nm }</h3>
 		</member-profile>
 		<member-costume>
 			<h4>衣装</h4>
 			<table class="tbl2">
-				<tr each={ c in opts.cos }>
+				<tr each={ c in opts.cos } data-editId="{ c.id }">
 					<th>{ c.nm }</th>
 					<td>
 						<span class="hr">
@@ -456,7 +456,7 @@
 		<member-skill>
 			<h4>スキル</h4>
 			<table class="tbl2">
-				<tr each={ s in opts.skill }>
+				<tr each={ s in opts.skill } data-editId="{ s.id }">
 					<th class="skilnm { s.st }"><b></b>{ s.nm }</th>
 					<td class='{ s.val == 10 ? "ovA" : s.val >= 5 ? "ov5" : "" }'>
 						{ s.val == 10 ? "MAX" : s.val }

@@ -479,7 +479,8 @@ h2 {
 #costume_list td,
 #costume_list .mem th,
 #skill_list td,
-#skill_list .mem th {
+#skill_list .mem th,
+#memStatus tr {
   cursor: pointer;
 }
 
