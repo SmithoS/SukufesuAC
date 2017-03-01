@@ -176,33 +176,91 @@ var DB = (function(){
     }
     return JSON.stringify(dt);
   };
-  d.getInvitationWarning = function() {
-    //Deep Copy
+  d.getStatisticsCostume = function(method) {
+    //データの入れる枠を用意
     var mem = JSON.parse(JSON.stringify(_member));
-    //勧誘すべきでないデータの入れる枠を用意
     var len = mem.length;
     for (var i = 0; i < len; i++) {
-      mem[i].maxSkill = [];
+      mem[i].cos = [];
     }
 
+    //抽出条件を設定
+    var condFunc;
+    switch (method) {
+      case "hasBoth":
+        condFunc = function (hr, r) {return hr && r;}
+        break;
+      case "hasHR":
+        condFunc = function (hr, r) {return hr;}
+        break;
+      case "hasAny":
+        condFunc = function (hr, r) {return hr || r;}
+        break;
+      case "hasNotHr":
+        condFunc = function (hr, r) {return !hr;}
+        break;
+      case "hasNone":
+      default:
+        condFunc = function (hr, r) {return !hr && !r;}
+        break;
+    }
 
-    //スキル
-    //警告レベルを取得
-    var warnLv = (d.getAllSetting())["invitation_warn_skill_lv"];
-    if (warnLv == null) warnLv = 10;
+    //衣装を抽出
+    var cosList =d.getCostumeList();
+    var cosLen = cosList.length;
+    for (var i = 0; i < cosLen; i++) {
+      var cos = cosList[i];
+      for (var mid in cos.hr) {
+        if (condFunc(cos.hr[mid], cos.r[mid])) {
+          var m = mem.find(function(e, i, a) {
+            return e.id == mid;
+          });
+          m.cos.push({
+            id: cos.id,
+            nm: cos.nm,
+            hr: cos.hr[mid],
+            r: cos.r[mid]
+          });
+        }
+      }
+    }
+    return mem;
+  };
+  d.getStatisticsSkill = function(border, method) {
+    //データの入れる枠を用意
+    var mem = JSON.parse(JSON.stringify(_member));
+    var len = mem.length;
+    for (var i = 0; i < len; i++) {
+      mem[i].skill = [];
+    }
 
-    //警告レベルを超えているスキルを抽出
+    //抽出条件を設定
+    var condFunc;
+    switch (method) {
+      case "under":
+        condFunc = function (v) {return v <= border;}
+        break;
+      case "equals":
+        condFunc = function (v) {return v == border;}
+        break;
+      case "under":
+      default:
+        condFunc = function (v) {return v >= border;}
+        break;
+    }
+
+    //スキルを抽出
     var skiList = d.getSkillList();
     var skiLen = skiList.length;
     for (var i = 0; i < skiLen; i++) {
       var ski = skiList[i];
       var skiVal = ski.val;
       for (var mid in skiVal) {
-        if (skiVal[mid] >= warnLv) {
+        if (condFunc(skiVal[mid])) {
           var m = mem.find(function(e, i, a) {
             return e.id == mid;
           });
-          m.maxSkill.push({
+          m.skill.push({
             id: ski.id,
             nm: ski.nm,
             st: ski.st,
@@ -290,8 +348,18 @@ var ListView = (function(){
     v.setMemberSkill(memId);
     $(document.getElementById("memStatus")).show();
   };
-  v.setInvitation = function() {
-    riot.mount("invitation-waring", {mem: DB.getInvitationWarning()});
+  v.setStatisticsCostume = function() {
+    var method = jq("statisticsCostumeMethod").val();
+    riot.mount("statistics-costume", {mem: DB.getStatisticsCostume(method)});
+    jq("statisticsResultCostume").show();
+    jq("statisticsResultSkill").hide();
+  };
+  v.setStatisticsSkill = function() {
+    var border = jq("statisticsSkillBorder").val();
+    var method = jq("statisticsSkillMethod").val();
+    riot.mount("statistics-skill", {mem: DB.getStatisticsSkill(border, method)});
+    jq("statisticsResultCostume").hide();
+    jq("statisticsResultSkill").show();
   };
   v.setSetting = function () {
     var $settingPg = jq("settingPage");
@@ -525,7 +593,7 @@ function setEventListener() {
           jq("settingPage").find(".itm").hide();
           break;
         case "page_invitation":
-          ListView.setInvitation();
+
           break;
         default:
           break;
@@ -570,6 +638,24 @@ function setEventListener() {
         isUpdMemberPage: true
       });
     });
+    jq("statisticsCostume").on("change", function(){
+      if ($(this).prop("checked")) {
+        ListView.setStatisticsCostume();
+      }
+    });
+    jq("statisticsSkill").on("change", function(){
+      if ($(this).prop("checked")) {
+        ListView.setStatisticsSkill();
+      }
+    });
+    $("#condDetailCostume select").on("change", function() {
+      ListView.setStatisticsCostume();
+    });
+    $("#condDetailSkill select").on("change", function() {
+      ListView.setStatisticsSkill();
+    });
+
+
     jq("dialogCloseBtn").on("click", function() {
       Dialog.close();
     });

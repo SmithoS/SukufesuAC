@@ -28,7 +28,7 @@
 				<td data-page="page_member"><span class="wrap w1"><span class="bg f"></span><span class="bg b"></span><span class="txt">部員</span></span></td>
 				<td data-page="page_costume"><span class="wrap w2"><span class="bg f"></span><span class="bg b"></span><span class="txt">衣装</span></span></td>
 				<td data-page="page_skill"><span class="wrap w3"><span class="bg f"></span><span class="bg b"></span><span class="txt">スキル</span></span></td>
-				<td data-page="page_invitation"><span class="wrap w5"><span class="bg f"></span><span class="bg b"></span><span class="txt">勧誘</span></span></td>
+				<td data-page="page_statistics"><span class="wrap w5"><span class="bg f"></span><span class="bg b"></span><span class="txt">統計</span></span></td>
 				<td data-page="page_setting"><span class="wrap w4"><span class="bg f"></span><span class="bg b"></span><span class="txt">設定</span></span></td>
 			</tr>
 		</table>
@@ -70,13 +70,66 @@
 
 			</div>
 		</div>
-		<div class="page skill page_invitation">
-			<h2>勧誘</h2>
+		<div class="page skill page_statistics">
+			<h2>統計</h2>
 			<div class="list">
-				<p>注意する部員とスキル一覧</p>
+				<div class="condition">
+					<input type="radio" name="statisticsTarget" id="statisticsCostume" />
+					<label for="statisticsCostume" class="condtitle costume">衣装</label>
+					<input type="radio" name="statisticsTarget" id="statisticsSkill" />
+					<label for="statisticsSkill" class="condtitle skill">スキル</label>
+					<div class="conditiondetail costume" id="condDetailCostume">
+						<p>衣装統計条件</p>
+						<p>
+							<label class="slct">
+								<select id="statisticsCostumeMethod">
+									<option value="hasBoth">HR,R両方とも所有している</option>
+									<option value="hasHR">HRを所有している（R不問）</option>
+									<option value="hasAny">HR,Rのどちらか所有している</option>
+									<option value="hasNotHr">HRを所有していない（R不問）</option>
+									<option value="hasNone">HR,Rともに所有していない</option>
+								</select>
+							</label>
+						</p>
+					</div>
+					<div class="conditiondetail skill" id="condDetailSkill">
+						<p>スキル統計条件</p>
+						<p>
+							スキルレベルが
+							<label class="slct">
+								<select id="statisticsSkillBorder">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">MAX</option>
+								</select>
+							</label>
+							<label class="slct">
+								<select id="statisticsSkillMethod">
+									<option value="over">以上</option>
+									<option value="under">以下</option>
+									<option value="equals">等しい</option>
+								</select>
+							</label>
+						</p>
+					</div>
 
-				<invitation-waring></invitation-waring>
-
+				</div>
+				<div>
+					<div id="statisticsResultCostume">
+						<statistics-costume></statistics-costume>
+					</div>
+					<div id="statisticsResultSkill">
+						<statistics-skill></statistics-skill>
+					</div>
+				</div>
 			</div>
 		</div>
 		<div class="page costume skill page_setting" id="settingPage">
@@ -213,7 +266,7 @@
 			</div>
 			<div class="list itm system">
 				<h3>システム設定</h3>
-				<table class="tbl2">
+				<!-- <table class="tbl2">
 					<tr>
 						<th>勧誘 スキル注意レベル</th>
 						<td>
@@ -233,7 +286,7 @@
 							</label>
 						</td>
 					</tr>
-				</table>
+				</table> -->
 			</div>
 			<div class="list itm orderCostume">
 				<h3>衣装並び順設定</h3>
@@ -439,20 +492,6 @@
 				</tr>
 			</table>
 		</member-costume>
-		<invitation-waring>
-			<table class="tbl2">
-				<tr each={ m in opts.mem }>
-					<th>{ m.snm }</th>
-					<td>
-						<ul>
-							<li each={ s in m.maxSkill } class="skilnm { s.st }">
-								<b></b>{ s.nm }<span>({ s.val >= 10 ? "MAX" : s.val })</span>
-							</li>
-						</ul>
-					</td>
-				</div>
-			</table>
-		</invitation-waring>
 		<member-skill>
 			<h4>スキル</h4>
 			<table class="tbl2">
@@ -464,6 +503,37 @@
 				</tr>
 			</table>
 		</member-skill>
+
+		<statistics-costume>
+			<table class="tbl2">
+				<tr each={ m in opts.mem }>
+					<th>{ m.snm }</th>
+					<td>
+						<ul>
+							<li each={ c in m.cos }>
+								{ c.nm }<span>({ c.hr ? "HR" : "" } / { c.r ? "R" : "" })</span>
+							</li>
+						</ul>
+					</td>
+				</div>
+			</table>
+		</statistics-costume>
+
+		<statistics-skill>
+			<table class="tbl2">
+				<tr each={ m in opts.mem }>
+					<th>{ m.snm }</th>
+					<td>
+						<ul>
+							<li each={ s in m.skill } class="skilnm { s.st }">
+								<b></b>{ s.nm }<span>({ s.val >= 10 ? "MAX" : s.val })</span>
+							</li>
+						</ul>
+					</td>
+				</div>
+			</table>
+		</statistics-skill>
+
 		<costume-sort-list>
 			<ol id="sortableCostumes" class="sortable">
 				<li each={ c in opts.cos } data-id="{ c.id }"><label>{ c.nm }</label></li>

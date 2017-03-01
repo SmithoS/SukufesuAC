@@ -1,5 +1,5 @@
 /* 初期表示 */
-.page_skill, .page_costume, .page_setting, .page_invitation {
+.page_skill, .page_costume, .page_setting, .page_statistics {
   display: none;
 }
 
@@ -556,19 +556,73 @@ h2 {
 
 
 /* 勧誘画面 */
-.page_invitation .list .tbl2 td {
+.page_statistics .condition {
+  margin: 20px 0;
+  border-bottom: 2px solid gray;
+  padding-bottom: 10px;
+}
+.page_statistics .condtitle {
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  width: 100px;
+  margin: 0 5px;
+}
+.page_statistics .condtitle.costume {
+  border-color: #50ee50;
+}
+.page_statistics .condtitle.skill {
+  border-color: #b770ff;
+}
+.page_statistics input:checked + .condtitle.costume {
+  background-color: #50ee50;
+  color: #ffffff;
+}
+.page_statistics input:checked + .condtitle.skill {
+  background-color: #b770ff;
+  color: #ffffff;
+}
+.page_statistics input {
+  display: none;
+}
+.page_statistics .slct {
+  position: relative;
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding: 0 5px;
+}
+.page_statistics .slct::after {
+  content: "▼";
+  pointer-events: none;
+  width: 2em;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.page_statistics .conditiondetail {
+  display: none;
+}
+#statisticsCostume:checked ~ .conditiondetail.costume {
+  display: block;
+}
+#statisticsSkill:checked ~ .conditiondetail.skill {
+  display: block;
+}
+.page_statistics .list .tbl2 td {
   width: 75%;
   min-width: 250px;
   font-size: 95%;
 }
-.page_invitation ul {
+.page_statistics ul {
   margin: 0;
   padding: 0;
 }
-.page_invitation li {
+.page_statistics li {
   list-style: none;
 }
-.page_invitation li span {
+.page_statistics li span {
   font-size: 75%;
 }
 
