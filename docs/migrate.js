@@ -58,5 +58,17 @@ Migrate = [
       cos.nm = "僕らは今のなかで";
       db.save("c001", cos);
     }
+  },
+  {
+    dbver: "1.00.04",
+    msg: "衣装「これからのSomeday」を追加しました。",
+    upd : function(db){
+      //勧誘警告レベル廃止
+      var st = db.getAllSetting();
+      if (st.hasOwnProperty("invitation_warn_skill_lv")) delete st["invitation_warn_skill_lv"];
+      db.save("_setting", st);
+      //これサム追加
+      db.save("c008", {id:"c008",so: 7, nm:"これからのSomeday",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+    }
   }
 ];
