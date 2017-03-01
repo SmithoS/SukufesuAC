@@ -809,4 +809,10 @@ $(function(){
   jq("settingPage").find('.design [name]').each(function(){
     $(this).trigger("change");
   });
+  //初期ページ表示
+  var stg = DB.getAllSetting();
+  var initPage = stg["init_display_page"];
+  if (initPage != null) {
+    jq("menu").find("[data-page='" + initPage + "']").trigger("click");
+  }
 });
