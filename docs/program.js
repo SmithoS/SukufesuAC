@@ -562,43 +562,53 @@ var Menu = (function() {
  ********************/
 
 /**
- * イベントリスナ定義
+ * イベントのバインド
  * この関数はhtml読み込み後に実行される
  */
 function setEventListener() {
+  $("#menu td").on("click", function(){
+    var showpage = $(this).attr("data-page");
+    $contents = jq("contents");
+    $contents.find(".page").each(function(i, elm) {
+      if ($(elm).hasClass(showpage)) $(elm).show();
+      else $(elm).hide();
+    });
+    switch (showpage) {
+      case "page_member":
+        jq("memStatus").hide();
+        break;
+      case "page_setting":
+        jq("settingPage").find(".itm").hide();
+        break;
+      default:
+        break;
+    }
+    Menu.close();
+  });
 
+  $("#settingPage .design select").on("change", function() {
+    var $wrapper = jq("wrapper");
+    var sKey = $(this).attr("name")
+    var sVal = $(this).val();
+    //画面に設定を反映
+    $(this).children().each(function(i, opt){
+      $wrapper.removeClass($(opt).attr("value"));
+    });
+    $wrapper.addClass($(this).val());
+    //保存
+    DB.saveSetting(sKey, sVal);
+  });
+}
+
+
+/**
+ * イベントのバインド
+ * この関数は描写処理が一通り終わった後に実行される。
+ */
+function setEventListenerLazy() {
 
     jq("menu_key").on("click", function(){
       Menu.toggle();
-    });
-
-    $("#menu td").on("click", function(){
-      var showpage = $(this).attr("data-page");
-      $contents = jq("contents");
-      $contents.find(".page").each(function(i, elm) {
-        if ($(elm).hasClass(showpage)) $(elm).show();
-        else $(elm).hide();
-      });
-      switch (showpage) {
-        case "page_member":
-          jq("memStatus").hide();
-          break;
-        // case "page_costume":
-        //   ListView.showCostume();
-        //   break;
-        // case "page_skill":
-        //   ListView.showSkill();
-        //   break;
-        case "page_setting":
-          jq("settingPage").find(".itm").hide();
-          break;
-        case "page_invitation":
-
-          break;
-        default:
-          break;
-      }
-      Menu.close();
     });
 
     $(document).on("click", "#costume_list td, #costume_list .mem th", function(){
@@ -677,18 +687,6 @@ function setEventListener() {
       addSkillVal(1);
     });
 
-    $("#settingPage .design select").on("change", function() {
-      var $wrapper = jq("wrapper");
-      var sKey = $(this).attr("name")
-      var sVal = $(this).val();
-      //画面に設定を反映
-      $(this).children().each(function(i, opt){
-        $wrapper.removeClass($(opt).attr("value"));
-      });
-      $wrapper.addClass($(this).val());
-      //保存
-      DB.saveSetting(sKey, sVal);
-    });
 
     $("#settingPage .system select").on("change", function() {
       var sKey = $(this).attr("name")
@@ -791,19 +789,15 @@ function setEventListener() {
  ********************/
 
 $(function(){
-
-
   //データ初期処理。マイグレート含む
   DB.init();
 
 
-  //イベントリスナ登録
-  setEventListener();
-
-
-
   //表示処理
   ListView.init();
+
+  //イベントリスナ登録
+  setEventListener();
 
   //デザイン反映
   jq("settingPage").find('.design [name]').each(function(){
@@ -815,4 +809,8 @@ $(function(){
   if (initPage != null) {
     jq("menu").find("[data-page='" + initPage + "']").trigger("click");
   }
+
+  //イベントリスナ定義（遅延）
+  setTimeout(setEventListenerLazy, 500);
+
 });
