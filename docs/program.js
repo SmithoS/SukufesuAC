@@ -226,7 +226,7 @@ var DB = (function(){
     }
     return mem;
   };
-  d.getStatisticsSkill = function(border, method) {
+  d.getStatisticsSkill = function(border, method, eventSkill) {
     //データの入れる枠を用意
     var mem = JSON.parse(JSON.stringify(_member));
     var len = mem.length;
@@ -235,17 +235,27 @@ var DB = (function(){
     }
 
     //抽出条件を設定
-    var condFunc;
+    var condFunc1;
     switch (method) {
       case "under":
-        condFunc = function (v) {return v <= border;}
+        condFunc1 = function (v) {return v <= border;}
         break;
       case "equals":
-        condFunc = function (v) {return v == border;}
+        condFunc1 = function (v) {return v == border;}
         break;
       case "under":
       default:
-        condFunc = function (v) {return v >= border;}
+        condFunc1 = function (v) {return v >= border;}
+        break;
+    }
+    var condFunc2;
+    switch (eventSkill) {
+      case "exclude":
+      condFunc2 = function (ski) {return ski.id != "s007" && ski.id != "s008";}
+        break;
+      case "include":
+      default:
+        condFunc2 = function (ski) {return true;}
         break;
     }
 
@@ -256,7 +266,7 @@ var DB = (function(){
       var ski = skiList[i];
       var skiVal = ski.val;
       for (var mid in skiVal) {
-        if (condFunc(skiVal[mid])) {
+        if (condFunc1(skiVal[mid]) && condFunc2(ski)) {
           var m = mem.find(function(e, i, a) {
             return e.id == mid;
           });
@@ -357,7 +367,8 @@ var ListView = (function(){
   v.setStatisticsSkill = function() {
     var border = jq("statisticsSkillBorder").val();
     var method = jq("statisticsSkillMethod").val();
-    riot.mount("statistics-skill", {mem: DB.getStatisticsSkill(border, method)});
+    var eventSkill = jq("statisticsEventSkill").val();
+    riot.mount("statistics-skill", {mem: DB.getStatisticsSkill(border, method, eventSkill)});
     jq("statisticsResultCostume").hide();
     jq("statisticsResultSkill").show();
   };

@@ -585,6 +585,9 @@ h2 {
 .page_statistics input {
   display: none;
 }
+.page_statistics .conditiondetail p {
+  margin: 8px 0;
+}
 .page_statistics .slct {
   position: relative;
   display: inline-block;
