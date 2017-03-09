@@ -628,6 +628,19 @@ h2 {
 .page_statistics li span {
   font-size: 75%;
 }
+.page_statistics .cameraArea {
+  margin: 5px 0;
+}
+.page_statistics .cameraArea img {
+  max-width: 100%;
+}
+.page_statistics .cameraArea label {
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: inline-block;
+  width: 150px;
+  padding: 10px;
+}
 
 /* 設定画面 */
 

@@ -675,6 +675,14 @@ function setEventListenerLazy() {
     $("#condDetailSkill select").on("change", function() {
       ListView.setStatisticsSkill();
     });
+    jq("cameraBtn").on("change", function() {
+      var reader = new FileReader();
+      reader.onload = function(evt) {
+        jq("cameraImg").attr("src", reader.result);
+      };
+      var imageFile = this.files[0];
+      reader.readAsDataURL(imageFile);
+    });
 
 
     jq("dialogCloseBtn").on("click", function() {
