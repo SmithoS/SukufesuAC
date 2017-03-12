@@ -75,10 +75,6 @@ var DB = (function(){
 
 
   d.init = function(argument) {
-
-    //LS.clear();
-
-
     //データマイグレーション
     var migLen = Migrate.length;
     var lastUpdDbVer = d.getLastUpdVersion();
@@ -89,7 +85,7 @@ var DB = (function(){
       Dialog.open({
         type: "confirm",
         text1: "データ更新",
-        text2: currentMig.msg + "データを更新します。",
+        text2: currentMig.msg + "\r\nデータを更新します。",
         okCallback: function() {
           for (var i = 0; i < migLen; i++) {
             var migData = Migrate[i];
@@ -104,6 +100,9 @@ var DB = (function(){
           ListView.updateSkill();
           ListView.setSetting();
           ListView.setVersion();
+
+          //デザイン反映
+          ListView.reflectDesign();
         }
       });
     }
@@ -302,6 +301,7 @@ var DB = (function(){
   };
   d.saveSetting = function(settingId, val) {
     var settingData = d.getAllSetting(settingId);
+    if (settingData == null) settingData = {};
     settingData[settingId] = val;
     setJson(SETTING_KEY, settingData);
   };
@@ -395,6 +395,11 @@ var ListView = (function(){
     jq("sysVer").text(SysVer);
     jq("dataVer").text(DB.getLastUpdVersion());
   };
+  v.reflectDesign = function() {
+    jq("settingPage").find('.design [name]').each(function(){
+      $(this).trigger("change");
+    });
+  };
 
   v.init = function() {
     v.showCostume();
@@ -402,6 +407,7 @@ var ListView = (function(){
     v.setMemberList();
     v.setSetting();
     v.setVersion();
+    v.reflectDesign();
   };
 
   return v;
@@ -818,15 +824,13 @@ $(function(){
   //イベントリスナ登録
   setEventListener();
 
-  //デザイン反映
-  jq("settingPage").find('.design [name]').each(function(){
-    $(this).trigger("change");
-  });
   //初期ページ表示
   var stg = DB.getAllSetting();
-  var initPage = stg["init_display_page"];
-  if (initPage != null) {
-    jq("menu").find("[data-page='" + initPage + "']").trigger("click");
+  if (stg != null) {
+    var initPage = stg["init_display_page"];
+    if (initPage != null) {
+      jq("menu").find("[data-page='" + initPage + "']").trigger("click");
+    }
   }
 
   //イベントリスナ定義（遅延）
