@@ -396,8 +396,12 @@ var ListView = (function(){
     jq("dataVer").text(DB.getLastUpdVersion());
   };
   v.reflectDesign = function() {
+    var $wrapper = jq("wrapper");
     jq("settingPage").find('.design [name]').each(function(){
-      $(this).trigger("change");
+      $(this).children().each(function(i, opt){
+        $wrapper.removeClass($(opt).attr("value"));
+      });
+      $wrapper.addClass($(this).val());
     });
   };
 
