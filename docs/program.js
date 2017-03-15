@@ -554,15 +554,16 @@ var Menu = (function() {
   var m = {};
 
   m.open = function() {
-    jq("menu").stop().animate(
+    jq("menu").animate(
       {"bottom": "0px"}
     ).addClass("active");
   };
 
   m.close = function() {
     var $menu = jq("menu");
-    $menu.stop().animate(
-      {"bottom": "-" + $menu.outerHeight() + "px"}
+    var outerHeight = $menu.height() + parseInt($menu.css("border-top-width"), 10) + parseInt($menu.css("border-bottom-width"), 10);
+    $menu.animate(
+      {"bottom": "-" + outerHeight + "px"}
     ).removeClass("active");
   };
 
