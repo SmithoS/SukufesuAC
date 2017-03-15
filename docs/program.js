@@ -362,14 +362,14 @@ var ListView = (function(){
     var method = jq("statisticsCostumeMethod").val();
     riot.mount("statistics-costume", {mem: DB.getStatisticsCostume(method)});
     jq("statisticsResultCostume").show();
-    jq("statisticsResultSkill").hide();
+    jq("statisticsResultSkill").css("display", "none");
   };
   v.setStatisticsSkill = function() {
     var border = jq("statisticsSkillBorder").val();
     var method = jq("statisticsSkillMethod").val();
     var eventSkill = jq("statisticsEventSkill").val();
     riot.mount("statistics-skill", {mem: DB.getStatisticsSkill(border, method, eventSkill)});
-    jq("statisticsResultCostume").hide();
+    jq("statisticsResultCostume").css("display", "none");
     jq("statisticsResultSkill").show();
   };
   v.setSetting = function () {
@@ -433,9 +433,9 @@ var Dialog = (function(){
     var $dialog = jq("dialog");
     $dialog.find(".descArea").show();
     $dialog.find(".editArea").show();
-    $dialog.find(".confirmArea").hide();
+    $dialog.find(".confirmArea").css("display", "none");
     $dialog.find(".editArea .costumeedit").show();
-    $dialog.find(".editArea .skiledit").hide();
+    $dialog.find(".editArea .skiledit").css("display", "none");
     // 名前表示
     var member = DB.getMember(prm.mem);
     jq("editMember").text(member.nm).attr("data-memid", member.id);
@@ -468,8 +468,8 @@ var Dialog = (function(){
     var $dialog = jq("dialog");
     $dialog.find(".descArea").show();
     $dialog.find(".editArea").show();
-    $dialog.find(".confirmArea").hide();
-    $dialog.find(".editArea .costumeedit").hide();
+    $dialog.find(".confirmArea").css("display", "none");
+    $dialog.find(".editArea .costumeedit").css("display", "none");
     $dialog.find(".editArea .skiledit").show();
 
     // 名前表示
@@ -514,8 +514,8 @@ var Dialog = (function(){
       }
 
     } else if (prm.type == "confirm") {
-      $dialog.find(".descArea").hide();
-      $dialog.find(".editArea").hide();
+      $dialog.find(".descArea").css("display", "none");
+      $dialog.find(".editArea").css("display", "none");
       $dialog.find(".confirmArea").show();
       $dialog.find(".confirmArea .confirmTxt1").text(prm.text1);
       $dialog.find(".confirmArea .confirmTxt2").text(prm.text2);
@@ -535,7 +535,7 @@ var Dialog = (function(){
     $dialog.stop()
     .animate(
       _getVanishPointCss(),
-      {complete: function(){$(this).hide();}}
+      {complete: function(){$(this).css("display", "none");}}
     );
   };
 
@@ -592,14 +592,14 @@ function setEventListener() {
     $contents = jq("contents");
     $contents.find(".page").each(function(i, elm) {
       if ($(elm).hasClass(showpage)) $(elm).show();
-      else $(elm).hide();
+      else $(elm).css("display", "none");
     });
     switch (showpage) {
       case "page_member":
-        jq("memStatus").hide();
+        jq("memStatus").css("display", "none");
         break;
       case "page_setting":
-        jq("settingPage").find(".itm").hide();
+        jq("settingPage").find(".itm").css("display", "none");
         break;
       default:
         break;
@@ -728,7 +728,7 @@ function setEventListenerLazy() {
       var itm = $(this).attr("data-itm");
       jq("settingPage").find(".itm").each(function(i, elm) {
         if ($(elm).hasClass(itm)) $(elm).show();
-        else $(elm).hide();
+        else $(elm).css("display", "none");
       });
       switch (itm) {
         case "orderCostume":
