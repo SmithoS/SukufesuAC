@@ -356,12 +356,12 @@ var ListView = (function(){
     riot.mount("member-profile", DB.getMember(memId));
     v.setMemberCostume(memId);
     v.setMemberSkill(memId);
-    $(document.getElementById("memStatus")).show();
+    $(document.getElementById("memStatus")).css("display", "block");
   };
   v.setStatisticsCostume = function() {
     var method = jq("statisticsCostumeMethod").val();
     riot.mount("statistics-costume", {mem: DB.getStatisticsCostume(method)});
-    jq("statisticsResultCostume").show();
+    jq("statisticsResultCostume").css("display", "block");
     jq("statisticsResultSkill").css("display", "none");
   };
   v.setStatisticsSkill = function() {
@@ -370,7 +370,7 @@ var ListView = (function(){
     var eventSkill = jq("statisticsEventSkill").val();
     riot.mount("statistics-skill", {mem: DB.getStatisticsSkill(border, method, eventSkill)});
     jq("statisticsResultCostume").css("display", "none");
-    jq("statisticsResultSkill").show();
+    jq("statisticsResultSkill").css("display", "block");
   };
   v.setSetting = function () {
     var $settingPg = jq("settingPage");
@@ -431,10 +431,10 @@ var Dialog = (function(){
 
   function editCostume(prm) {
     var $dialog = jq("dialog");
-    $dialog.find(".descArea").show();
-    $dialog.find(".editArea").show();
+    $dialog.find(".descArea").css("display", "block");
+    $dialog.find(".editArea").css("display", "block");
     $dialog.find(".confirmArea").css("display", "none");
-    $dialog.find(".editArea .costumeedit").show();
+    $dialog.find(".editArea .costumeedit").css("display", "block");
     $dialog.find(".editArea .skiledit").css("display", "none");
     // 名前表示
     var member = DB.getMember(prm.mem);
@@ -466,11 +466,11 @@ var Dialog = (function(){
 
   function editSkill(prm) {
     var $dialog = jq("dialog");
-    $dialog.find(".descArea").show();
-    $dialog.find(".editArea").show();
+    $dialog.find(".descArea").css("display", "block");
+    $dialog.find(".editArea").css("display", "block");
     $dialog.find(".confirmArea").css("display", "none");
     $dialog.find(".editArea .costumeedit").css("display", "none");
-    $dialog.find(".editArea .skiledit").show();
+    $dialog.find(".editArea .skiledit").css("display", "block");
 
     // 名前表示
     var member = DB.getMember(prm.mem);
@@ -516,7 +516,7 @@ var Dialog = (function(){
     } else if (prm.type == "confirm") {
       $dialog.find(".descArea").css("display", "none");
       $dialog.find(".editArea").css("display", "none");
-      $dialog.find(".confirmArea").show();
+      $dialog.find(".confirmArea").css("display", "block");
       $dialog.find(".confirmArea .confirmTxt1").text(prm.text1);
       $dialog.find(".confirmArea .confirmTxt2").text(prm.text2);
       okCallback = prm.okCallback;
@@ -524,7 +524,7 @@ var Dialog = (function(){
 
     $dialog.stop()
     .css(_getVanishPointCss())
-    .show()
+    .css("display", "block")
     .animate(
       {top: "10px" , bottom: "10px", left: "10px", right: "10px"}
     );
@@ -591,7 +591,7 @@ function setEventListener() {
     var showpage = $(this).attr("data-page");
     $contents = jq("contents");
     $contents.find(".page").each(function(i, elm) {
-      if ($(elm).hasClass(showpage)) $(elm).show();
+      if ($(elm).hasClass(showpage)) $(elm).css("display", "block");
       else $(elm).css("display", "none");
     });
     switch (showpage) {
@@ -727,7 +727,7 @@ function setEventListenerLazy() {
     $("#settingItemList a").on("click", function() {
       var itm = $(this).attr("data-itm");
       jq("settingPage").find(".itm").each(function(i, elm) {
-        if ($(elm).hasClass(itm)) $(elm).show();
+        if ($(elm).hasClass(itm)) $(elm).css("display", "block");
         else $(elm).css("display", "none");
       });
       switch (itm) {
