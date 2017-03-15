@@ -522,7 +522,7 @@ var Dialog = (function(){
       okCallback = prm.okCallback;
     }
 
-    $dialog.stop()
+    $dialog
     .css(_getVanishPointCss())
     .css("display", "block")
     .animate(
@@ -532,7 +532,7 @@ var Dialog = (function(){
 
   d.close = function(){
     var $dialog = jq("dialog");
-    $dialog.stop()
+    $dialog
     .animate(
       _getVanishPointCss(),
       {complete: function(){$(this).css("display", "none");}}
