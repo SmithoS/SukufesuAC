@@ -1,3 +1,15 @@
+/* カスタムフォント */
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?uor1w9');
+  src:  url('fonts/icomoon.eot?uor1w9#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?uor1w9') format('truetype'),
+    url('fonts/icomoon.woff?uor1w9') format('woff'),
+    url('fonts/icomoon.svg?uor1w9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* 初期表示 */
 .page_skill, .page_costume, .page_setting, .page_statistics, .page_live {
   display: none;
@@ -574,11 +586,11 @@ h2 {
 }
 
 /* ライブ */
-.page_live .liverank {
+.liverank {
   padding: 0;
   margin: 0;
 }
-.page_live .liverank li {
+.liverank li {
   display: inline-block;
   width: 50px;
   text-align: center;
@@ -586,11 +598,6 @@ h2 {
 .liverank li {
   color: gray;
 }
-.liverank .easy::after {content: "E";}
-.liverank .normal::after {content: "N";}
-.liverank .hard::after {content: "H";}
-.liverank .extream::after {content: "EX";}
-.liverank .challenge::after {content: "C";}
 .liverank li.fc,
 .liverank li.ap {
   font-weight: bold;
@@ -1040,3 +1047,27 @@ h2 {
 #wrapper.menu_show_fixed #menu {
   bottom: 0 !important; /* Javascriptで表示位置をDOMに直接している可能性があるため */
 }
+
+/* コンボ表示マーク */
+/* 文字 */
+#wrapper.combo_char .liverank .easy::after {content: "E";}
+#wrapper.combo_char .liverank .normal::after {content: "N";}
+#wrapper.combo_char .liverank .hard::after {content: "H";}
+#wrapper.combo_char .liverank .extream::after {content: "EX";}
+#wrapper.combo_char .liverank .challenge::after {content: "C";}
+
+/* 音符 */
+#wrapper.combo_onpu .liverank li::after {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#wrapper.combo_onpu .liverank .easy::after {content: "\e903";}
+#wrapper.combo_onpu .liverank .normal::after {content: "\e904";}
+#wrapper.combo_onpu .liverank .hard::after {content: "\e902";}
+#wrapper.combo_onpu .liverank .extream::after {content: "\e901";}
+#wrapper.combo_onpu .liverank .challenge::after {content: "\e905";font-size: 120%;}
