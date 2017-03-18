@@ -246,10 +246,10 @@ h2 {
   text-align: center;
 }
 .dialog .descArea {
-  height: 50%;
+  height: 30%;
 }
 .dialog .editArea {
-  height: 30%;
+  height: 50%;
 }
 .dialog .confirmArea {
   height: 80%;
@@ -272,6 +272,7 @@ h2 {
 /* ダイアログ（スキル編集） */
 .dialog .skiledit {
   text-align: center;
+  padding-top: 40%;
 }
 .dialog .skiledit input[type="text"] {
   width: 40px;
@@ -326,6 +327,7 @@ h2 {
 /* ダイアログ（衣装編集） */
 .dialog .costumeedit {
   text-align: center;
+  padding-top: 40%;
 }
 .dialog .costumeedit .rateBtn {
   display: inline-block;
@@ -364,6 +366,9 @@ h2 {
 /* ダイアログ（ライブ） */
 .dialog .liveedit table {
   width: 100%;
+}
+.dialog .liveedit table tr {
+  height: 2.5em;
 }
 .dialog .liveedit .slct {
   display: inline-block;
@@ -516,7 +521,7 @@ h2 {
 #skill_list td,
 #skill_list .mem th,
 #memStatus tr,
-#live_list li {
+#live_list .itm {
   cursor: pointer;
 }
 
