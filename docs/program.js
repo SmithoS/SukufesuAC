@@ -307,9 +307,15 @@ var DB = (function(){
     skillData.val[memId] = skVal;
     setJson(skillId, skillData);
   };
-  d.saveLive = function (lvId, rank, cmb) {
+  d.saveLive = function (lvId, updCmbObj) {
     var liveData = getJson(lvId);
-    liveData.cb[rank] = cmb;
+    var cmbData = liveData.cb;
+    cmbData.e = updCmbObj.e;
+    cmbData.n = updCmbObj.n;
+    cmbData.h = updCmbObj.h;
+    cmbData.ex = updCmbObj.ex;
+    cmbData.c = updCmbObj.c;
+    liveData.cb = cmbData;
     setJson(lvId, liveData);
   }
   d.saveSetting = function(settingId, val) {
@@ -532,27 +538,27 @@ var Dialog = (function(){
 
     // 名前表示
     var lv = DB.getLive(prm.editId);
-    var ranknm = "";
-    switch (prm.rank) {
-      case "e": ranknm = "EASY"; break;
-      case "n": ranknm = "NORMAL"; break;
-      case "h": ranknm = "HARD"; break;
-      case "ex": ranknm = "EXTREAM"; break;
-      case "c": ranknm = "CHALLENGE"; break;
-    }
     jq("editTgt").text(lv.nm).attr("data-tgtid", lv.id);
-    jq("editMember").text(ranknm).attr("data-rank", prm.rank);
+    jq("editMember").text("");
 
-    //コンボ状態表示
-    var cmb = lv.cb[prm.rank];
-    jq("livecombo").val(cmb);
+    //コンボ状態設定
+    jq("livecombo_e").val(lv.cb.e);
+    jq("livecombo_n").val(lv.cb.n);
+    jq("livecombo_h").val(lv.cb.h);
+    jq("livecombo_ex").val(lv.cb.ex);
+    jq("livecombo_c").val(lv.cb.c);
 
     okCallback = function() {
       //キーの取得
       var tgtId = jq("editTgt").attr("data-tgtid");
-      var rank = jq("editMember").attr("data-rank");
       //更新
-      DB.saveLive(tgtId, rank, jq("livecombo").val());
+      DB.saveLive(tgtId, {
+        e: jq("livecombo_e").val(),
+        n: jq("livecombo_n").val(),
+        h: jq("livecombo_h").val(),
+        ex: jq("livecombo_ex").val(),
+        c: jq("livecombo_c").val()
+      });
       ListView.updateLive();
     };
   }
@@ -732,12 +738,11 @@ function setEventListenerLazy() {
         isUpdMemberPage: true
       });
     });
-    $(document).on("click", "#live_list .itm li", function() {
+    $(document).on("click", "#live_list .itm", function() {
       Dialog.open({
         type: "edit",
         target: "live",
-        editId: $(this).closest(".itm").attr("data-editId"),
-        rank: $(this).attr("data-id")
+        editId: $(this).attr("data-editId")
       });
     });
     jq("statisticsCostume").on("change", function(){
