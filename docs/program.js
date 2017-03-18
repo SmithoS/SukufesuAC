@@ -56,9 +56,10 @@ var DB = (function(){
     var len = LS.length;
     var l = [];
     var k = null;
+    var reg = new RegExp("^" + startKeyChr + "[0-9]+$");
     for (var i = 0; i < len; i++) {
       k = LS.key(i);
-      if (k.substring(0,1) == startKeyChr) l.push(getJson(k));
+      if (reg.test(k)) l.push(getJson(k));
     }
     // 並び替え
     if (sortFunc == null) {
@@ -98,6 +99,7 @@ var DB = (function(){
           //表示
           ListView.updateCostume();
           ListView.updateSkill();
+          ListView.updateLive();
           ListView.setSetting();
           ListView.setVersion();
 
@@ -123,6 +125,9 @@ var DB = (function(){
   d.getSkill = function(id) {
     return getJson(id);
   };
+  d.getLive = function(id) {
+    return getJson(id);
+  };
   d.getMemberList = function() {
     return _member;
   }
@@ -131,6 +136,9 @@ var DB = (function(){
   };
   d.getSkillList = function() {
     return getList("s", null);
+  };
+  d.getLiveList = function() {
+    return getList("l", null);
   }
   d.getMemberCostumeList = function(memId) {
     var cosList = d.getCostumeList();
@@ -299,6 +307,11 @@ var DB = (function(){
     skillData.val[memId] = skVal;
     setJson(skillId, skillData);
   };
+  d.saveLive = function (lvId, rank, cmb) {
+    var liveData = getJson(lvId);
+    liveData.cb[rank] = cmb;
+    setJson(lvId, liveData);
+  }
   d.saveSetting = function(settingId, val) {
     var settingData = d.getAllSetting(settingId);
     if (settingData == null) settingData = {};
@@ -342,6 +355,9 @@ var ListView = (function(){
     //skillView.update({"skill": DB.getSkillList()});
     v.showSkill();
   };
+  v.updateLive = function() {
+    v.showLive();
+  };
 
   v.setMemberCostume = function(memId) {
     memCosView = riot.mount("member-costume", {"cos": DB.getMemberCostumeList(memId)});
@@ -357,6 +373,9 @@ var ListView = (function(){
     v.setMemberCostume(memId);
     v.setMemberSkill(memId);
     $(document.getElementById("memStatus")).css("display", "block");
+  };
+  v.showLive = function() {
+    riot.mount("live-list", {"liveList": DB.getLiveList()});
   };
   v.setStatisticsCostume = function() {
     var method = jq("statisticsCostumeMethod").val();
@@ -408,6 +427,7 @@ var ListView = (function(){
   v.init = function() {
     v.showCostume();
     v.showSkill();
+    v.showLive();
     v.setMemberList();
     v.setSetting();
     v.setVersion();
@@ -436,6 +456,7 @@ var Dialog = (function(){
     $dialog.find(".confirmArea").css("display", "none");
     $dialog.find(".editArea .costumeedit").css("display", "block");
     $dialog.find(".editArea .skiledit").css("display", "none");
+    $dialog.find(".editArea .liveedit").css("display", "none");
     // 名前表示
     var member = DB.getMember(prm.mem);
     jq("editMember").text(member.nm).attr("data-memid", member.id);
@@ -471,6 +492,7 @@ var Dialog = (function(){
     $dialog.find(".confirmArea").css("display", "none");
     $dialog.find(".editArea .costumeedit").css("display", "none");
     $dialog.find(".editArea .skiledit").css("display", "block");
+    $dialog.find(".editArea .liveedit").css("display", "none");
 
     // 名前表示
     var member = DB.getMember(prm.mem);
@@ -499,20 +521,60 @@ var Dialog = (function(){
     };
   }
 
+  function editLive(prm) {
+    var $dialog = jq("dialog");
+    $dialog.find(".descArea").css("display", "block");
+    $dialog.find(".editArea").css("display", "block");
+    $dialog.find(".confirmArea").css("display", "none");
+    $dialog.find(".editArea .costumeedit").css("display", "none");
+    $dialog.find(".editArea .skiledit").css("display", "none");
+    $dialog.find(".editArea .liveedit").css("display", "block");
+
+    // 名前表示
+    var lv = DB.getLive(prm.editId);
+    var ranknm = "";
+    switch (prm.rank) {
+      case "e": ranknm = "EASY"; break;
+      case "n": ranknm = "NORMAL"; break;
+      case "h": ranknm = "HARD"; break;
+      case "ex": ranknm = "EXTREAM"; break;
+      case "c": ranknm = "CHALLENGE"; break;
+    }
+    jq("editTgt").text(lv.nm).attr("data-tgtid", lv.id);
+    jq("editMember").text(ranknm).attr("data-rank", prm.rank);
+
+    //コンボ状態表示
+    var cmb = lv.cb[prm.rank];
+    jq("livecombo").val(cmb);
+
+    okCallback = function() {
+      //キーの取得
+      var tgtId = jq("editTgt").attr("data-tgtid");
+      var rank = jq("editMember").attr("data-rank");
+      //更新
+      DB.saveLive(tgtId, rank, jq("livecombo").val());
+      ListView.updateLive();
+    };
+  }
+
   d.open = function(prm){
     var $dialog = jq("dialog");
     //表示内容の切り替え
     if (prm.type == "edit") {
-      // 名前表示
-      var member = DB.getMember(prm.mem);
-      $dialog.find(".description .memName").text(member.nm);
-
-      if (prm.target == "costume") {
-        editCostume(prm);
-      } else {
-        editSkill(prm);
+      switch (prm.target) {
+        case "costume":
+          $dialog.find(".description .memName").text(DB.getMember(prm.mem).nm);
+          editCostume(prm);
+          break;
+        case "skill":
+          $dialog.find(".description .memName").text(DB.getMember(prm.mem).nm);
+          editSkill(prm);
+          break;
+        case "live":
+          $dialog.find(".description .memName").text("");
+          editLive(prm);
+          break;
       }
-
     } else if (prm.type == "confirm") {
       $dialog.find(".descArea").css("display", "none");
       $dialog.find(".editArea").css("display", "none");
@@ -668,6 +730,14 @@ function setEventListenerLazy() {
         editId: $(this).attr("data-editId"),
         mem: $("#memStatus h3").attr("data-mem"),
         isUpdMemberPage: true
+      });
+    });
+    $(document).on("click", "#live_list .itm li", function() {
+      Dialog.open({
+        type: "edit",
+        target: "live",
+        editId: $(this).closest(".itm").attr("data-editId"),
+        rank: $(this).attr("data-id")
       });
     });
     jq("statisticsCostume").on("change", function(){

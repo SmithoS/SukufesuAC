@@ -1,5 +1,5 @@
 /* 初期表示 */
-.page_skill, .page_costume, .page_setting, .page_statistics {
+.page_skill, .page_costume, .page_setting, .page_statistics, .page_live {
   display: none;
 }
 
@@ -168,6 +168,7 @@ h2 {
 #menu td .wrap.w3 {background-color: #b770ff;}
 #menu td .wrap.w4 {background-color: #70b7ff;}
 #menu td .wrap.w5 {background-color: #ff60ff;}
+#menu td .wrap.w6 {background-color: #7070ff;}
 #menu td .bg {
 	position: absolute;
 	display: inline-block;
@@ -348,10 +349,27 @@ h2 {
   margin:auto;
   z-index: 1;
 }
-
-
-
-
+/* ダイアログ（ライブ） */
+.dialog .liveedit .slct {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border: 1px solid gray;
+  border-radius: 15px;
+}
+.dialog .liveedit .slct::after {
+  content: "▼";
+  pointer-events: none;
+  display: block;
+  width: 2em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.dialog .liveedit .slct select {
+  width: 100%;
+}
 
 /* 衣装、スキル一覧（共通） */
 .list * {
@@ -480,7 +498,8 @@ h2 {
 #costume_list .mem th,
 #skill_list td,
 #skill_list .mem th,
-#memStatus tr {
+#memStatus tr,
+#live_list li {
   cursor: pointer;
 }
 
@@ -554,6 +573,41 @@ h2 {
 							-1px 1px 0 gray;
 }
 
+/* ライブ */
+.page_live .liverank {
+  padding: 0;
+  margin: 0;
+}
+.page_live .liverank li {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+}
+.liverank li {
+  color: gray;
+}
+.liverank .easy::after {content: "E";}
+.liverank .normal::after {content: "N";}
+.liverank .hard::after {content: "H";}
+.liverank .extream::after {content: "EX";}
+.liverank .challenge::after {content: "C";}
+.liverank li.fc,
+.liverank li.ap {
+  font-weight: bold;
+}
+.liverank .ap::before {
+  content: "★";
+}
+.liverank .easy.fc,
+.liverank .easy.ap {color: #51a8ff;}
+.liverank .normal.fc,
+.liverank .normal.ap {color: #51ff51;}
+.liverank .hard.fc,
+.liverank .hard.ap {color: #e8e833;}
+.liverank .extream.fc,
+.liverank .extream.ap {color: #ff5151;}
+.liverank .challenge.fc,
+.liverank .challenge.ap {color: #a851ff;}
 
 /* 勧誘画面 */
 .page_statistics .condition {

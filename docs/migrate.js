@@ -70,5 +70,43 @@ Migrate = [
       //これサム追加
       db.save("c008", {id:"c008",so: 7, nm:"これからのSomeday",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
     }
+  },
+  {
+    dbver: "1.00.05",
+    msg: "楽曲ページ（フルコン管理）の実装に伴い、楽曲一覧を登録します。",
+    upd : function(db){
+      db.save("l001", {id:"l001",so: 1, nm:"僕らのLIVE 君とのLIFE", cb:{}});
+      db.save("l002", {id:"l002",so: 2, nm:"Snow halation", cb:{}});
+      db.save("l003", {id:"l003",so: 3, nm:"夏色えがおで1，2，Jump！", cb:{}});
+      db.save("l004", {id:"l004",so: 4, nm:"もぎゅっと ”love” で接近中！", cb:{}});
+      db.save("l005", {id:"l005",so: 5, nm:"Wonderful Rush", cb:{}});
+      db.save("l006", {id:"l006",so: 6, nm:"Music S．T．A．R．T！！", cb:{}});
+      db.save("l007", {id:"l007",so: 7, nm:"僕らは今のなかで", cb:{}});
+      db.save("l008", {id:"l008",so: 8, nm:"それは僕たちの奇跡", cb:{}});
+      db.save("l009", {id:"l009",so: 9, nm:"ラブノベルス", cb:{}});
+      db.save("l010", {id:"l010",so: 10, nm:"知らないLove＊教えてLove", cb:{}});
+      db.save("l011", {id:"l011",so: 11, nm:"sweet＆sweet holiday", cb:{}});
+      db.save("l012", {id:"l012",so: 12, nm:"Mermaid festa vol．2 ～Passionate～", cb:{}});
+      db.save("l013", {id:"l013",so: 13, nm:"乙女式れんあい塾", cb:{}});
+      db.save("l014", {id:"l014",so: 14, nm:"告白日和、です！", cb:{}});
+      db.save("l015", {id:"l015",so: 15, nm:"soldier game", cb:{}});
+      db.save("l016", {id:"l016",so: 16, nm:"ススメ→トゥモロウ", cb:{}});
+      db.save("l017", {id:"l017",so: 17, nm:"WAO-WAO Powerful day！", cb:{}});
+      db.save("l018", {id:"l018",so: 18, nm:"春情ロマンティック", cb:{}});
+      db.save("l019", {id:"l019",so: 19, nm:"PSYCHIC FIRE", cb:{}});
+      db.save("l020", {id:"l020",so: 20, nm:"ユメノトビラ", cb:{}});
+      db.save("l021", {id:"l021",so: 21, nm:"これからのSomeday", cb:{}});
+      db.save("l022", {id:"l022",so: 22, nm:"Love wing bell", cb:{}});
+      db.save("l023", {id:"l023",so: 23, nm:"baby maybe 恋のボタン", cb:{}});
+      db.save("l024", {id:"l024",so: 24, nm:"Mermaid festa vol．1", cb:{}});
+      db.save("l025", {id:"l025",so: 25, nm:"きっと青春が聞こえる", cb:{}});
+      db.save("l026", {id:"l026",so: 26, nm:"輝夜の城で踊りたい", cb:{}});
+      db.save("l027", {id:"l027",so: 27, nm:"LOVELESS WORLD", cb:{}});
+      db.save("l028", {id:"l028",so: 28, nm:"タカラモノズ", cb:{}});
+      db.save("l029", {id:"l029",so: 29, nm:"どんなときもずっと", cb:{}});
+      db.save("l030", {id:"l030",so: 30, nm:"Angelic Angel", cb:{}});
+      db.save("l031", {id:"l031",so: 31, nm:"SUNNY DAY SONG", cb:{}});
+      db.save("l032", {id:"l032",so: 32, nm:"僕たちはひとつの光", cb:{}});
+    }
   }
 ];

@@ -31,6 +31,7 @@
 				<td data-page="page_member"><span class="wrap w1"><span class="bg f"></span><span class="bg b"></span><span class="txt">部員</span></span></td>
 				<td data-page="page_costume"><span class="wrap w2"><span class="bg f"></span><span class="bg b"></span><span class="txt">衣装</span></span></td>
 				<td data-page="page_skill"><span class="wrap w3"><span class="bg f"></span><span class="bg b"></span><span class="txt">スキル</span></span></td>
+				<td data-page="page_live"><span class="wrap w6"><span class="bg f"></span><span class="bg b"></span><span class="txt">楽曲</span></span></td>
 				<td data-page="page_statistics"><span class="wrap w5"><span class="bg f"></span><span class="bg b"></span><span class="txt">統計</span></span></td>
 				<td data-page="page_setting"><span class="wrap w4"><span class="bg f"></span><span class="bg b"></span><span class="txt">設定</span></span></td>
 			</tr>
@@ -71,6 +72,12 @@
 
 				<skill></skill>
 
+			</div>
+		</div>
+		<div class="page skill page_live">
+			<h2>楽曲リザルト一覧</h2>
+			<div id="live_list" class="list">
+				<live-list></live-list>
 			</div>
 		</div>
 		<div class="page skill page_statistics">
@@ -295,6 +302,7 @@
 									<option value="page_member">部員</option>
 									<option value="page_costume">衣装</option>
 									<option value="page_skill">スキル</option>
+									<option value="page_live">ライブ</option>
 									<option value="page_statistics">統計</option>
 								</select>
 							</label>
@@ -401,6 +409,15 @@
 							<span class="valtxt">+</span>
 						</a>
 					</div>
+					<div class="liveedit">
+						<label class="slct">
+							<select id="livecombo">
+								<option value="">-</option>
+								<option value="fc">FULL COMBO</option>
+								<option value="ap">ALL PERFECT</option>
+							</select>
+						</label>
+					</div>
 				</div>
 				<div class="confirmArea">
 					<div class="confirmTxt1"></div>
@@ -469,6 +486,20 @@
 				</table>
 			</div>
 		</skill>
+
+		<live-list>
+			<div class="itm" each={ l in opts.liveList } data-editId="{ l.id }">
+				<h3>{ l.nm }</h3>
+				<ul class="liverank">
+					<li class='easy { l.cb.e }' data-id="e"></li>
+					<li class='normal { l.cb.n }' data-id="n"></li>
+					<li class='hard { l.cb.h }' data-id="h"></li>
+					<li class='extream { l.cb.ex }' data-id="ex"></li>
+					<li class='challenge { l.cb.c }' data-id="c"></li>
+				</ul>
+			</div>
+		</live-list>
+
 		<member-list>
 			<table id="statusMemberList" class="tbl1 line1">
 				<tr class="mem">
