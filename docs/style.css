@@ -370,31 +370,49 @@ h2 {
 .dialog .liveedit table tr {
   height: 2.5em;
 }
-.dialog .liveedit .slct {
-  display: inline-block;
+.dialog .liveedit table th {
+  width: 120px;
+}
+.dialog .liveedit table .slctbox {
   width: 100%;
-  height: 100%;
+  position: relative;
+}
+.dialog .liveedit table .slctbox a {
+  text-decoration: none;
+  color: black;
+}
+.dialog .liveedit table .slctbox .slcttxt {
+  width: 100%;
+  display: inline-block;
   position: relative;
   border: 1px solid gray;
   border-radius: 15px;
+  padding-left: 5px;
 }
-.dialog .liveedit .slct::after {
+.dialog .liveedit table .slctbox .slcttxt::after {
   content: "▼";
-  pointer-events: none;
-  display: block;
-  width: 2em;
   position: absolute;
-  right: 0;
   top: 0;
-  text-align: right;
-  padding-right: 5px;
+  right: 0;
 }
-.dialog .liveedit .slct select {
-  width: 100%;
-  padding-left: 15px;
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
+
+.dialog .liveedit table .slctbox .pulldown {
+  position: absolute;
+  top: 1em;
+  left: 0;
+  right: 0;
+  border: 1px solid gray;
+  background-color: white;
+  display: none;
+  z-index: 1;
+}
+.dialog .liveedit table .slctbox .pulldown a {
+  display: block;
+  border-bottom: 1px solid gray;
+  padding: 8px 0 8px 5px;
+}
+.dialog .liveedit table .slctbox .pulldown a:last-child {
+  border-bottom: none;
 }
 
 /* 衣装、スキル一覧（共通） */

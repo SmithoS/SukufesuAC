@@ -541,23 +541,37 @@ var Dialog = (function(){
     jq("editTgt").text(lv.nm).attr("data-tgtid", lv.id);
     jq("editMember").text("");
 
+    var getnm = function(rnk) {
+      var nm = "-";
+      switch (rnk) {
+        case "fc": nm = "FULL COMBO"; break;
+        case "ap": nm = "ALL PERFECT"; break;
+      }
+      return nm;
+    }
+
     //コンボ状態設定
-    jq("livecombo_e").val(lv.cb.e);
-    jq("livecombo_n").val(lv.cb.n);
-    jq("livecombo_h").val(lv.cb.h);
-    jq("livecombo_ex").val(lv.cb.ex);
-    jq("livecombo_c").val(lv.cb.c);
+    jq("livecombo_e").attr("data-val", lv.cb.e);
+    jq("livecombo_n").attr("data-val", lv.cb.n);
+    jq("livecombo_h").attr("data-val", lv.cb.h);
+    jq("livecombo_ex").attr("data-val", lv.cb.ex);
+    jq("livecombo_c").attr("data-val", lv.cb.c);
+    jq("livecombo_e").find("span").text(getnm(lv.cb.e));
+    jq("livecombo_n").find("span").text(getnm(lv.cb.n));
+    jq("livecombo_h").find("span").text(getnm(lv.cb.h));
+    jq("livecombo_ex").find("span").text(getnm(lv.cb.ex));
+    jq("livecombo_c").find("span").text(getnm(lv.cb.c));
 
     okCallback = function() {
       //キーの取得
       var tgtId = jq("editTgt").attr("data-tgtid");
       //更新
       DB.saveLive(tgtId, {
-        e: jq("livecombo_e").val(),
-        n: jq("livecombo_n").val(),
-        h: jq("livecombo_h").val(),
-        ex: jq("livecombo_ex").val(),
-        c: jq("livecombo_c").val()
+        e: jq("livecombo_e").attr("data-val"),
+        n: jq("livecombo_n").attr("data-val"),
+        h: jq("livecombo_h").attr("data-val"),
+        ex: jq("livecombo_ex").attr("data-val"),
+        c: jq("livecombo_c").attr("data-val")
       });
       ListView.updateLive();
     };
@@ -790,6 +804,27 @@ function setEventListenerLazy() {
     });
     jq("btnNumPlus").on("click", function() {
       addSkillVal(1);
+    });
+    jq("dialog").find(".slctbox").each(function(){
+      var $self = $(this);
+      var $slct = $self.find(".slcttxt");
+      var $pd = $self.find(".pulldown");
+      var $opts = $pd.find("a");
+      $slct.on("click", function(e) {
+        $pd.css("display", "block");
+        e.stopPropagation();
+      });
+      $opts.on("click", function(e) {
+        var val = $(this).attr("data-val");
+        var txt = $(this).text();
+        $slct.attr("data-val", val);
+        $slct.find("span").text(txt);
+        $pd.css("display", "none");
+        e.stopPropagation();
+      });
+    });
+    jq("dialog").on("click", function() {
+      $(this).find(".pulldown").css("display", "none");
     });
 
 
