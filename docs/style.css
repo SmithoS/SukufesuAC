@@ -391,6 +391,10 @@ h2 {
 }
 .dialog .liveedit .slct select {
   width: 100%;
+  padding-left: 15px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
 }
 
 /* 衣装、スキル一覧（共通） */
@@ -731,7 +735,7 @@ h2 {
   top: 0;
 }
 .page_setting select {
-  width: calc(100% - 2em);
+  width: 100%;
   height: 100%;
   appearance: none;
   -moz-appearance: none;
