@@ -150,7 +150,6 @@ h2 {
 #menu table {
 	margin: 0;
 	padding: 0;
-	min-width: 400px;
   width: 100%;
 	height: 100%;
   table-layout: fixed;
@@ -1079,6 +1078,15 @@ h2 {
 #wrapper.menu_show_fixed #menu {
   bottom: 0 !important; /* Javascriptで表示位置をDOMに直接している可能性があるため */
 }
+
+/* メニュータブ各種非表示 */
+#wrapper.menu_tab_member_hide #menu [data-page="page_member"] { display: none;}
+#wrapper.menu_tab_costume_hide #menu [data-page="page_costume"] { display: none;}
+#wrapper.menu_tab_skill_hide #menu [data-page="page_skill"] { display: none;}
+#wrapper.menu_tab_statistics_hide #menu [data-page="page_statistics"] { display: none;}
+#wrapper.menu_tab_live_hide #menu [data-page="page_live"] { display: none;}
+
+
 
 /* コンボ表示マーク */
 /* 文字 */

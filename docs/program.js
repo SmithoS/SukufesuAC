@@ -422,13 +422,27 @@ var ListView = (function(){
   };
   v.reflectDesign = function() {
     var $wrapper = jq("wrapper");
+    var val;
     jq("settingPage").find('.design [name]').each(function(){
       $(this).children().each(function(i, opt){
-        $wrapper.removeClass($(opt).attr("value"));
+        val = $(opt).attr("value");
+        if (val != null && val != "") $wrapper.removeClass(val);
       });
-      $wrapper.addClass($(this).val());
+      val = $(this).val();
+      if (val != null && val != "") $wrapper.addClass(val);
+
+      // メニューのタブ設定であれば、メニュータブの幅調整
+      if ($(this).attr("data-ismenutab") != null) v.updateMenu();
     });
   };
+  v.updateMenu = function () {
+    var $menu = jq("menu");
+    var minWidth = 0;
+    $menu.find("[data-page]").each(function() {
+      if ($(this).css("display") != "none") minWidth += 70;
+    });
+    $menu.find("table").css("min-width", minWidth + "px");
+  }
 
   v.init = function() {
     v.showCostume();
@@ -694,13 +708,17 @@ function setEventListener() {
     var $wrapper = jq("wrapper");
     var sKey = $(this).attr("name")
     var sVal = $(this).val();
+    var nval;
     //画面に設定を反映
     $(this).children().each(function(i, opt){
-      $wrapper.removeClass($(opt).attr("value"));
+      nval = $(opt).attr("value");
+      if (nval != null && nval != "") $wrapper.removeClass(nval);
     });
-    $wrapper.addClass($(this).val());
+    if (sVal != null && sVal != "") $wrapper.addClass(sVal);
     //保存
     DB.saveSetting(sKey, sVal);
+
+    if ($(this).attr("data-ismenutab") != null)  ListView.updateMenu();
   });
 }
 
