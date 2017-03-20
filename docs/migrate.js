@@ -108,5 +108,12 @@ Migrate = [
       db.save("l031", {id:"l031",so: 31, nm:"SUNNY DAY SONG", cb:{}});
       db.save("l032", {id:"l032",so: 32, nm:"僕たちはひとつの光", cb:{}});
     }
+  },
+  {
+    dbver: "1.00.06",
+    msg: "衣装「ウェディング風衣装」を追加しました。",
+    upd : function(db){
+      db.save("c009", {id:"c009",so: 9, nm:"ウェディング風衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+    }
   }
 ];
