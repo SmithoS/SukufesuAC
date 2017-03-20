@@ -2,13 +2,6 @@
  * 共通定数定義
  ********************/
 
-/**
- * 現在のシステムバージョン
- * @type {String}
- */
-var SysVer = "0.01α"
-
-
 /********************
  * 共通関数（便利な関数）定義
  ********************/
@@ -417,7 +410,6 @@ var ListView = (function(){
     Sortable.create(sl);
   };
   v.setVersion = function () {
-    jq("sysVer").text(SysVer);
     jq("dataVer").text(DB.getLastUpdVersion());
   };
   v.reflectDesign = function() {
