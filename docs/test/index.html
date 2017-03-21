@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<link rel="shortcut icon" href="https://raw.githubusercontent.com/SmithoS/SukufesuAC/images/docs/img/icon_kotori.png" />
+	<link rel="apple-touch-icon" href="https://raw.githubusercontent.com/SmithoS/SukufesuAC/images/docs/img/icon_kotori.png" />
+	<meta name="apple-mobile-web-app-title" content="AC部活帳" />
+	<title>スクフェスAC部活帳</title>
+	<!-- design -->
+	<link rel="stylesheet" type="text/css" href="../sanitize.css" />
+	<link rel="stylesheet" type="text/css" href="./style.css" />
+
+	<!-- script -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+	<script src="../js/zepto/fx.js"></script>
+	<script src="https://cdn.jsdelivr.net/riot/3.0/riot+compiler.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/sortable/latest/Sortable.min.js"></script>
+	<script src="../migrate.js"></script>
+	<script src="./program.js"></script>
+</head>
+<body>
+<div id="wrapper">
+	<div id="header">
+		<h1>Test スクフェスAC部活帳</h1>
+		<a href="javascript:void(0)" id="menu_key"><span class="btn">＋</span></a>
+	</div>
+	<div id="menu">
+		<table>
+			<tr>
+				<td data-page="page_member"><span class="wrap w1"><span class="bg f"></span><span class="bg b"></span><span class="txt">部員</span></span></td>
+				<td data-page="page_costume"><span class="wrap w2"><span class="bg f"></span><span class="bg b"></span><span class="txt">衣装</span></span></td>
+				<td data-page="page_skill"><span class="wrap w3"><span class="bg f"></span><span class="bg b"></span><span class="txt">スキル</span></span></td>
+				<td data-page="page_statistics"><span class="wrap w5"><span class="bg f"></span><span class="bg b"></span><span class="txt">統計</span></span></td>
+				<td data-page="page_live"><span class="wrap w6"><span class="bg f"></span><span class="bg b"></span><span class="txt">楽曲</span></span></td>
+				<td data-page="page_setting"><span class="wrap w4"><span class="bg f"></span><span class="bg b"></span><span class="txt">設定</span></span></td>
+			</tr>
+		</table>
+	</div>
+	<div id="contents">
+		<div class="page costume skill page_member">
+			<h2>部員詳細</h2>
+			<div class="list">
+
+				<member-list></member-list>
+
+				<div id="memStatus">
+					<div>
+						<member-profile></member-profile>
+					</div>
+					<div>
+						<member-costume></member-costume>
+					</div>
+					<div>
+						<member-skill></member-skill>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="page costume page_costume">
+			<h2>衣装部屋</h2>
+			<div id="costume_list" class="list">
+
+				<costume></costume>
+
+			</div>
+		</div>
+		<div class="page skill page_skill">
+			<h2>スキル一覧</h2>
+			<div id="skill_list" class="list">
+
+				<skill></skill>
+
+			</div>
+		</div>
+		<div class="page skill page_live">
+			<h2>楽曲コンボ取得一覧</h2>
+			<div id="live_list" class="list">
+				<live-list></live-list>
+			</div>
+		</div>
+		<div class="page skill page_statistics">
+			<h2>統計</h2>
+			<div class="list">
+				<div class="condition">
+					<input type="radio" name="statisticsTarget" id="statisticsCostume" />
+					<label for="statisticsCostume" class="condtitle costume">衣装</label>
+					<input type="radio" name="statisticsTarget" id="statisticsSkill" />
+					<label for="statisticsSkill" class="condtitle skill">スキル</label>
+					<div class="conditiondetail costume" id="condDetailCostume">
+						<p>衣装統計条件</p>
+						<p>
+							<label class="slct">
+								<select id="statisticsCostumeMethod">
+									<option value="hasBoth">HR,R両方とも所有している</option>
+									<option value="hasHR">HRを所有している（R不問）</option>
+									<option value="hasAny">HR,Rのどちらか所有している</option>
+									<option value="hasNotHr">HRを所有していない（R不問）</option>
+									<option value="hasNone">HR,Rともに所有していない</option>
+								</select>
+							</label>
+						</p>
+					</div>
+					<div class="conditiondetail skill" id="condDetailSkill">
+						<p>スキル統計条件</p>
+						<p>
+							スキルレベルが
+							<label class="slct">
+								<select id="statisticsSkillBorder">
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="6">6</option>
+										<option value="7">7</option>
+										<option value="8">8</option>
+										<option value="9">9</option>
+										<option value="10">MAX</option>
+								</select>
+							</label>
+							<label class="slct">
+								<select id="statisticsSkillMethod">
+									<option value="over">以上</option>
+									<option value="under">以下</option>
+									<option value="equals">等しい</option>
+								</select>
+							</label>
+						</p>
+						<p>
+							イベントスキルを対象から
+							<label class="slct">
+								<select id="statisticsEventSkill">
+									<option value="exclude">除く</option>
+									<option value="include">含む</option>
+								</select>
+							</label>
+						</p>
+					</div>
+
+				</div>
+				<div>
+					<div id="statisticsResultCostume">
+						<statistics-costume></statistics-costume>
+					</div>
+					<div id="statisticsResultSkill">
+						<statistics-skill></statistics-skill>
+					</div>
+				</div>
+				<div class="cameraArea">
+					<div>
+						<img id="cameraImg" />
+					</div>
+					<label for="cameraBtn">
+						カメラ<input type="file" accept="image/*;capture=camera" id="cameraBtn" />
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="page costume skill page_setting" id="settingPage">
+			<h2>設定</h2>
+			<div class="list">
+				<div>
+					<ul id="settingItemList">
+						<li><a href="javascript:void(0)" data-itm="design">デザイン</a></li>
+						<li><a href="javascript:void(0)" data-itm="system">システム</a></li>
+						<li><a href="javascript:void(0)" data-itm="orderCostume">衣装並び順</a></li>
+						<li><a href="javascript:void(0)" data-itm="orderSkill">スキル並び順</a></li>
+						<li><a href="javascript:void(0)" data-itm="export">エクスポート</a></li>
+						<li><a href="javascript:void(0)" data-itm="inport">インポート</a></li>
+						<li><a href="javascript:void(0)" data-itm="help">ヘルプ</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="list itm design">
+				<h3>デザイン設定</h3>
+				<div class="ptn">
+					<h4>衣装</h4>
+					<div class="sample">
+						<span class="hr">
+							<span class="owned">
+								<span class="rareMark"><span class="rareTxt">HR</span></span>
+							</span>
+						</span>
+						<span class="r">
+							<span class="owned">
+								<span class="rareMark"><span class="rareTxt">R</span></span>
+							</span>
+						</span>
+					</div>
+					<table class="tbl2" id="settingTbl">
+						<tr>
+							<th>衣装所有マーク</th>
+							<td>
+								<label class="slct">
+									<select id="cos_mark" name="cos_mark">
+										<option value="cos_hart">ハート</option>
+										<option value="cos_dia">ダイア</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>衣装所有色（HR）</th>
+							<td>
+								<label class="slct">
+									<select id="cos_hr_color" name="cos_hr_color">
+										<option value="cos_hr_orange">オレンジ</option>
+										<option value="cos_hr_lightblue">薄青</option>
+										<option value="cos_hr_lightgreen">薄緑</option>
+										<option value="cos_hr_blue">青</option>
+										<option value="cos_hr_yellow">黄</option>
+										<option value="cos_hr_red">赤</option>
+										<option value="cos_hr_purple">紫</option>
+										<option value="cos_hr_green">緑</option>
+										<option value="cos_hr_pink">ピンク</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>衣装所有色（R）</th>
+							<td>
+								<label class="slct">
+									<select id="cos_r_color" name="cos_r_color">
+										<option value="cos_r_orange">オレンジ</option>
+										<option value="cos_r_lightblue">薄青</option>
+										<option value="cos_r_lightgreen">薄緑</option>
+										<option value="cos_r_blue">青</option>
+										<option value="cos_r_yellow">黄</option>
+										<option value="cos_r_red">赤</option>
+										<option value="cos_r_purple">紫</option>
+										<option value="cos_r_green">緑</option>
+										<option value="cos_r_pink">ピンク</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ptn">
+					<h4>スキル</h4>
+					<div class="sample">
+						<span class="skilnm st1"><b></b>アシスト</span>
+						<span class="skilnm st2"><b></b>カメラ</span>
+						<span class="skilnm st3"><b></b>ステージ</span>
+					</div>
+					<table class="tbl2">
+						<tr>
+							<th>スキル種類マーク</th>
+							<td>
+								<label class="slct">
+									<select id="skill_mark" name="skill_mark">
+										<option value="skill_hart">ハート</option>
+										<option value="skill_dia">ダイア</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ptn">
+					<h4>楽曲</h4>
+					<div class="sample">
+						<ul class="liverank">
+							<li class="easy fc"></li>
+							<li class="normal fc"></li>
+							<li class="hard fc"></li>
+							<li class="extream fc"></li>
+							<li class="challenge fc"></li>
+						</ul>
+					</div>
+					<table class="tbl2">
+						<tr>
+							<th>コンボ表示マーク</th>
+							<td>
+								<label class="slct">
+									<select id="combo_mark" name="combo_mark">
+										<option value="combo_char">文字</option>
+										<option value="combo_onpu">音符</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ptn">
+					<h4>メニュー</h4>
+					<table class="tbl2">
+						<tr>
+							<th>表示方法</th>
+							<td>
+								<label class="slct">
+									<select id="menu_show_type" name="menu_show_type">
+										<option value="menu_show_hide">隠す</option>
+										<option value="menu_show_fixed">画面下に固定</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>部員</th>
+							<td>
+								<label class="slct">
+									<select id="menu_tab_member" name="menu_tab_member" data-ismenutab="1">
+										<option value="">表示</option>
+										<option value="menu_tab_member_hide">非表示</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>衣装</th>
+							<td>
+								<label class="slct">
+									<select id="menu_tab_costume" name="menu_tab_costume" data-ismenutab="1">
+										<option value="">表示</option>
+										<option value="menu_tab_costume_hide">非表示</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>スキル</th>
+							<td>
+								<label class="slct">
+									<select id="menu_tab_skill" name="menu_tab_skill" data-ismenutab="1">
+										<option value="">表示</option>
+										<option value="menu_tab_skill_hide">非表示</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>統計</th>
+							<td>
+								<label class="slct">
+									<select id="menu_tab_buin" name="menu_tab_statistics" data-ismenutab="1">
+										<option value="">表示</option>
+										<option value="menu_tab_statistics_hide">非表示</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
+							<th>楽曲</th>
+							<td>
+								<label class="slct">
+									<select id="menu_tab_buin" name="menu_tab_live" data-ismenutab="1">
+										<option value="">表示</option>
+										<option value="menu_tab_live_hide">非表示</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="ptn">
+					<h4>その他</h4>
+					<table class="tbl2">
+						<tr>
+							<th>一覧の部員名称</th>
+							<td>
+								<label class="slct">
+									<select id="name_display_type" name="name_display_type">
+										<option value="name_display_full">名字 + 名前</option>
+										<option value="name_display_short">名前</option>
+										<option value="name_display_c2">二文字</option>
+										<option value="name_display_c1">一文字</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="list itm system">
+				<h3>システム設定</h3>
+				<table class="tbl2">
+					<tr>
+						<th>起動時初期表示ページ</th>
+						<td>
+							<label class="slct">
+								<select id="init_display_page" name="init_display_page">
+									<option value="page_member">部員</option>
+									<option value="page_costume">衣装</option>
+									<option value="page_skill">スキル</option>
+									<option value="page_live">ライブ</option>
+									<option value="page_statistics">統計</option>
+								</select>
+							</label>
+						</td>
+					</tr>
+				</table>
+			</div>
+			<div class="list itm orderCostume">
+				<h3>衣装並び順設定</h3>
+				<costume-sort-list></costume-sort-list>
+				<div>
+					<a href="javascript:void(0)" id="saveCosOrderbtn" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">ＯＫ</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm orderSkill">
+				<h3>スキル並び順設定</h3>
+				<skill-sort-list></skill-sort-list>
+				<div>
+					<a href="javascript:void(0)" id="saveSkillOrderbtn" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">ＯＫ</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm export">
+				<h3>エクスポート</h3>
+				<textarea id="exportData"></textarea>
+				<div>
+					<a href="javascript:void(0)" id="writeExportData" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">出力</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm inport">
+				<h3>インポート</h3>
+				<textarea id="inportData"></textarea>
+				<div>
+					<a href="javascript:void(0)" id="loadInportData" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">取込</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm help">
+				<h3>ヘルプ</h3>
+				<div>
+					<h4>システム情報</h4>
+					<table class="tbl2">
+						<tr>
+							<th>システムバージョン</th>
+							<td id="sysVer">0.01β</td>
+						</tr>
+						<tr>
+							<th>データバージョン</th>
+							<td id="dataVer"></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div id="menuSpacer">&nbsp;</div>
+	</div>
+
+	<div class="dialogwrapper" id="dialog">
+		<div class="dialog">
+			<div class="dialoginner">
+				<a href="javascript:void(0)" class="closeBtn" id="dialogCloseBtn">✕</a>
+				<div class="descArea">
+					<div class="edritDesc">
+						<div class="description">
+							<p class="memName" id="editMember" data-memid="">（メンバ名）</p>
+							<p class="editTgtName" id="editTgt" data-tgtid="">（衣装名 or スキル名）</p>
+						</div>
+					</div>
+				</div>
+				<div class="editArea">
+					<div class="costumeedit">
+						<span class="rateBtn">
+							<input type="checkbox" id="edit_hr">
+							<label for="edit_hr" class="hr"><span class="rareTxt">HR</span></label>
+						</span>
+						<span class="rateBtn">
+							<input type="checkbox" id="edit_r">
+							<label for="edit_r" class="r"><span class="rareTxt">R</span></label>
+						</span>
+					</div>
+					<div class="skiledit">
+						<a href="javascript:void(0)" class="valbtn" id="btnNumMinus">
+							<span class="minus"></span>
+							<span class="valtxt">-</span>
+						</a>
+						<span id="inpNumVal" class="skillVal"></span>
+						<a href="javascript:void(0)" class="valbtn" id="btnNumPlus">
+							<span class="plus"></span>
+							<span class="valtxt">+</span>
+						</a>
+					</div>
+					<div class="liveedit">
+						<table>
+							<tr>
+								<th>EASY</th>
+								<td>
+									<div class="slctbox">
+										<a href="javascript:void(0);" class="slcttxt" id="livecombo_e"><span></span></a>
+										<div class="pulldown">
+											<a href="javascript:void(0);" data-val="">-</a>
+											<a href="javascript:void(0);" data-val="fc">FULL COMBO</a>
+											<a href="javascript:void(0);" data-val="ap">ALL PERFECT</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>NORMAL</th>
+								<td>
+									<div class="slctbox">
+										<a href="javascript:void(0);" class="slcttxt" id="livecombo_n"><span></span></a>
+										<div class="pulldown">
+											<a href="javascript:void(0);" data-val="">-</a>
+											<a href="javascript:void(0);" data-val="fc">FULL COMBO</a>
+											<a href="javascript:void(0);" data-val="ap">ALL PERFECT</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>HARD</th>
+								<td>
+									<div class="slctbox">
+										<a href="javascript:void(0);" class="slcttxt" id="livecombo_h"><span></span></a>
+										<div class="pulldown">
+											<a href="javascript:void(0);" data-val="">-</a>
+											<a href="javascript:void(0);" data-val="fc">FULL COMBO</a>
+											<a href="javascript:void(0);" data-val="ap">ALL PERFECT</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>EXTREAM</th>
+								<td>
+									<div class="slctbox">
+										<a href="javascript:void(0);" class="slcttxt" id="livecombo_ex"><span></span></a>
+										<div class="pulldown">
+											<a href="javascript:void(0);" data-val="">-</a>
+											<a href="javascript:void(0);" data-val="fc">FULL COMBO</a>
+											<a href="javascript:void(0);" data-val="ap">ALL PERFECT</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+							<tr>
+								<th>CHALLENGE</th>
+								<td>
+									<div class="slctbox">
+										<a href="javascript:void(0);" class="slcttxt" id="livecombo_c"><span></span></a>
+										<div class="pulldown">
+											<a href="javascript:void(0);" data-val="">-</a>
+											<a href="javascript:void(0);" data-val="fc">FULL COMBO</a>
+											<a href="javascript:void(0);" data-val="ap">ALL PERFECT</a>
+										</div>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+				<div class="confirmArea">
+					<div class="confirmTxt1"></div>
+					<div class="confirmTxt2"></div>
+				</div>
+				<div class="bntarea">
+					<a href="javascript:void(0)" id="okbtn" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">ＯＫ</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="riot/tag">
+		<costume>
+		  <div class="itm" each={ c in opts.cos } data-editId="{ c.id }">
+				<h3>{ c.nm }</h3>
+				<table class="tbl1">
+					<colgroup>
+						<col each={ m in parent.opts.mem } class="{ m.id }" />
+					</colgroup>
+		      <tr class="mem">
+		        <th each={ m in parent.opts.mem } data-mem="{ m.id }">
+							<span class="nameFull">{ m.nm }</span>
+							<span class="nameShort">{ m.snm }</span>
+							<span class="name1Char">{ m.c1nm }</span>
+							<span class="name2Char">{ m.c2nm }</span>
+						</th>
+		      </tr>
+		      <tr class="hr">
+		        <td each={ m in parent.opts.mem } data-mem="{ m.id }" class='{ c.hr[m.id] ? "owned" : "" }'>
+							<span class="rareMark"><span class="rareTxt">HR</span>
+						</td>
+		      </tr>
+		      <tr class="r">
+						<td each={ m in parent.opts.mem } data-mem="{ m.id }" class='{ c.r[m.id] ? "owned" : "" }'>
+							<span class="rareMark"><span class="rareTxt">R</span>
+						</td>
+		      </tr>
+		    </table>
+		  </div>
+		</costume>
+		<skill>
+			<div class="itm" each={ s in opts.skill } data-editId="{ s.id }">
+				<h3 class="skilnm { s.st }"><b></b>{ s.nm }</h3>
+				<table class="tbl1">
+					<colgroup>
+						<col each={ m in parent.opts.mem } class="{ m.id }" />
+					</colgroup>
+					<tr class="mem">
+						<th each={ m in parent.opts.mem } data-mem="{ m.id }">
+							<span class="nameFull">{ m.nm }</span>
+							<span class="nameShort">{ m.snm }</span>
+							<span class="name1Char">{ m.c1nm }</span>
+							<span class="name2Char">{ m.c2nm }</span>
+						</th>
+					</tr>
+					<tr>
+						<td each={ m in parent.opts.mem } data-mem="{ m.id }" class='{ s.val[m.id] >= 10 ? "ovA" : s.val[m.id] >= 5 ? "ov5" : "" }'>
+							{ s.val[m.id] }
+						</td>
+					</tr>
+				</table>
+			</div>
+		</skill>
+
+		<live-list>
+			<div class="itm" each={ l in opts.liveList } data-editId="{ l.id }">
+				<h3>{ l.nm }</h3>
+				<ul class="liverank">
+					<li class='easy { l.cb.e }' data-id="e"><b></b><i></i></li>
+					<li class='normal { l.cb.n }' data-id="n"><b></b><i></i></li>
+					<li class='hard { l.cb.h }' data-id="h"><b></b><i></i></li>
+					<li class='extream { l.cb.ex }' data-id="ex"><b></b><i></i></li>
+					<li class='challenge { l.cb.c }' data-id="c"><b></b><i></i></li>
+				</ul>
+			</div>
+		</live-list>
+
+		<member-list>
+			<table id="statusMemberList" class="tbl1 line1">
+				<tr class="mem">
+					<th each={ m in opts.mem } class="{ m.id }">
+						<a href="javascript:void(0)" data-id="{ m.id }">
+							<span class="nameFull">{ m.nm }</span>
+							<span class="nameShort">{ m.snm }</span>
+							<span class="name1Char">{ m.c1nm }</span>
+							<span class="name2Char">{ m.c2nm }</span>
+						</a>
+					</th>
+				</tr>
+			</table>
+		</member-list>
+		<member-profile>
+			<h3 data-mem="{ opts.id }"}>{ opts.nm }</h3>
+		</member-profile>
+		<member-costume>
+			<h4>衣装</h4>
+			<table class="tbl2">
+				<tr each={ c in opts.cos } data-editId="{ c.id }">
+					<th>{ c.nm }</th>
+					<td>
+						<span class="hr">
+							<span class='{ c.hr ? "owned" : "" }'>
+								<span class="rareMark"><span class="rareTxt">HR</span></span>
+							</span>
+						</span>
+						<span class="r">
+							<span class='{ c.r ? "owned" : "" }'>
+								<span class="rareMark"><span class="rareTxt">R</span></span>
+							</span>
+						</span>
+					</td>
+				</tr>
+			</table>
+		</member-costume>
+		<member-skill>
+			<h4>スキル</h4>
+			<table class="tbl2">
+				<tr each={ s in opts.skill } data-editId="{ s.id }">
+					<th class="skilnm { s.st }"><b></b>{ s.nm }</th>
+					<td class='{ s.val == 10 ? "ovA" : s.val >= 5 ? "ov5" : "" }'>
+						{ s.val == 10 ? "MAX" : s.val }
+					</td>
+				</tr>
+			</table>
+		</member-skill>
+
+		<statistics-costume>
+			<table class="tbl2">
+				<tr each={ m in opts.mem }>
+					<th>{ m.snm }</th>
+					<td>
+						<ul>
+							<li each={ c in m.cos }>
+								{ c.nm }<span>({ c.hr ? "HR" : "" } / { c.r ? "R" : "" })</span>
+							</li>
+						</ul>
+					</td>
+				</div>
+			</table>
+		</statistics-costume>
+
+		<statistics-skill>
+			<table class="tbl2">
+				<tr each={ m in opts.mem }>
+					<th>{ m.snm }</th>
+					<td>
+						<ul>
+							<li each={ s in m.skill } class="skilnm { s.st }">
+								<b></b>{ s.nm }<span>({ s.val >= 10 ? "MAX" : s.val })</span>
+							</li>
+						</ul>
+					</td>
+				</div>
+			</table>
+		</statistics-skill>
+
+		<costume-sort-list>
+			<ol id="sortableCostumes" class="sortable">
+				<li each={ c in opts.cos } data-id="{ c.id }"><label>{ c.nm }</label></li>
+			</ol>
+		</costume-sort-list>
+		<skill-sort-list>
+			<ol id="sortableSkills" class="sortable">
+				<li each={ s in opts.skill } data-id="{ s.id }" class="skilnm { s.st }"><label><b></b>{ s.nm }</label></li>
+			</ol>
+		</skill-sort-list>
+	</script>
+</div>
+</body>
+</html>

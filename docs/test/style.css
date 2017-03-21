@@ -1,0 +1,1179 @@
+/* カスタムフォント */
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?uor1w9');
+  src:  url('../fonts/icomoon.eot?uor1w9#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?uor1w9') format('truetype'),
+    url('../fonts/icomoon.woff?uor1w9') format('woff'),
+    url('../fonts/icomoon.svg?uor1w9#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* 初期表示 */
+.page_skill, .page_costume, .page_setting, .page_statistics, .page_live {
+  display: none;
+}
+
+/**/
+html, body {
+  height: 100%;
+}
+#wrapper {
+  min-height: 100%;
+}
+body {
+  width: 100%;
+  color: #333333;
+}
+#wrapper {
+  padding: 10px 5px;
+  background-color: #fff9ff;
+}
+h1 {
+  font-size: 1.5em;
+  margin: 0;
+}
+h2 {
+  font-size: 1.3em;
+  margin: 0;
+}
+
+
+/* ボタン */
+.button {
+  display: inline-block;
+  background-color: transparent;
+  text-decoration: none;
+  position: relative;
+  width: 100px;
+  height: 50px;
+  text-align: center;
+  padding: 2px 2px 7px 2px;
+  background-color: white;
+  box-shadow: 5px 5px 5px rgba(0,0,0,0.4);
+}
+.button .txt2 {
+  display: inline-block;
+  color: white;
+  font-weight: bold;
+  width: 100%;
+  height: calc(100% - 5px);
+  padding-top: 5px;
+}
+.button.ok .txt2 {
+  background-color: #FF7766;
+}
+.button .txt1 {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height:0;
+  top: 0;
+  left: 0;
+}
+.button .txt1.f {
+  border: 10px solid transparent;
+  border-left: 10px solid white;
+  border-top: 10px solid white;
+}
+.button .txt1.b {
+  border: 8px solid transparent;
+  border-left-width: 8px;
+  border-top-width: 8px;
+  border-left-style: solid;
+  border-top-style: solid;
+}
+.button .txt3 {
+  position: absolute;
+  display: inline-block;
+  width: 0;
+  height:0;
+  right: 0;
+  bottom: 0;
+}
+/* 影が不自然になるので
+.button .txt3.f {
+  border: 10px solid transparent;
+  border-right: 10px solid white;
+  border-bottom: 10px solid white;
+}
+.button .txt3.b {
+  border: 8px solid transparent;
+  border-right: 8px solid #969bA0;
+  border-bottom: 8px solid #969bA0;
+}
+*/
+
+/* メニュー */
+#menu_key {
+	position: fixed;
+	text-decoration: none;
+	top: 5px;
+	right: 5px;
+	height: 40px;
+	width: 40px;
+	text-align: center;
+	border: 1px solid white;
+	border-radius: 7px;
+	padding: 3px;
+  z-index: 100;
+}
+#menu_key .btn {
+	color: white;
+	font-weight: bold;
+	background-color: skyblue;
+	display: block;
+	width: 100%;
+	height: 100%;
+	border-radius: 7px;
+	padding-top: 4px;
+}
+#menu {
+	width: 150px;
+	position: fixed;
+	left: 0;
+	right:0;
+	bottom: -50px;
+	margin: auto;
+	width: 90%;
+	height: 50px;
+	padding: 5px 5px 0 5px;
+	border: 1px solid gray;
+	border-bottom-style: none;
+	border-radius: 15px 15px 0 0;
+	background-color: #fff9ff;
+	z-index: 100;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+#menu table {
+	margin: 0;
+	padding: 0;
+  width: 100%;
+	height: 100%;
+  table-layout: fixed;
+}
+#menu td {
+	padding: 0 3px;
+}
+#menu td .wrap {
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	color: white;
+	font-weight: bold;
+	position: relative;
+  text-shadow: 0 1px 0 gray,
+							0 -1px 0 gray,
+							1px 0 0 gray,
+							1px 1px 0 gray,
+							1px -1px 0 gray,
+							-1px 0 0 gray,
+							-1px -1px 0 gray,
+							-1px 1px 0 gray;
+}
+#menu td .wrap.w1 {background-color: #ffb770;}
+#menu td .wrap.w2 {background-color: #70ff70;}
+#menu td .wrap.w3 {background-color: #b770ff;}
+#menu td .wrap.w4 {background-color: #70b7ff;}
+#menu td .wrap.w5 {background-color: #ff60ff;}
+#menu td .wrap.w6 {background-color: #7070ff;}
+#menu td .bg {
+	position: absolute;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	top: 0;
+	left: 0;
+}
+#menu td .bg.f {
+	border: 10px solid transparent;
+	border-left: 10px solid white;
+	border-top: 10px solid white;
+}
+#menu td .bg.b {
+	border: 8px solid transparent;
+	border-left: 8px solid #fff9ff;
+	border-top: 8px solid #fff9ff;
+}
+#menu td .txt {
+  display: inline-block;
+  padding-top: 10px;
+}
+
+/* ダイアログ */
+#dialog {
+  display: none;
+  z-index: 100;
+}
+.dialogwrapper {
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  position: fixed;
+  background-color: aliceblue;
+  border-radius: 30px;
+  padding: 8px;
+  margin: auto;
+  overflow: hidden;
+}
+.dialog {
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+  border: 2px solid black;
+}
+.dialoginner {
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+}
+.dialog .closeBtn {
+  top: 15px;
+  right: 15px;
+  position: absolute;
+  border-radius: 50%;
+  text-decoration: none;
+  color: white;
+  background-color: #FF7766;
+  display: inline-block;
+  width: 26px;
+  height: 26px;
+  text-align: center;
+}
+.dialog .descArea {
+  height: 30%;
+}
+.dialog .editArea {
+  height: 50%;
+}
+.dialog .confirmArea {
+  height: 80%;
+}
+.dialog .bntarea {
+  text-align: center;
+}
+.dialog p {
+  margin: 0;
+}
+.dialog .description p {
+  font-size: 1.4em;
+}
+.dialog .button .txt1.b {
+  border: 8px solid transparent;
+  border-left-color: aliceblue;
+  border-top-color: aliceblue;
+}
+
+/* ダイアログ（スキル編集） */
+.dialog .skiledit {
+  text-align: center;
+  padding-top: 40%;
+}
+.dialog .skiledit input[type="text"] {
+  width: 40px;
+  height: 26px;
+  margin: 0 10px;
+  text-align: right;
+}
+.dialog .skiledit .valbtn {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+  color: white;
+  font-weight: bold;
+  width: 70px;
+  height: 50px;
+}
+.dialog .skiledit .valtxt {
+  position: absolute;
+  top: 8px;
+}
+.dialog .skiledit .minus {
+  content: "";
+  display: inline-block;
+  border: 25px solid transparent;
+  border-right: 40px solid #000;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.dialog .skiledit .plus {
+  content: "";
+  display: inline-block;
+  border: 25px solid transparent;
+  border-left: 40px solid #000;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.dialog .skiledit .skillVal {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 150%;
+  width: 100px;
+}
+.dialog .skiledit .minus + .valtxt {
+  right: 3px;
+}
+.dialog .skiledit .plus + .valtxt {
+  left: 3px;
+}
+
+/* ダイアログ（衣装編集） */
+.dialog .costumeedit {
+  text-align: center;
+  padding-top: 40%;
+}
+.dialog .costumeedit .rateBtn {
+  display: inline-block;
+  vertical-align: top;
+  width: 100px;
+}
+.dialog .costumeedit input {
+  display: none;
+}
+.dialog .costumeedit input + label {
+  display: inline-block;
+  width: 100px;
+  height: 40px;
+  font-size: 35px;
+  color: gray;
+  position: relative;
+}
+.dialog .costumeedit input:checked + label {
+  font-weight: bold;
+  color: white;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 72px;
+}
+
+.dialog .costumeedit input:checked + label .rareTxt {
+  position: absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  right:0;
+  margin:auto;
+  z-index: 1;
+}
+/* ダイアログ（ライブ） */
+.dialog .liveedit table {
+  width: 100%;
+}
+.dialog .liveedit table tr {
+  height: 2.5em;
+}
+.dialog .liveedit table th {
+  width: 120px;
+}
+.dialog .liveedit table .slctbox {
+  width: 100%;
+  position: relative;
+}
+.dialog .liveedit table .slctbox a {
+  text-decoration: none;
+  color: black;
+}
+.dialog .liveedit table .slctbox .slcttxt {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding-left: 5px;
+}
+.dialog .liveedit table .slctbox .slcttxt::after {
+  content: "▼";
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.dialog .liveedit table .slctbox .pulldown {
+  position: absolute;
+  top: 1em;
+  left: 0;
+  right: 0;
+  border: 1px solid gray;
+  background-color: white;
+  display: none;
+  z-index: 1;
+}
+.dialog .liveedit table .slctbox .pulldown a {
+  display: block;
+  border-bottom: 1px solid gray;
+  padding: 8px 0 8px 5px;
+}
+.dialog .liveedit table .slctbox .pulldown a:last-child {
+  border-bottom: none;
+}
+
+/* 衣装、スキル一覧（共通） */
+.list * {
+  text-align: center;
+}
+.list .itm {
+	width: 100%;
+	margin: 15px 0;
+}
+.list h3 {
+  font-size: 1.1em;
+  margin: 0;
+}
+.list h4 {
+  font-size: 1em;
+  margin: 0;
+}
+.list .mem {
+	font-size: 90%;
+}
+.list .mem th {
+	height: 27px;
+}
+.list td {
+	height: 31px;
+}
+.list table.tbl1 {
+	width: 100%;
+	table-layout: fixed;
+  border: 1px solid gray;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+}
+.list .tbl1 th,
+.list .tbl1 td {
+	border-left: 1px solid gray;
+}
+.list .tbl1 td {
+  border-top: 1px solid gray;
+}
+.list .tbl1 tr th:first-child,
+.list .tbl1 tr td:first-child {
+  border-left: none;
+}
+.list .tbl1 tr:first-child th {
+  border-top: none;
+}
+.list .tbl1 tr:first-child th:first-child {border-radius: 10px 0 0 0;}
+.list .tbl1 tr:first-child th:last-child  {border-radius:  0 10px 0 0;}
+.list .tbl1 tr:last-child td:first-child {border-radius: 0 0 0 10px;}
+.list .tbl1 tr:last-child td:last-child  {border-radius:  0 0 10px 0;}
+.list .tbl1.line1 tr:first-child th:first-child {border-radius: 10px 0 0 10px;}
+.list .tbl1.line1 tr:first-child th:last-child  {border-radius:  0 10px 10px 0;}
+
+
+.list table.tbl2 {
+	width: 100%;
+  border: 1px solid gray;
+  border-spacing: 0;
+  border-collapse: separate;
+  border-radius: 10px;
+}
+.list .tbl2 th,
+.list .tbl2 td {
+	border-top: 1px solid gray;
+}
+.list .tbl2 th {
+  width: 65%;
+  font-size: 95%;
+}
+.list .tbl2 td {
+  border-left: 1px solid gray;
+}
+.list .tbl2 tr:first-child th,
+.list .tbl2 tr:first-child td {
+  border-top: none;
+}
+.list .tbl2 tr:first-child th:first-child {border-radius: 10px 0 0 0;}
+.list .tbl2 tr:first-child td:last-child  {border-radius:  0 10px 0 0;}
+.list .tbl2 tr:last-child th:first-child {border-radius: 0 0 0 10px;}
+.list .tbl2 tr:last-child td:last-child  {border-radius:  0 0 10px 0;}
+
+
+
+
+/* http://www.colordic.org/p/ */
+.list .m01 { background-color: #ffe5cc;}
+.list .m02 { background-color: #ccffff;}
+.list .m03 { background-color: #e5ffcc;}
+.list .m04 { background-color: #ccccff;}
+.list .m05 { background-color: #ffffcc;}
+.list .m06 { background-color: #ffcce5;}
+.list .m07 { background-color: #e5ccff;}
+.list .m08 { background-color: #ccffcc;}
+.list .m09 { background-color: #ffccff;}
+
+/**/
+
+.page.costume .rareMark .rareTxt {
+  color: gray;
+  font-style: italic;
+  font-size: 70%;
+}
+.page.costume .owned .rareMark {
+	font-weight: bold;
+	display: inline-block;
+	position: relative;
+	width: 30px;
+	height: 27px;
+	vertical-align: top;
+}
+
+.page.costume .owned .rareMark .rareTxt {
+	position: absolute;
+	z-index: 1;
+  color: white;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* iPhone対策 */
+#costume_list td,
+#costume_list .mem th,
+#skill_list td,
+#skill_list .mem th,
+#memStatus tr,
+#live_list .itm {
+  cursor: pointer;
+}
+
+/* 部員詳細 */
+#memStatus {
+  padding-top: 15px;
+}
+#memStatus .hr,
+#memStatus .r {
+  display: inline-block;
+  width: 45px;
+}
+
+/* 衣装一覧 */
+.page_member a {
+  text-decoration: none;
+  color: inherit;
+}
+.page_member table {
+  table-layout: fixed;
+}
+
+/* スキル一覧 */
+/*
+.page_skill h3 {
+  text-shadow: 0 1px 0 gray,
+              0 -1px 0 gray,
+              1px 0 0 gray,
+              1px 1px 0 gray,
+              1px -1px 0 gray,
+              -1px 0 0 gray,
+              -1px -1px 0 gray,
+              -1px 1px 0 gray;
+}
+.page_skill h3.st1 {
+  color: #ffafaf;
+}
+.page_skill h3.st2 {
+  color: #afafff;
+}
+.page_skill h3.st3 {
+  color: #afffaf;
+}
+.page_skill .st1::before { content: "アシスト";}
+.page_skill .st2::before { content: "カメラ";}
+.page_skill .st3::before { content: "ステージ";}
+*/
+.page.skill .skilnm b {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+  width: 20px;
+  height: 18px;
+}
+
+.page.skill .skilnm.st1 b:before, .page.skill .skilnm.st1 b:after {background-color: #ff5858;}
+.page.skill .skilnm.st2 b:before, .page.skill .skilnm.st2 b:after {background-color: #7070ff;}
+.page.skill .skilnm.st3 b:before, .page.skill .skilnm.st3 b:after {background-color: #30cc30;}
+
+.page.skill td {color: black;}
+.page.skill td.ov5 {font-weight: bold;color: deeppink;}
+.page.skill td.ovA {font-weight: bold;
+	color: yellow;
+	text-shadow: 0 1px 0 gray,
+							0 -1px 0 gray,
+							1px 0 0 gray,
+							1px 1px 0 gray,
+							1px -1px 0 gray,
+							-1px 0 0 gray,
+							-1px -1px 0 gray,
+							-1px 1px 0 gray;
+}
+
+/* ライブ */
+.liverank {
+  padding: 0;
+  margin: 0;
+}
+.liverank li {
+  display: inline-block;
+  width: 50px;
+  height: 1em;
+  text-align: center;
+  color: gray;
+  position: relative;
+}
+.liverank li::after {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+   margin: auto;
+}
+.liverank li.fc,
+.liverank li.ap {
+  font-weight: bold;
+}
+.liverank li.ap {
+  text-shadow: 0 1px 0 #fff9ff,
+              0 -1px 0 #fff9ff,
+              1px 0 0 #fff9ff,
+              1px 1px 0 #fff9ff,
+              1px -1px 0 #fff9ff,
+              -1px 0 0 #fff9ff,
+              -1px -1px 0 #fff9ff,
+              -1px 1px 0 #fff9ff;
+}
+.liverank b,
+.liverank i {
+  display: none;
+}
+.liverank .ap b ,
+.liverank .ap i {
+  width: 0;
+  height: 0;
+  top: -3px;
+  left: -0px;
+  right: 0;
+  margin: auto;
+}
+.liverank .ap b::before,
+.liverank .ap b::after,
+.liverank .ap i::before,
+.liverank .ap i::after {
+  content: "";
+}
+.liverank .ap b ,
+.liverank .ap i,
+.liverank .ap b::before,
+.liverank .ap b::after,
+.liverank .ap i::before,
+.liverank .ap i::after {
+  display: inline-block;
+  position: absolute;
+  border-bottom: 16px solid #ffa851;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+}
+.liverank .ap b::before {transform: rotate(65deg); top: 3px;left: 0px;}
+.liverank .ap b::after  {transform: rotate(-65deg);top: 3px;left: -13px;}
+.liverank .ap i::before {transform: rotate(145deg); top: 11px;left: -2px;}
+.liverank .ap i::after  {transform: rotate(-145deg);top: 11px;left: -11px;}
+
+.liverank .easy.fc,
+.liverank .easy.ap {color: #51a8ff;}
+.liverank .normal.fc,
+.liverank .normal.ap {color: #51ff51;}
+.liverank .hard.fc,
+.liverank .hard.ap {color: #e8e833;}
+.liverank .extream.fc,
+.liverank .extream.ap {color: #ff5151;}
+.liverank .challenge.fc,
+.liverank .challenge.ap {color: #a851ff;}
+
+/* 勧誘画面 */
+.page_statistics .condition {
+  margin: 20px 0;
+  border-bottom: 2px solid gray;
+  padding-bottom: 10px;
+}
+.page_statistics .condtitle {
+  display: inline-block;
+  border-width: 1px;
+  border-style: solid;
+  width: 100px;
+  margin: 0 5px;
+}
+.page_statistics .condtitle.costume {
+  border-color: #50ee50;
+}
+.page_statistics .condtitle.skill {
+  border-color: #b770ff;
+}
+.page_statistics input:checked + .condtitle.costume {
+  background-color: #50ee50;
+  color: #ffffff;
+}
+.page_statistics input:checked + .condtitle.skill {
+  background-color: #b770ff;
+  color: #ffffff;
+}
+.page_statistics input {
+  display: none;
+}
+.page_statistics .conditiondetail p {
+  margin: 8px 0;
+}
+.page_statistics .slct {
+  position: relative;
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding: 0 5px;
+}
+.page_statistics .slct::after {
+  content: "▼";
+  pointer-events: none;
+  width: 2em;
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.page_statistics .conditiondetail {
+  display: none;
+}
+#statisticsCostume:checked ~ .conditiondetail.costume {
+  display: block;
+}
+#statisticsSkill:checked ~ .conditiondetail.skill {
+  display: block;
+}
+.page_statistics .list .tbl2 td {
+  width: 75%;
+  min-width: 250px;
+  font-size: 95%;
+}
+.page_statistics ul {
+  margin: 0;
+  padding: 0;
+}
+.page_statistics li {
+  list-style: none;
+}
+.page_statistics li span {
+  font-size: 75%;
+}
+.page_statistics .cameraArea {
+  margin: 5px 0;
+}
+.page_statistics .cameraArea img {
+  max-width: 100%;
+}
+.page_statistics .cameraArea label {
+  border: 1px solid gray;
+  border-radius: 10px;
+  display: inline-block;
+  width: 150px;
+  padding: 10px;
+}
+
+/* 設定画面 */
+
+.page_setting .slct {
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.page_setting .slct::after {
+  content: "▼";
+  pointer-events: none;
+  display: block;
+  width: 2em;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.page_setting select {
+  width: 100%;
+  height: 100%;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+.page_setting .list.itm {
+  display: none;
+}
+#settingItemList {
+  margin: 0;
+  padding: 0;
+}
+#settingItemList li {
+  list-style: none;
+  display: inline-block;
+  border: 1px solid #6060ff;
+  background-color: #8080ff;
+  border-radius: 10px;
+  width: 8em;
+  margin: 5px;
+}
+#settingItemList a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  color: #ffffff;
+}
+.page_setting .design .ptn {
+  margin: 10px 0;
+}
+.page_setting .list.itm .sortable {
+  padding-right: 25px;
+}
+.page_setting .list.itm .sortable li {
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+.page_setting .list.itm .sortable li.sortable-drag {
+  list-style: none;
+}
+.page_setting .list.itm .sortable li label {
+  text-align: left;
+  display: block;
+  border: 1px solid gray;
+  border-radius: 10px;
+  padding: 3px 0 3px 10px;
+}
+.page_setting .button .txt1.b {
+  border-left-color: #fff9ff;
+  border-top-color: #fff9ff;
+}
+.page_setting textarea {
+  background-color: #FFFFFF;
+  border: 1px solid gray;
+  border-radius: 15px;
+  width: 100%;
+  height: 200px;
+  text-align: left;
+}
+
+/******************
+ *
+ * 切り替わるスタイル
+ *
+ ******************/
+
+
+/* 所有している衣装のマークの色 */
+
+/* オレンジ */
+#wrapper.cos_hr_orange .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_orange .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_orange .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_orange .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_orange .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_orange .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_orange .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_orange .page.costume .r .owned .rareMark::after {background-color: #ffaf60;}
+/* 水色 */
+#wrapper.cos_hr_lightblue .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_lightblue .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_lightblue .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_lightblue .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_lightblue .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_lightblue .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_lightblue .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_lightblue .page.costume .r .owned .rareMark::after {background-color: #60ffff;}
+/* 薄緑 */
+#wrapper.cos_hr_lightgreen .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_lightgreen .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_lightgreen .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_lightgreen .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_lightgreen .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_lightgreen .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_lightgreen .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_lightgreen .page.costume .r .owned .rareMark::after {background-color: #afff60;}
+/* 青 */
+#wrapper.cos_hr_blue .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_blue .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_blue .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_blue .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_blue .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_blue .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_blue .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_blue .page.costume .r .owned .rareMark::after {background-color: #6060ff;}
+/* 黄 */
+#wrapper.cos_hr_yellow .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_yellow .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_yellow .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_yellow .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_yellow .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_yellow .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_yellow .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_yellow .page.costume .r .owned .rareMark::after {background-color: #ffff60;}
+/* 赤 */
+#wrapper.cos_hr_red .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_red .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_red .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_red .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_red .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_red .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_red .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_red .page.costume .r .owned .rareMark::after {background-color: #ff6060;}
+/* 紫 */
+#wrapper.cos_hr_purple .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_purple .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_purple .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_purple .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_purple .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_purple .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_purple .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_purple .page.costume .r .owned .rareMark::after {background-color: #af60ff;}
+/* 緑 */
+#wrapper.cos_hr_green .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_green .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_green .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_green .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_green .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_green .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_green .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_green .page.costume .r .owned .rareMark::after {background-color: #60ff60;}
+/* ピンク */
+#wrapper.cos_hr_pink .dialog .costumeedit input:checked + label.hr::before,
+#wrapper.cos_hr_pink .dialog .costumeedit input:checked + label.hr::after,
+#wrapper.cos_r_pink .dialog .costumeedit input:checked + label.r::before,
+#wrapper.cos_r_pink .dialog .costumeedit input:checked + label.r::after,
+#wrapper.cos_hr_pink .page.costume .hr .owned .rareMark::before,
+#wrapper.cos_hr_pink .page.costume .hr .owned .rareMark::after,
+#wrapper.cos_r_pink .page.costume .r .owned .rareMark::before,
+#wrapper.cos_r_pink .page.costume .r .owned .rareMark::after {background-color: #ff60ff;}
+/* 文字が読みづらい場合に縁を入れる */
+#wrapper.cos_hr_lightblue .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_r_lightblue .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_hr_lightgreen .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_r_lightgreen .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_hr_yellow .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_r_yellow .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_hr_green .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_r_green .dialog .costumeedit input:checked + label .rareTxt,
+#wrapper.cos_hr_lightblue .page.costume .hr .owned .rareMark .rareTxt,
+#wrapper.cos_r_lightblue .page.costume .r .owned .rareMark .rareTxt,
+#wrapper.cos_hr_lightgreen .page.costume .hr .owned .rareMark .rareTxt,
+#wrapper.cos_r_lightgreen .page.costume .r .owned .rareMark .rareTxt,
+#wrapper.cos_hr_yellow .page.costume .hr .owned .rareMark .rareTxt,
+#wrapper.cos_r_yellow .page.costume .r .owned .rareMark .rareTxt,
+#wrapper.cos_hr_green .page.costume .hr .owned .rareMark .rareTxt,
+#wrapper.cos_r_green .page.costume .r .owned .rareMark .rareTxt {
+  text-shadow: 0 1px 0 lightgray,
+              0 -1px 0 lightgray,
+              1px 0 0 lightgray,
+              1px 1px 0 lightgray,
+              1px -1px 0 lightgray,
+              -1px 0 0 lightgray,
+              -1px -1px 0 lightgray,
+              -1px 1px 0 lightgray;
+}
+
+/* 所有衣装のマーク */
+
+/* ダイア */
+#wrapper.cos_dia .page.costume .owned .rareMark::before,
+#wrapper.cos_dia .dialog .costumeedit input:checked + label:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  transform: rotate(-45deg);
+}
+#wrapper.cos_dia .page.costume .owned .rareMark::before {
+  width: 20px;
+  height:20px;
+}
+#wrapper.cos_dia .owned .rareMark .rareTxt {
+  top: 6px;
+}
+#wrapper.cos_dia .dialog .costumeedit input:checked + label:before {
+  width: 57px;
+  height:57px;
+}
+#wrapper.cos_dia .dialog .costumeedit input:checked + label .rareTxt {
+  top: 10px;
+}
+
+/* ハート */
+#wrapper.cos_hart .page.costume .owned .rareMark::before,
+#wrapper.cos_hart .page.costume .owned .rareMark::after,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:after {
+  position: absolute;
+  content: "";
+  top: 0;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::before,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before {
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::after,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::before,
+#wrapper.cos_hart .page.costume .owned .rareMark::after {
+	width: 15px;
+	height: 24px;
+	border-radius: 15px 15px 0 0;
+}
+#wrapper.cos_hart .page.costume .owned .rareMark::before {
+	left: 15px;
+}
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before,
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:after {
+  width: 40px;
+  height: 64px;
+  border-radius: 40px 40px 0 0;
+}
+#wrapper.cos_hart .dialog .costumeedit input:checked + label:before {
+  left: 40px;
+}
+
+
+/* スキルを示すマーク */
+
+/* ハート */
+#wrapper.skill_hart .page.skill .skilnm b:before,
+#wrapper.skill_hart .page.skill .skilnm b:after {
+  position: absolute;
+  content: "";
+  top: 0;
+  width: 10px;
+  height: 16px;
+  border-radius: 10px 10px 0 0;
+}
+#wrapper.skill_hart .page.skill .skilnm b:before {
+  left: 10px;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+#wrapper.skill_hart .page.skill .skilnm b:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+
+/* ダイア */
+#wrapper.skill_dia .page.skill .skilnm b:before {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 14px;
+  height: 14px;
+  transform: rotate(45deg);
+}
+
+/* 一覧で表示する名称 */
+#wrapper.name_display_full .nameShort,
+#wrapper.name_display_full .name1Char,
+#wrapper.name_display_full .name2Char {
+  display: none;
+}
+#wrapper.name_display_short .nameFull,
+#wrapper.name_display_short .name1Char,
+#wrapper.name_display_short .name2Char {
+  display: none;
+}
+#wrapper.name_display_c1 .nameFull,
+#wrapper.name_display_c1 .nameShort,
+#wrapper.name_display_c1 .name2Char {
+  display: none;
+}
+#wrapper.name_display_c2 .nameFull,
+#wrapper.name_display_c2 .nameShort,
+#wrapper.name_display_c2 .name1Char {
+  display: none;
+}
+
+/* メニュー表示方法 */
+/* 隠す */
+#wrapper.menu_show_fixed #menu_key {
+  display: block;
+}
+#wrapper.menu_show_fixed #menuSpacer {
+  display: none;
+}
+#wrapper.menu_show_fixed #menu {
+  bottom: -50px;
+}
+
+/* 固定表示 */
+#wrapper.menu_show_fixed #menu_key {
+  display: none;
+}
+#wrapper.menu_show_fixed #menuSpacer {
+  height: 50px;
+  display: block;
+}
+#wrapper.menu_show_fixed #menu {
+  bottom: 0 !important; /* Javascriptで表示位置をDOMに直接している可能性があるため */
+}
+
+/* メニュータブ各種非表示 */
+#wrapper.menu_tab_member_hide #menu [data-page="page_member"] { display: none;}
+#wrapper.menu_tab_costume_hide #menu [data-page="page_costume"] { display: none;}
+#wrapper.menu_tab_skill_hide #menu [data-page="page_skill"] { display: none;}
+#wrapper.menu_tab_statistics_hide #menu [data-page="page_statistics"] { display: none;}
+#wrapper.menu_tab_live_hide #menu [data-page="page_live"] { display: none;}
+
+
+
+/* コンボ表示マーク */
+/* 文字 */
+#wrapper.combo_char .liverank .easy::after {content: "E";}
+#wrapper.combo_char .liverank .normal::after {content: "N";}
+#wrapper.combo_char .liverank .hard::after {content: "H";}
+#wrapper.combo_char .liverank .extream::after {content: "EX";}
+#wrapper.combo_char .liverank .challenge::after {content: "C";}
+
+/* 音符 */
+#wrapper.combo_onpu .liverank .ap b ,
+#wrapper.combo_onpu .liverank .ap i {
+  top: -6px;
+}
+#wrapper.combo_onpu .liverank li::after {
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+#wrapper.combo_onpu .liverank .easy::after {content: "\e903";}
+#wrapper.combo_onpu .liverank .normal::after {content: "\e904";}
+#wrapper.combo_onpu .liverank .hard::after {content: "\e902";}
+#wrapper.combo_onpu .liverank .extream::after {content: "\e901";}
+#wrapper.combo_onpu .liverank .challenge::after {content: "\e905";font-size: 125%;top:-3px;}
+#wrapper.combo_onpu .liverank .easy.ap b ,
+#wrapper.combo_onpu .liverank .easy.ap i {left: 1px;}
+#wrapper.combo_onpu .liverank .normal.ap b ,
+#wrapper.combo_onpu .liverank .normal.ap i {left: -3px;}
+#wrapper.combo_onpu .liverank .hard.ap b ,
+#wrapper.combo_onpu .liverank .hard.ap i {left: 1px;}
+#wrapper.combo_onpu .liverank .extream.ap b ,
+#wrapper.combo_onpu .liverank .extream.ap i {left: -3px;}
+#wrapper.combo_onpu .liverank .challenge.ap b ,
+#wrapper.combo_onpu .liverank .challenge.ap i {left: -1px;}
