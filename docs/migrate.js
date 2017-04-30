@@ -115,5 +115,13 @@ Migrate = [
     upd : function(db){
       db.save("c009", {id:"c009",so: 9, nm:"ウェディング風衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
     }
+  },
+  {
+    dbver: "1.00.07",
+    msg: "楽曲「Wonder zone」衣装「パンキッシュ・ロック・ガール」を追加しました。",
+    upd : function(db){
+      db.save("c010", {id:"c010",so: 10, nm:"パンキッシュ・ロック・ガール",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+      db.save("l033", {id:"l033",so: 33, nm:"Wonder zone", cb:{}});
+    }
   }
 ];
