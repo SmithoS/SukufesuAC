@@ -199,6 +199,12 @@ var DB = (function(){
       case "hasNotHr":
         condFunc = function (hr, r) {return !hr;}
         break;
+      case "hasNotR":
+        condFunc = function (hr, r) {return !r;}
+        break;
+      case "hasNotAny":
+        condFunc = function (hr, r) {return !hr || !r;}
+        break;
       case "hasNone":
       default:
         condFunc = function (hr, r) {return !hr && !r;}
