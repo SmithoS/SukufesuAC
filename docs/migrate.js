@@ -123,5 +123,12 @@ Migrate = [
       db.save("c010", {id:"c010",so: 10, nm:"パンキッシュ・ロック・ガール",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
       db.save("l033", {id:"l033",so: 33, nm:"Wonder zone", cb:{}});
     }
+  },
+  {
+    dbver: "1.00.08",
+    msg: "楽曲「Dancing stars on me!」を追加します。",
+    upd : function(db){
+      db.save("l034", {id:"l034",so: 33, nm:"Dancing stars on me!", cb:{}});
+    }
   }
 ];
