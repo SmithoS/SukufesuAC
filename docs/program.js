@@ -16,6 +16,11 @@ function jq(id) {
   return $(document.getElementById(id));
 }
 
+function isEventSkill(skillId) {
+  return skillId == "s007" || skillId == "s008";
+}
+
+
 /********************
  * 各種オブジェクト定義
  ********************/
@@ -92,6 +97,7 @@ var DB = (function(){
           //表示
           ListView.updateCostume();
           ListView.updateSkill();
+          ListView.showPercent();
           ListView.updateLive();
           ListView.setSetting();
           ListView.setVersion();
@@ -257,7 +263,7 @@ var DB = (function(){
     var condFunc2;
     switch (eventSkill) {
       case "exclude":
-      condFunc2 = function (ski) {return ski.id != "s007" && ski.id != "s008";}
+      condFunc2 = function (ski) {return !isEventSkill(ski.id);}
         break;
       case "include":
       default:
@@ -440,11 +446,44 @@ var ListView = (function(){
       if ($(this).css("display") != "none") minWidth += 70;
     });
     $menu.find("table").css("min-width", minWidth + "px");
-  }
+  };
+
+  v.showPercent = function() {
+    var cosPer = {cntHR: 0, cntR: 0, obtHR: 0, obtR: 0};
+    var skiPer = {cnt: 0, obt: 0};
+    var cos = DB.getCostumeList();
+    var ski = DB.getSkillList();
+    for (var i = 0; i < cos.length; i++) {
+      for (var memid in cos[i].hr) {
+        cosPer.cntHR += 1;
+        cosPer.cntR += 1;
+        if (cos[i].hr[memid]) cosPer.obtHR += 1;
+        if (cos[i].r[memid]) cosPer.obtR += 1;
+      }
+    }
+    for (var i = 0; i < ski.length; i++) {
+      if (!isEventSkill(ski[i].id)) {
+        for (var memid in ski[i].val) {
+          skiPer.cnt += 10;
+          skiPer.obt += ski[i].val[memid];
+        }
+      }
+    }
+    var cosPercentHR = Math.floor(cosPer.obtHR * 100 / cosPer.cntHR);
+    var cosPercentR = Math.floor(cosPer.obtR * 100 / cosPer.cntR);
+    var skiPercent = Math.floor(skiPer.obt * 100 / skiPer.cnt);
+    jq("perObtCostumeHRtxt").text(cosPercentHR)
+    jq("perObtCostumeHR").css("width", (cosPercentHR / 2) + "%");
+    jq("perObtCostumeRtxt").text(cosPercentR)
+    jq("perObtCostumeR").css("width", (cosPercentR / 2) + "%");
+    jq("perObtSkilltxt").text(skiPercent)
+    jq("perObtSkill").css("width", skiPercent + "%");
+  };
 
   v.init = function() {
     v.showCostume();
     v.showSkill();
+    v.showPercent();
     v.showLive();
     v.setMemberList();
     v.setSetting();
@@ -496,6 +535,7 @@ var Dialog = (function(){
 
       DB.saveCostume(tgtId, memId, isHr, isR);
       ListView.updateCostume();
+      ListView.showPercent();
       if (prm.isUpdMemberPage) {
         ListView.setMemberCostume(member.id);
       }
@@ -533,6 +573,7 @@ var Dialog = (function(){
 
       DB.saveSkill(tgtId, memId, val);
       ListView.updateSkill();
+      ListView.showPercent();
       if (prm.isUpdMemberPage) {
         ListView.setMemberSkill(member.id);
       }

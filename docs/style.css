@@ -11,7 +11,7 @@
 }
 
 /* 初期表示 */
-.page_skill, .page_costume, .page_setting, .page_statistics, .page_live {
+.page_home, .page_skill, .page_costume, .page_setting, .page_statistics, .page_live {
   display: none;
 }
 
@@ -180,6 +180,7 @@ h2 {
 #menu td .wrap.w4 {background-color: #70b7ff;}
 #menu td .wrap.w5 {background-color: #ff60ff;}
 #menu td .wrap.w6 {background-color: #7070ff;}
+#menu td .wrap.w7 {background-color: #50dd50;}
 #menu td .bg {
 	position: absolute;
 	display: inline-block;
@@ -786,6 +787,32 @@ h2 {
   padding: 10px;
 }
 
+/* ホーム */
+.page_home .perBase {
+  display: inline-block;
+  border: 1px solid gray;
+  border-radius: 10px;
+  height: 20px;
+  width: 100%;
+  text-align: left;
+  overflow: hidden;
+}
+.page_home .perObt {
+  display: inline-block;
+  height: 100%;
+  background-color: red;
+}
+#perObtCostumeHR, #perObtCostumeR {
+  background-color: #70ff70;
+}
+#perObtSkill {
+  background-color: #b770ff;
+}
+.page_home .notice {
+  color: gray;
+  font-size: 75%;
+}
+
 /* 設定画面 */
 
 .page_setting .slct {
@@ -1132,6 +1159,7 @@ h2 {
 }
 
 /* メニュータブ各種非表示 */
+#wrapper.menu_tab_home_hide #menu [data-page="page_home"] { display: none;}
 #wrapper.menu_tab_member_hide #menu [data-page="page_member"] { display: none;}
 #wrapper.menu_tab_costume_hide #menu [data-page="page_costume"] { display: none;}
 #wrapper.menu_tab_skill_hide #menu [data-page="page_skill"] { display: none;}

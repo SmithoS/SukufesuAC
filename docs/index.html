@@ -28,6 +28,7 @@
 	<div id="menu">
 		<table>
 			<tr>
+				<td data-page="page_home"><span class="wrap w7"><span class="bg f"></span><span class="bg b"></span><span class="txt">ホーム</span></span></td>
 				<td data-page="page_member"><span class="wrap w1"><span class="bg f"></span><span class="bg b"></span><span class="txt">部員</span></span></td>
 				<td data-page="page_costume"><span class="wrap w2"><span class="bg f"></span><span class="bg b"></span><span class="txt">衣装</span></span></td>
 				<td data-page="page_skill"><span class="wrap w3"><span class="bg f"></span><span class="bg b"></span><span class="txt">スキル</span></span></td>
@@ -38,6 +39,24 @@
 		</table>
 	</div>
 	<div id="contents">
+		<div class="page page_home">
+			<h2>ホーム</h2>
+			<div class="list">
+				<h3>衣装取得率</h3>
+				<div>HR：<span id="perObtCostumeHRtxt"></span>%　／　R：<span id="perObtCostumeRtxt"></span>%</div>
+				<span class="perBase"><span id="perObtCostumeHR" class="perObt"></span><span id="perObtCostumeR" class="perObt"></span></span>
+			</div>
+			<div class="list">
+				<h3>スキル取得率</h3>
+				<div><span id="perObtSkilltxt"></span>%<br /><span class="notice">(イベントスキル除)</span></div>
+				<span class="perBase"><span id="perObtSkill" class="perObt"></span></span>
+			</div>
+			<div>
+				<h3>イベント情報</h3>
+				 	実装予定
+			</div>
+		</div>
+
 		<div class="page costume skill page_member">
 			<h2>部員詳細</h2>
 			<div class="list">
@@ -303,6 +322,17 @@
 							</td>
 						</tr>
 						<tr>
+							<th>ホーム</th>
+							<td>
+								<label class="slct">
+									<select id="menu_tab_home" name="menu_tab_home" data-ismenutab="1">
+										<option value="">表示</option>
+										<option value="menu_tab_home_hide">非表示</option>
+									</select>
+								</label>
+							</td>
+						</tr>
+						<tr>
 							<th>部員</th>
 							<td>
 								<label class="slct">
@@ -386,6 +416,7 @@
 						<td>
 							<label class="slct">
 								<select id="init_display_page" name="init_display_page">
+									<option value="page_home">ホーム</option>
 									<option value="page_member">部員</option>
 									<option value="page_costume">衣装</option>
 									<option value="page_skill">スキル</option>
