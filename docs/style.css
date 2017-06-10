@@ -812,6 +812,17 @@ h2 {
   color: gray;
   font-size: 75%;
 }
+.page_home .eventList b::before {
+  font-family: 'icomoon' !important;
+  content: "\e904";
+}
+.page_home .eventList .versionup b { color: #675199; }
+.page_home .eventList .shop b { color: #0ea7e1; }
+.page_home .eventList .game b { color: #df5094; }
+.page_home .eventList .campaign b { color: #3672ba; }
+.page_home .eventList .other b { color: #4db44b; }
+
+
 
 /* 設定画面 */
 

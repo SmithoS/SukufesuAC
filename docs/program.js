@@ -19,6 +19,15 @@ function jq(id) {
 function isEventSkill(skillId) {
   return skillId == "s007" || skillId == "s008" || skillId == "s009";
 }
+function formatNowISOString() {
+  return formatDateISOString(new Date());
+}
+function formatDateISOString(now) {
+  function padZero(n) {
+    return ("0" + n).slice(-2)
+  }
+  return now.getFullYear() + "-" + padZero(now.getMonth()) + "-" + padZero(now.getDate()) + "T" + padZero(now.getHours()) + ":" + padZero(now.getMinutes()) + ":" + padZero(now.getSeconds());
+}
 
 
 /********************
@@ -329,6 +338,19 @@ var DB = (function(){
     settingData[settingId] = val;
     setJson(SETTING_KEY, settingData);
   };
+  d.getEvents = function(eventId) {
+    var id = "events_" + eventId;
+    return getJson(id);
+  };
+  d.saveEvents = function(eventId, events) {
+    var id = "events_" + eventId;
+    setJson(id, {
+      "date": formatNowISOString(),
+      "events": events
+    });
+  };
+
+
   d.loadInportData = function(str) {
     var dt = JSON.parse(str);
     for (var k in dt) {
@@ -479,6 +501,20 @@ var ListView = (function(){
     jq("perObtSkilltxt").text(skiPercent)
     jq("perObtSkill").css("width", skiPercent + "%");
   };
+  v.showAllEvensCalendar = function() {
+    var eventsTypeList = ["versionup", "game", "campaign"];
+    for (var i = 0, len = eventsTypeList.length; i < len; i++) {
+      v.showEvensCalendar(eventsTypeList[i]);
+    }
+  }
+  v.showEvensCalendar = function(et) {
+    var evInf = DB.getEvents(et);
+    if (evInf != null) {
+      riot.mount("#" + et + "Events", "events-calendar", {
+        "events": evInf.events
+      });
+    }
+  }
 
   v.init = function() {
     v.showCostume();
@@ -489,6 +525,8 @@ var ListView = (function(){
     v.setSetting();
     v.setVersion();
     v.reflectDesign();
+
+    v.showAllEvensCalendar();
   };
 
   return v;
@@ -770,6 +808,42 @@ function setEventListenerLazy() {
 
     jq("menu_key").on("click", function(){
       Menu.toggle();
+    });
+
+    jq("updateEvents").on("click", function() {
+      var key;
+      var borderDate = new Date();
+      borderDate.setDate(borderDate.getDate() - 1);
+      borderDate = formatDateISOString(borderDate);
+
+      var key1 = "versionup";
+      var savedInf1 = DB.getEvents(key);
+      if (savedInf1 == null || savedInf1.date < borderDate) {
+        EventsCalendar.GetVersionUpEvents(function(events) {
+          DB.saveEvents(key1, events);
+          ListView.showEvensCalendar(key1);
+        });
+      }
+
+      var key2 = "game";
+      var savedInf2 = DB.getEvents(key2);
+      if (savedInf2 == null || savedInf2.date < borderDate) {
+        EventsCalendar.GetGameEvents(function(events) {
+          DB.saveEvents(key2, events);
+          ListView.showEvensCalendar(key2);
+        });
+      }
+
+      var key3 = "campaign";
+      var savedInf3 = DB.getEvents(key3);
+      if (savedInf3 == null || savedInf3.date < borderDate) {
+        EventsCalendar.GetCampaignEvents(function(events) {
+          DB.saveEvents(key3, events);
+          ListView.showEvensCalendar(key3);
+        });
+      }
+
+
     });
 
     $(document).on("click", "#costume_list td, #costume_list .mem th", function(){

@@ -17,6 +17,7 @@
 	<script src="https://cdn.jsdelivr.net/riot/3.0/riot+compiler.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/sortable/latest/Sortable.min.js"></script>
 	<script src="./migrate.js"></script>
+	<script src="./js/events.js"></script>
 	<script src="./program.js"></script>
 </head>
 <body>
@@ -53,7 +54,12 @@
 			</div>
 			<div>
 				<h3>イベント情報</h3>
-				 	実装予定
+				<p><a href="javascript:void(0)" id="updateEvents">イベント情報取得</a></p>
+				<div>
+					<div id="versionupEvents"></div>
+					<div id="gameEvents"></div>
+					<div id="campaignEvents"></div>
+				</div>
 			</div>
 		</div>
 
@@ -767,6 +773,16 @@
 				<li each={ s in opts.skill } data-id="{ s.id }" class="skilnm { s.st }"><label><b></b>{ s.nm }</label></li>
 			</ol>
 		</skill-sort-list>
+
+		<events-calendar>
+			<dl class="eventList" each={ e in opts.events }>
+				<dt class="title { e.type }"><b></b><a href="{ e.url }" target="_blank">{ e.nm }</a></dt>
+				<dd>
+					<p>{ e.start }{ e.start != e.end ? "〜" + e.end : "" }</p>
+				</dd>
+			</dl>
+		</events-calendar>
+
 	</script>
 </div>
 </body>
