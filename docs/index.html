@@ -52,7 +52,7 @@
 				<div><span id="perObtSkilltxt"></span>%<br /><span class="notice">(イベントスキル除)</span></div>
 				<span class="perBase"><span id="perObtSkill" class="perObt"></span></span>
 			</div>
-			<div>
+			<div id="eventsList">
 				<h3>イベント情報</h3>
 				<p><a href="javascript:void(0)" id="updateEvents">イベント情報取得</a></p>
 				<div>
@@ -197,6 +197,7 @@
 						<li><a href="javascript:void(0)" data-itm="orderSkill">スキル並び順</a></li>
 						<li><a href="javascript:void(0)" data-itm="export">エクスポート</a></li>
 						<li><a href="javascript:void(0)" data-itm="inport">インポート</a></li>
+						<li><a href="javascript:void(0)" data-itm="advanced">高度機能設定</a></li>
 						<li><a href="javascript:void(0)" data-itm="help">ヘルプ</a></li>
 					</ul>
 				</div>
@@ -474,6 +475,28 @@
 					<a href="javascript:void(0)" id="loadInportData" class="button ok">
 						<span class="txt1 f"></span><span class="txt1 b"></span>
 						<span class="txt2">取込</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+				</div>
+			</div>
+			<div class="list itm advanced">
+				<h3>高度機能設定</h3>
+				<p>
+					高度な機能拡張を行うための設定です。<br />
+					詳細についてはドキュメントをいずれ整備します。<br />
+					分からない場合は設定しないでください。
+				</p>
+				<h4>イベント取得APIキー</h4>
+				<textarea id="eventsApiKey"></textarea>
+				<div>
+					<a href="javascript:void(0)" id="loadEventsApiKey" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">読込</span>
+						<span class="txt3 f"></span><span class="txt3 b"></span>
+					</a>
+					<a href="javascript:void(0)" id="saveEventsApiKey" class="button ok">
+						<span class="txt1 f"></span><span class="txt1 b"></span>
+						<span class="txt2">保存</span>
 						<span class="txt3 f"></span><span class="txt3 b"></span>
 					</a>
 				</div>

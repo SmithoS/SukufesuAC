@@ -1,6 +1,13 @@
 /********************
  * 共通定数定義
  ********************/
+ var EventApiDbId = "eventsApiKey"
+ var EventLockCountBorder = 3;
+
+ /********************
+  * 共通変数定義
+  ********************/
+var EventLockCount = 0;
 
 /********************
  * 共通関数（便利な関数）定義
@@ -502,6 +509,15 @@ var ListView = (function(){
     jq("perObtSkill").css("width", skiPercent + "%");
   };
   v.showAllEvensCalendar = function() {
+    var apiKey = DB.getAllSetting();
+    if (apiKey != null) apiKey = apiKey[EventApiDbId];
+    if (apiKey == null || apiKey == "") {
+      jq("eventsList").css("display", "none");
+      return ;
+    }
+
+
+
     var eventsTypeList = ["versionup", "game", "campaign"];
     for (var i = 0, len = eventsTypeList.length; i < len; i++) {
       v.showEvensCalendar(eventsTypeList[i]);
@@ -810,25 +826,84 @@ function setEventListenerLazy() {
       Menu.toggle();
     });
 
+    jq("loadEventsApiKey").on("click", function() {
+      var apiKey = DB.getAllSetting();
+      if (apiKey != null) apiKey = apiKey[EventApiDbId];
+      jq("eventsApiKey").val(apiKey == null ? "" : apiKey);
+    });
+    jq("saveEventsApiKey").on("click", function() {
+      var str = jq("eventsApiKey").val();
+      DB.saveSetting(EventApiDbId, str);
+      Dialog.open({
+        "type": "confirm",
+        "text1": "OK",
+        "text2": "保存しました。再読込を行います。",
+        "okCallback": function() {
+          location.reload();
+        }
+      });
+    });
+
     jq("updateEvents").on("click", function() {
-      var key;
+      if (EventLockCount >= EventLockCountBorder) {
+        Dialog.open({
+          "type": "confirm",
+          "text1": "エラー",
+          "text2": "イベント取得処理を連続して失敗しています。処理を中断します。"
+        });
+        return;
+      }
+
+
+      //APIキーがある場合のみ処理を行う
+      var apiKey = DB.getAllSetting();
+      if (apiKey != null) apiKey = apiKey[EventApiDbId];
+      if (apiKey == null || apiKey == "") {
+        Dialog.open({
+          "type": "confirm",
+          "text1": "エラー",
+          "text2": "イベント取得APIキーが未設定のため処理できません。"
+        });
+        return ;
+      }
+
+      //APIから取得するかのしきい値
       var borderDate = new Date();
       borderDate.setDate(borderDate.getDate() - 1);
       borderDate = formatDateISOString(borderDate);
 
+      //個別で判断しているが、できれば一括で管理したい……
+
       var key1 = "versionup";
-      var savedInf1 = DB.getEvents(key);
+      var savedInf1 = DB.getEvents(key1);
       if (savedInf1 == null || savedInf1.date < borderDate) {
-        EventsCalendar.GetVersionUpEvents(function(events) {
+        EventsCalendar.GetVersionUpEvents(apiKey, function(events) {
           DB.saveEvents(key1, events);
           ListView.showEvensCalendar(key1);
+          //リセット
+          EventLockCount = 0;
+        }, function() {
+          EventLockCount = EventLockCount + 1;
+          Dialog.open({
+            "type": "confirm",
+            "text1": "エラー",
+            "text2": "イベントが取得できませんでした。イベント取得APIキーが不正な可能性があります。"
+                    + "\r\n（システム側不正かもしれませんが）"
+                    + "\r\n連打するとサーバ負荷になるのでおやめください。"
+          });
+        });
+      } else {
+        Dialog.open({
+          "type": "confirm",
+          "text1": "情報",
+          "text2": "イベント取得の再取得は最後に実行してから 1 日間経過する必要があります。（サーバ負荷のため）"
         });
       }
 
       var key2 = "game";
       var savedInf2 = DB.getEvents(key2);
       if (savedInf2 == null || savedInf2.date < borderDate) {
-        EventsCalendar.GetGameEvents(function(events) {
+        EventsCalendar.GetGameEvents(apiKey, function(events) {
           DB.saveEvents(key2, events);
           ListView.showEvensCalendar(key2);
         });
@@ -837,7 +912,7 @@ function setEventListenerLazy() {
       var key3 = "campaign";
       var savedInf3 = DB.getEvents(key3);
       if (savedInf3 == null || savedInf3.date < borderDate) {
-        EventsCalendar.GetCampaignEvents(function(events) {
+        EventsCalendar.GetCampaignEvents(apiKey, function(events) {
           DB.saveEvents(key3, events);
           ListView.showEvensCalendar(key3);
         });

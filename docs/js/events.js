@@ -63,7 +63,7 @@ var EventsCalendar = (function(){
     return events;
   }
 
-  function GetEvents(calName, callback) {
+  function GetEvents(calName, apiKey, callback, errCallback) {
     var url = GetCalendarUrl(calName);
     if (url == null) return;
 
@@ -71,29 +71,32 @@ var EventsCalendar = (function(){
       "type": "GET",
       "url": url,
       "cache": false,
-      "data": GetParams(),
+      "data": GetParams(apiKey),
       "dataType": "json",
       "success": function(data) {
         callback(getEvents(calName, data));
+      },
+      "error": function(data) {
+        if (errCallback != null) errCallback(data);
       }
     });
   }
 
   var e = {};
-  e.GetVersionUpEvents = function (callback) {
-    GetEvents("VersionUp", callback);
+  e.GetVersionUpEvents = function (apiKey, callback, errCallback) {
+    GetEvents("VersionUp", apiKey, callback, errCallback);
   }
-  e.GetShopEvents = function (callback) {
-    GetEvents("Shop", callback);
+  e.GetShopEvents = function (apiKey, callback, errCallback) {
+    GetEvents("Shop", apiKey, callback, errCallback);
   }
-  e.GetGameEvents = function (callback) {
-    GetEvents("Game", callback);
+  e.GetGameEvents = function (apiKey, callback, errCallback) {
+    GetEvents("Game", apiKey, callback, errCallback);
   }
-  e.GetCampaignEvents = function (callback) {
-    GetEvents("Campaign", callback);
+  e.GetCampaignEvents = function (apiKey, callback, errCallback) {
+    GetEvents("Campaign", apiKey, callback, errCallback);
   }
-  e.GetOtherEvents = function (callback) {
-    GetEvents("Other", callback);
+  e.GetOtherEvents = function (apiKey, callback, errCallback) {
+    GetEvents("Other", apiKey, callback, errCallback);
   }
 
   return e;
