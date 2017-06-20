@@ -145,5 +145,12 @@ Migrate = [
       db.save("l035", {id:"l035",so: 35, nm:"Cutie Panther", cb:{}});
       db.save("s009", {id: "s009",so: 9,nm: "メンバーフラワーシャワー",st: "st3",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
     }
+  },
+  {
+    dbver: "1.00.11",
+    msg: "衣装「ユニット衣装（BiBiのレザーグロス・クイーン）」を追加します。ユニットごとに表記を切り替えるような対応は今後追加します",
+    upd : function(db){
+      db.save("c012", {id:"c012",so: 12, nm:"ユニット衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+    }
   }
 ];
