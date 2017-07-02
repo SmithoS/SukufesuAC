@@ -33,7 +33,13 @@ function formatDateISOString(now) {
   function padZero(n) {
     return ("0" + n).slice(-2)
   }
-  return now.getFullYear() + "-" + padZero(now.getMonth()) + "-" + padZero(now.getDate()) + "T" + padZero(now.getHours()) + ":" + padZero(now.getMinutes()) + ":" + padZero(now.getSeconds());
+  return now.getFullYear() + "-" + padZero(now.getMonth() + 1) + "-" + padZero(now.getDate()) + "T" + padZero(now.getHours()) + ":" + padZero(now.getMinutes()) + ":" + padZero(now.getSeconds());
+}
+function formatYMDISOString(dt) {
+  function padZero(n) {
+    return ("0" + n).slice(-2)
+  }
+  return dt.getFullYear() + "-" + padZero(dt.getMonth() + 1) + "-" + padZero(dt.getDate());
 }
 
 
@@ -525,7 +531,15 @@ var ListView = (function(){
   }
   v.showEvensCalendar = function(et) {
     var evInf = DB.getEvents(et);
+    //FullCalendarに合わせて終了日+1 になっているので、1引く
     if (evInf != null) {
+      if (evInf.events != null) {
+        for (var i = 0; i < evInf.events.length; i++) {
+          var dt = new Date(evInf.events[i].end);
+          dt.setDate(dt.getDate() - 1);
+          evInf.events[i].end =　formatYMDISOString(dt);
+        }
+      }
       riot.mount("#" + et + "Events", "events-calendar", {
         "events": evInf.events
       });
