@@ -152,5 +152,13 @@ Migrate = [
     upd : function(db){
       db.save("c012", {id:"c012",so: 12, nm:"ユニット衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
     }
+  },
+  {
+    dbver: "1.00.12",
+    msg: "楽曲「Oh,Love&Peace!」衣装「水着風衣装」を追加します。",
+    upd : function(db){
+      db.save("l036", {id:"l036",so: 36, nm:"Oh,Love&Peace!", cb:{}});
+      db.save("c013", {id:"c013",so: 13, nm:"水着風衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+    }
   }
 ];
