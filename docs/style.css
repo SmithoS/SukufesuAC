@@ -556,6 +556,24 @@ h2 {
   display: inline-block;
   width: 45px;
 }
+#memStatus .stage ul {
+  margin: 0;
+  padding: 0;
+}
+#memStatus .stage li {
+  display: inline-block;
+  list-style-type: none;
+}
+#memStatus .stage li.back {
+  width: 9.3%;
+}
+#memStatus .stage li.target {
+  width: 25%;
+}
+#memStatus .stage li img {
+  width: 100%;
+  height: auto;
+}
 
 /* 衣装一覧 */
 .page_member a {

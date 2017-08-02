@@ -55,15 +55,15 @@ var DB = (function(){
   var d = {};
   var LS = localStorage;
   var _member = [
-    {id: "m01", nm: "高坂穂乃果", snm: "穂乃果", c1nm:"ほ", c2nm:"ほの", birthday:"8/3"},
-    {id: "m02", nm: "絢瀬絵里", snm: "絵里", c1nm:"え", c2nm:"えり", birthday:"10/21"},
-    {id: "m03", nm: "南ことり", snm: "ことり", c1nm:"こ", c2nm:"こと", birthday:"9/12"},
-    {id: "m04", nm: "園田海未", snm: "海未", c1nm:"う", c2nm:"うみ", birthday:"3/15"},
-    {id: "m05", nm: "星空凛", snm: "凛", c1nm:"り", c2nm:"りん", birthday:"11/1"},
-    {id: "m06", nm: "西木野真姫", snm: "真姫", c1nm:"ま", c2nm:"まき", birthday:"4/19"},
-    {id: "m07", nm: "東條希", snm: "希", c1nm:"の", c2nm:"のぞ", birthday:"6/9"},
-    {id: "m08", nm: "小泉花陽", snm: "花陽", c1nm:"は", c2nm:"ぱな", birthday:"1/17"},
-    {id: "m09", nm: "矢沢にこ", snm: "にこ", c1nm:"に", c2nm:"にこ", birthday:"7/22"}
+    {id: "m01", nm: "高坂穂乃果", snm: "穂乃果", c1nm:"ほ", c2nm:"ほの", birthday:"8/3", img: "https://i.gyazo.com/42f32915a494f5d453efd3a73048b13e.png"},
+    {id: "m02", nm: "絢瀬絵里", snm: "絵里", c1nm:"え", c2nm:"えり", birthday:"10/21", img: "https://i.gyazo.com/5c8abc5a0b2aea555125ce6f182a5f14.png"},
+    {id: "m03", nm: "南ことり", snm: "ことり", c1nm:"こ", c2nm:"こと", birthday:"9/12", img: "https://i.gyazo.com/781d2bf4000267e48b97590a391c1c7e.png"},
+    {id: "m04", nm: "園田海未", snm: "海未", c1nm:"う", c2nm:"うみ", birthday:"3/15", img: "https://i.gyazo.com/58ed36ed6b41121bf568993efc8bc8f2.png"},
+    {id: "m05", nm: "星空凛", snm: "凛", c1nm:"り", c2nm:"りん", birthday:"11/1", img: "https://i.gyazo.com/f9da436e320cfa077a3b01da8ab02333.png"},
+    {id: "m06", nm: "西木野真姫", snm: "真姫", c1nm:"ま", c2nm:"まき", birthday:"4/19", img: "https://i.gyazo.com/40b2b7475dbb0c3662980d4583c0ecdd.png"},
+    {id: "m07", nm: "東條希", snm: "希", c1nm:"の", c2nm:"のぞ", birthday:"6/9", img: "https://i.gyazo.com/21ad88598faf4917695d25084cfe4b50.png"},
+    {id: "m08", nm: "小泉花陽", snm: "花陽", c1nm:"は", c2nm:"ぱな", birthday:"1/17", img: "https://i.gyazo.com/a4d9f2365d9dfc693245c4499710cf1c.png"},
+    {id: "m09", nm: "矢沢にこ", snm: "にこ", c1nm:"に", c2nm:"にこ", birthday:"7/22", img: "https://i.gyazo.com/2a5c3a858c8a9a17e78a777e60f0158b.png"}
   ];
 
   function setJson(id, obj) {
@@ -415,7 +415,7 @@ var ListView = (function(){
     riot.mount("member-list", {"mem": DB.getMemberList()});
   };
   v.setMemberStatus = function(memId) {
-    riot.mount("member-profile", DB.getMember(memId));
+    riot.mount("member-profile", {"target": DB.getMember(memId), "all": DB.getMemberList()});
     v.setMemberCostume(memId);
     v.setMemberSkill(memId);
     $(document.getElementById("memStatus")).css("display", "block");

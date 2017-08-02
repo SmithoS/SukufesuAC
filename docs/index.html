@@ -725,7 +725,14 @@
 			</table>
 		</member-list>
 		<member-profile>
-			<h3 data-mem="{ opts.id }"}>{ opts.nm }</h3>
+			<h3 data-mem="{ opts.target.id }"}>{ opts.target.nm }</h3>
+			<div class="stage">
+				<ul>
+					<li each={ m in opts.all } class="{ parent.opts.target.id ==  m.id ? 'target' : 'back'}" >
+						<img src="{ m.img }" />
+					</li>
+				</ul>
+			</div>
 		</member-profile>
 		<member-costume>
 			<h4>衣装</h4>
