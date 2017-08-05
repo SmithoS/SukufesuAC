@@ -68,7 +68,7 @@ Migrate = [
       if (st.hasOwnProperty("invitation_warn_skill_lv")) delete st["invitation_warn_skill_lv"];
       db.save("_setting", st);
       //これサム追加
-      db.save("c008", {id:"c008",so: 7, nm:"これからのSomeday",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+      registCostume(db, 8, "これからのSomeday");
     }
   },
   {
@@ -113,52 +113,73 @@ Migrate = [
     dbver: "1.00.06",
     msg: "衣装「ウェディング風衣装」を追加しました。",
     upd : function(db){
-      db.save("c009", {id:"c009",so: 9, nm:"ウェディング風衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+      registCostume(db, 9, "ウェディング風衣装");
     }
   },
   {
     dbver: "1.00.07",
     msg: "楽曲「Wonder zone」衣装「パンキッシュ・ロック・ガール」を追加しました。",
     upd : function(db){
-      db.save("c010", {id:"c010",so: 10, nm:"パンキッシュ・ロック・ガール",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
-      db.save("l033", {id:"l033",so: 33, nm:"Wonder zone", cb:{}});
+      registCostume(db, 10, "パンキッシュ・ロック・ガール");
+      registLive(db, 33, "Wonder zone");
     }
   },
   {
     dbver: "1.00.08",
     msg: "楽曲「Dancing stars on me!」を追加します。",
     upd : function(db){
-      db.save("l034", {id:"l034",so: 33, nm:"Dancing stars on me!", cb:{}});
+      registLive(db, 34, "Dancing stars on me!");
     }
   },
   {
     dbver: "1.00.09",
     msg: "衣装「Dancing stars on me!」を追加します。",
     upd : function(db){
-      db.save("c011", {id:"c011",so: 11, nm:"Dancing stars on me!",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+      registCostume(db, 11, "Dancing stars on me!");
     }
   },
   {
     dbver: "1.00.10",
     msg: "スキル「メンバーフラワーシャワー」、楽曲「Cutie Panther」を追加します。",
     upd : function(db){
-      db.save("l035", {id:"l035",so: 35, nm:"Cutie Panther", cb:{}});
       db.save("s009", {id: "s009",so: 9,nm: "メンバーフラワーシャワー",st: "st3",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
+      registLive(db, 35, "Cutie Panther");
     }
   },
   {
     dbver: "1.00.11",
     msg: "衣装「ユニット衣装（BiBiのレザーグロス・クイーン）」を追加します。ユニットごとに表記を切り替えるような対応は今後追加します",
     upd : function(db){
-      db.save("c012", {id:"c012",so: 12, nm:"ユニット衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+      registCostume(db, 12, "ユニット衣装");
     }
   },
   {
     dbver: "1.00.12",
     msg: "楽曲「Oh,Love&Peace!」衣装「水着風衣装」を追加します。",
     upd : function(db){
-      db.save("l036", {id:"l036",so: 36, nm:"Oh,Love&Peace!", cb:{}});
-      db.save("c013", {id:"c013",so: 13, nm:"水着風衣装",  hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},r: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}});
+      registLive(db, 36, "Oh,Love&Peace!");
+      registCostume(db, 13, "水着風衣装");
     }
   }
 ];
+
+function registCostume(db, num, name) {
+  var idval = "c" + ("000" + num).slice(-3);
+  db.save(idval, {
+    id: idval,
+    so: num,
+    nm: name,
+    hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},
+    r:  {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}
+  });
+}
+
+function registLive(db, num, name) {
+  var idval = "l" + ("000" + num).slice(-3);
+  db.save(idval, {
+    id: idval,
+    so: num,
+    nm: name,
+    cb: {}
+  });
+}
