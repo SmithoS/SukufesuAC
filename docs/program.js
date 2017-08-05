@@ -103,10 +103,12 @@ var DB = (function(){
     var currentVer = currentMig.dbver;
     if (lastUpdDbVer < currentVer) {
 
+      var updateMsg = (lastUpdDbVer == "0" ? "初回のデータ登録を行います。") : currentMig.msg + "\r\nデータを更新します。";
+
       Dialog.open({
         type: "confirm",
         text1: "データ更新",
-        text2: currentMig.msg + "\r\nデータを更新します。",
+        text2: updateMsg,
         okCallback: function() {
           for (var i = 0; i < migLen; i++) {
             var migData = Migrate[i];
