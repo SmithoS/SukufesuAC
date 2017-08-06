@@ -103,7 +103,7 @@ var DB = (function(){
     var currentVer = currentMig.dbver;
     if (lastUpdDbVer < currentVer) {
 
-      var updateMsg = (lastUpdDbVer == "0" ? "初回のデータ登録を行います。") : currentMig.msg + "\r\nデータを更新します。";
+      var updateMsg = lastUpdDbVer == "0" ? "初回のデータ登録を行います。" : currentMig.msg + "\r\nデータを更新します。";
 
       Dialog.open({
         type: "confirm",
