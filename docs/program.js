@@ -487,7 +487,7 @@ var ListView = (function(){
 
   v.showPercent = function() {
     var cosPer = {cntHR: 0, cntR: 0, obtHR: 0, obtR: 0};
-    var skiPer = {cnt: 0, obt: 0};
+    var skiPer = {cnt: 0, obt: 0, obtCnt: 0};
     var cos = DB.getCostumeList();
     var ski = DB.getSkillList();
     for (var i = 0; i < cos.length; i++) {
@@ -503,6 +503,7 @@ var ListView = (function(){
         for (var memid in ski[i].val) {
           skiPer.cnt += 10;
           skiPer.obt += ski[i].val[memid];
+          skiPer.obtCnt += ski[i].val[memid] > 0 ? 1 : 0;
         }
       }
     }
@@ -515,6 +516,9 @@ var ListView = (function(){
     jq("perObtCostumeR").css("width", (cosPercentR / 2) + "%");
     jq("perObtSkilltxt").text(skiPercent)
     jq("perObtSkill").css("width", skiPercent + "%");
+    jq("cntObtHR").text(cosPer.obtHR);
+    jq("cntObtR").text(cosPer.obtR);
+    jq("cntObtSkill").text(skiPer.obtCnt);
   };
   v.showAllEvensCalendar = function() {
     var apiKey = DB.getAllSetting();
