@@ -164,34 +164,42 @@ var DB = (function(){
     return getList("l", null);
   }
   d.getMemberCostumeList = function(memId) {
-    var cosList = d.getCostumeList();
-    var clsLen = cosList.length;
-    var l = [];
-    for (var i = 0; i < clsLen; i++) {
-      var cos = cosList[i];
-      l.push({
-        id: cos.id,
-        nm: cos.nm,
-        hr: cos.hr[memId],
-        r: cos.r[memId]
-      });
+    if (memId == null) {
+      return null;
+    } else {
+      var cosList = d.getCostumeList();
+      var clsLen = cosList.length;
+      var l = [];
+      for (var i = 0; i < clsLen; i++) {
+        var cos = cosList[i];
+        l.push({
+          id: cos.id,
+          nm: cos.nm,
+          hr: cos.hr[memId],
+          r: cos.r[memId]
+        });
+      }
+      return l;
     }
-    return l;
   };
   d.getMemberSkillList = function(memId) {
-    var skiList = d.getSkillList();
-    var skiLen = skiList.length;
-    var l = [];
-    for (var i = 0; i < skiLen; i++) {
-      var ski = skiList[i];
-      l.push({
-        id: ski.id,
-        nm: ski.nm,
-        st: ski.st,
-        val: ski.val[memId]
-      });
+    if (memId == null) {
+      return null;
+    } else {
+      var skiList = d.getSkillList();
+      var skiLen = skiList.length;
+      var l = [];
+      for (var i = 0; i < skiLen; i++) {
+        var ski = skiList[i];
+        l.push({
+          id: ski.id,
+          nm: ski.nm,
+          st: ski.st,
+          val: ski.val[memId]
+        });
+      }
+      return l;
     }
-    return l;
   };
   d.getAllSetting = function () {
     return getJson(SETTING_KEY);
@@ -806,7 +814,7 @@ function setEventListener() {
     });
     switch (showpage) {
       case "page_member":
-        jq("memStatus").css("display", "none");
+        ListView.setMemberStatus(null);
         break;
       case "page_setting":
         jq("settingPage").find(".itm").css("display", "none");
@@ -957,7 +965,7 @@ function setEventListenerLazy() {
         mem: $(this).attr("data-mem")
       });
     });
-    $(document).on("click", "#statusMemberList a", function() {
+    $(document).on("click", "#statusMemberList a, #statusMemberStage a", function() {
       ListView.setMemberStatus($(this).attr("data-id"));
     });
     $(document).on("click", "#memStatus member-costume tr", function() {

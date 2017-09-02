@@ -44,7 +44,7 @@
 			<h2>ホーム</h2>
 			<div class="list">
 				<h3>衣装取得率</h3>
-				<div>HR：<span id="perObtCostumeHRtxt"></span>%（<span id="cntObtHR"></span>枚）　／　R：<span id="perObtCostumeRtxt"></span>%（<span id="cntObtR"></span>枚）</div>
+				<div>HR：<span id="perObtCostumeHRtxt"></span>%（<span id="cntObtHR"></span>枚） ／ R：<span id="perObtCostumeRtxt"></span>%（<span id="cntObtR"></span>枚）</div>
 				<span class="perBase"><span id="perObtCostumeHR" class="perObt"></span><span id="perObtCostumeR" class="perObt"></span></span>
 			</div>
 			<div class="list">
@@ -725,18 +725,20 @@
 			</table>
 		</member-list>
 		<member-profile>
-			<h3 data-mem="{ opts.target.id }"}>{ opts.target.nm }</h3>
-			<div class="stage">
+			<h3 data-mem="{ opts.target != null ? opts.target.id : ''}"}>{ opts.target != null ? opts.target.nm : 'μ’ｓ'}</h3>
+			<div class="stage" id="statusMemberStage">
 				<ul>
-					<li each={ m in opts.all } class="{ parent.opts.target.id ==  m.id ? 'target' : 'back'}" >
-						<img src="{ m.img }" />
+					<li each={ m in opts.all } class="{ (parent.opts.target != null && parent.opts.target.id ==  m.id) ? 'target' : 'back'}" >
+						<a href="javascript:void(0)" data-id="{ m.id }">
+							<img src="{ m.img }" />
+						</a>
 					</li>
 				</ul>
 			</div>
 		</member-profile>
 		<member-costume>
-			<h4>衣装</h4>
-			<table class="tbl2">
+			<h4 if={ opts.cos != null }>衣装</h4>
+			<table class="tbl2" if={ opts.cos != null }>
 				<tr each={ c in opts.cos } data-editId="{ c.id }">
 					<th>{ c.nm }</th>
 					<td>
@@ -755,8 +757,8 @@
 			</table>
 		</member-costume>
 		<member-skill>
-			<h4>スキル</h4>
-			<table class="tbl2">
+			<h4 if={ opts.skill != null }>スキル</h4>
+			<table class="tbl2" if={ opts.skill != null }>
 				<tr each={ s in opts.skill } data-editId="{ s.id }">
 					<th class="skilnm { s.st }"><b></b>{ s.nm }</th>
 					<td class='{ s.val == 10 ? "ovA" : s.val >= 5 ? "ov5" : "" }'>
