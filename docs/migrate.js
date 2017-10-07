@@ -160,6 +160,13 @@ Migrate = [
       registLive(db, 36, "Oh,Love&Peace!");
       registCostume(db, 13, "水着風衣装");
     }
+  },
+  {
+    dbver: "1.00.13",
+    msg: "衣装「Music S.T.A.R.T!!」を追加します。",
+    upd : function(db){
+      registCostume(db, 14, "Music S.T.A.R.T!!");
+    }
   }
 ];
 
