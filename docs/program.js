@@ -416,7 +416,15 @@ var ListView = (function(){
   };
 
   v.setMemberCostume = function(memId) {
-    memCosView = riot.mount("member-costume", {"cos": DB.getMemberCostumeList(memId)});
+    var memCostume = DB.getMemberCostumeList(memId);
+    var cosCnt = {"hr": 0, "r": 0};
+    if (memCostume != null) {
+      for (var i = 0; i < memCostume.length; i++) {
+        if (memCostume[i].hr) cosCnt.hr += 1;
+        if (memCostume[i].r) cosCnt.r += 1;
+      }
+    }
+    memCosView = riot.mount("member-costume", {"cos": memCostume, "cnt": cosCnt});
   };
   v.setMemberSkill = function(memId) {
     riot.mount("member-skill", {"skill": DB.getMemberSkillList(memId)});

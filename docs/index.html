@@ -738,6 +738,7 @@
 		</member-profile>
 		<member-costume>
 			<h4 if={ opts.cos != null }>衣装</h4>
+			<div if={ opts.cnt != null }>HR：　 { opts.cnt.hr } ／　R： { opts.cnt.r } </div>
 			<table class="tbl2" if={ opts.cos != null }>
 				<tr each={ c in opts.cos } data-editId="{ c.id }">
 					<th>{ c.nm }</th>
