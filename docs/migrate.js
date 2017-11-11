@@ -167,6 +167,13 @@ Migrate = [
     upd : function(db){
       registCostume(db, 14, "Music S.T.A.R.T!!");
     }
+  },
+  {
+    dbver: "1.00.14",
+    msg: "スキル「メンバーラブリハート」を追加します。",
+    upd : function(db){
+      db.save("s010", {id: "s010",so: 10,nm: "メンバーラブリハート",st: "st3",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
+    }
   }
 ];
 

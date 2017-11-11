@@ -24,7 +24,7 @@ function jq(id) {
 }
 
 function isEventSkill(skillId) {
-  return skillId == "s007" || skillId == "s008" || skillId == "s009";
+  return skillId == "s007" || skillId == "s008" || skillId == "s009" || skillId == "s010";
 }
 function formatNowISOString() {
   return formatDateISOString(new Date());
