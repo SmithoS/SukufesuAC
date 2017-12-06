@@ -174,6 +174,16 @@ Migrate = [
     upd : function(db){
       db.save("s010", {id: "s010",so: 10,nm: "メンバーラブリハート",st: "st3",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
     }
+  },
+  {
+    dbver: "1.00.15",
+    msg: "衣装「サイバーガール」を追加します。スキル「メンバーラブリーハート」の名前を修正します。",
+    upd : function(db){
+      registCostume(db, 15, "サイバーガール");
+      var skill = db.getSkill("s010");
+      skill.nm = "メンバーラブリーハート";
+      db.save("s010", skill);
+    }
   }
 ];
 
