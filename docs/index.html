@@ -647,28 +647,28 @@
 	<script type="riot/tag">
 		<costume>
 		  <div class="itm" each={ c in opts.cos } data-editId="{ c.id }">
-				<h3>{ c.nm }</h3>
-				<table class="tbl1">
-					<colgroup>
-						<col each={ m in parent.opts.mem } class="{ m.id }" />
-					</colgroup>
-		      <tr class="mem">
-		        <th each={ m in parent.opts.mem } data-mem="{ m.id }">
-							<span class="nameFull">{ m.nm }</span>
-							<span class="nameShort">{ m.snm }</span>
-							<span class="name1Char">{ m.c1nm }</span>
-							<span class="name2Char">{ m.c2nm }</span>
-						</th>
-		      </tr>
-		      <tr class="hr">
-		        <td each={ m in parent.opts.mem } data-mem="{ m.id }" class='{ c.hr[m.id] ? "owned" : "" }'>
-							<span class="rareMark"><span class="rareTxt">HR</span>
-						</td>
-		      </tr>
-		      <tr class="r">
-						<td each={ m in parent.opts.mem } data-mem="{ m.id }" class='{ c.r[m.id] ? "owned" : "" }'>
-							<span class="rareMark"><span class="rareTxt">R</span>
-						</td>
+			<h3>{ c.nm }</h3>
+			<table class="tbl1">
+				<colgroup>
+					<col each={ hrm in Object.getOwnPropertyNames(c.hr) } class="{ hrm }" />
+				</colgroup>
+		      	<tr class="mem">
+		        	<th each={ mid in Object.getOwnPropertyNames(c.hr) } data-mem="{ mid }">
+						<span class="nameFull">{ DB.getMember(mid).nm }</span>
+						<span class="nameShort">{ DB.getMember(mid).snm }</span>
+						<span class="name1Char">{ DB.getMember(mid).c1nm }</span>
+						<span class="name2Char">{ DB.getMember(mid).c2nm }</span>
+					</th>
+		      	</tr>
+		      	<tr class="hr">
+		        	<td each={ mid in Object.getOwnPropertyNames(c.hr) } data-mem="{ mid }" class='{ c.hr[mid] ? "owned" : "" }'>
+						<span class="rareMark"><span class="rareTxt">HR</span>
+					</td>
+		      	</tr>
+		      	<tr class="r">
+					<td each={ mid in Object.getOwnPropertyNames(c.r) } data-mem="{ mid }" class='{ c.r[mid] ? "owned" : "" }'>
+						<span class="rareMark"><span class="rareTxt">R</span>
+					</td>
 		      </tr>
 		    </table>
 		  </div>

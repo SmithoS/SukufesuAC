@@ -172,12 +172,14 @@ var DB = (function(){
       var l = [];
       for (var i = 0; i < clsLen; i++) {
         var cos = cosList[i];
-        l.push({
-          id: cos.id,
-          nm: cos.nm,
-          hr: cos.hr[memId],
-          r: cos.r[memId]
-        });
+        if (cos.hr[memId] != null) {
+          l.push({
+            id: cos.id,
+            nm: cos.nm,
+            hr: cos.hr[memId],
+            r: cos.r[memId]
+          });
+        }
       }
       return l;
     }
@@ -508,10 +510,12 @@ var ListView = (function(){
     var ski = DB.getSkillList();
     for (var i = 0; i < cos.length; i++) {
       for (var memid in cos[i].hr) {
-        cosPer.cntHR += 1;
-        cosPer.cntR += 1;
-        if (cos[i].hr[memid]) cosPer.obtHR += 1;
-        if (cos[i].r[memid]) cosPer.obtR += 1;
+        if (cos[i].hr[memid] != null) {
+          cosPer.cntHR += 1;
+          cosPer.cntR += 1;
+          if (cos[i].hr[memid]) cosPer.obtHR += 1;
+          if (cos[i].r[memid]) cosPer.obtR += 1;
+        }
       }
     }
     for (var i = 0; i < ski.length; i++) {
