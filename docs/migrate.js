@@ -68,7 +68,7 @@ Migrate = [
       if (st.hasOwnProperty("invitation_warn_skill_lv")) delete st["invitation_warn_skill_lv"];
       db.save("_setting", st);
       //これサム追加
-      registCostume(db, 8, "これからのSomeday");
+      registCostumeAllMuse(db, 8, "これからのSomeday");
     }
   },
   {
@@ -113,14 +113,14 @@ Migrate = [
     dbver: "1.00.06",
     msg: "衣装「ウェディング風衣装」を追加しました。",
     upd : function(db){
-      registCostume(db, 9, "ウェディング風衣装");
+      registCostumeAllMuse(db, 9, "ウェディング風衣装");
     }
   },
   {
     dbver: "1.00.07",
     msg: "楽曲「Wonder zone」衣装「パンキッシュ・ロック・ガール」を追加しました。",
     upd : function(db){
-      registCostume(db, 10, "パンキッシュ・ロック・ガール");
+      registCostumeAllMuse(db, 10, "パンキッシュ・ロック・ガール");
       registLive(db, 33, "Wonder zone");
     }
   },
@@ -135,7 +135,7 @@ Migrate = [
     dbver: "1.00.09",
     msg: "衣装「Dancing stars on me!」を追加します。",
     upd : function(db){
-      registCostume(db, 11, "Dancing stars on me!");
+      registCostumeAllMuse(db, 11, "Dancing stars on me!");
     }
   },
   {
@@ -150,7 +150,7 @@ Migrate = [
     dbver: "1.00.11",
     msg: "衣装「ユニット衣装（BiBiのレザーグロス・クイーン）」を追加します。ユニットごとに表記を切り替えるような対応は今後追加します",
     upd : function(db){
-      registCostume(db, 12, "ユニット衣装");
+      registCostumeAllMuse(db, 12, "ユニット衣装");
     }
   },
   {
@@ -158,14 +158,14 @@ Migrate = [
     msg: "楽曲「Oh,Love&Peace!」衣装「水着風衣装」を追加します。",
     upd : function(db){
       registLive(db, 36, "Oh,Love&Peace!");
-      registCostume(db, 13, "水着風衣装");
+      registCostumeAllMuse(db, 13, "水着風衣装");
     }
   },
   {
     dbver: "1.00.13",
     msg: "衣装「Music S.T.A.R.T!!」を追加します。",
     upd : function(db){
-      registCostume(db, 14, "Music S.T.A.R.T!!");
+      registCostumeAllMuse(db, 14, "Music S.T.A.R.T!!");
     }
   },
   {
@@ -179,22 +179,75 @@ Migrate = [
     dbver: "1.00.15",
     msg: "衣装「サイバーガール」を追加します。スキル「メンバーラブリーハート」の名前を修正します。",
     upd : function(db){
-      registCostume(db, 15, "サイバーガール");
+      registCostumeAllMuse(db, 15, "サイバーガール");
       var skill = db.getSkill("s010");
       skill.nm = "メンバーラブリーハート";
       db.save("s010", skill);
     }
+  },
+  {
+    dbver: "1.00.16",
+    msg: "「ユニット衣装」でまとめられていた「レザーグロス・クイーン(BiBi)」「ピュアリークリア(lily white)」「フラウリーハート(Printemps)」をユニットそれぞれの衣装に分割します。<br />保持状態は「ユニット衣装」から自動で引き継ぎます。<br />衣装「フラワー・チロル」「Heart to Heart」スキル「アクティビティプラス」「メンバーハートフレーム」「パウダースノー」「おそろいのバッグチャーム」を追加します。",
+    upd : function(db){
+      // -- 衣装の分割 --
+      var unitCosId = "c012";
+      var unitCos = db.getCostume(unitCosId);
+
+      if (unitCos != null) {
+        registCostume(db, 16, "レザーグロス・クイーン", Unit.BiBi);
+        for (var i = 0; i < Unit.BiBi.length; i++) {
+          var id = Unit.BiBi[i];
+          db.saveCostume("c016", id, unitCos.hr[id], unitCos.r[id]);
+        }
+        registCostume(db, 17, "ピュアリークリア", Unit.LilyWhite);
+        for (var i = 0; i < Unit.LilyWhite.length; i++) {
+          var id = Unit.LilyWhite[i];
+          db.saveCostume("c017", id, unitCos.hr[id], unitCos.r[id]);
+        }
+        registCostume(db, 18, "フラウリーハート", Unit.Printemps);
+        for (var i = 0; i < Unit.Printemps.length; i++) {
+          var id = Unit.Printemps[i];
+          db.saveCostume("c018", id, unitCos.hr[id], unitCos.r[id]);
+        }
+        db.delete(unitCosId);
+      }
+
+      // -- 新規衣装の追加 --
+      registCostume(db, 19, "フラワー・チロル", Unit.Printemps);
+      registCostumeAllMuse(db, 20, "HEART to HEART!(AC)");
+      // -- 新スキル追加 --
+      db.save("s011", {id: "s011",so: 11,nm: "アクティビティプラス",st: "st1",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
+      db.save("s012", {id: "s012",so: 12,nm: "メンバーハートフレーム",st: "st2",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
+      db.save("s013", {id: "s013",so: 13,nm: "パウダースノー",st: "st3",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
+      db.save("s014", {id: "s014",so: 14,nm: "おそろいのバッグチャーム",st: "st3",val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}});
+    }
   }
 ];
 
-function registCostume(db, num, name) {
+var Unit = {
+  Printemps: ["m01", "m03", "m08"],
+  LilyWhite: ["m04", "m05", "m07"],
+  BiBi: ["m02", "m06", "m09"]
+};
+
+function registCostumeAllMuse(db, num, name) {
+  registCostume(db, num, name, ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09"]);
+}
+
+function registCostume(db, num, name, memAry) {
   var idval = "c" + ("000" + num).slice(-3);
+  var hrObj = {};
+  var rObj = {};
+  for (var i = 0; i < memAry.length; i++) {
+    hrObj[memAry[i]] = false;
+    rObj[memAry[i]] = false;
+  }
   db.save(idval, {
     id: idval,
     so: num,
     nm: name,
-    hr: {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false},
-    r:  {m01: false,m02: false,m03: false,m04: false,m05: false,m06: false,m07: false,m08: false,m09: false}
+    hr: hrObj,
+    r:  rObj
   });
 }
 

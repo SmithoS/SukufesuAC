@@ -24,7 +24,7 @@ function jq(id) {
 }
 
 function isEventSkill(skillId) {
-  return skillId == "s007" || skillId == "s008" || skillId == "s009" || skillId == "s010";
+  return skillId == "s007" || skillId == "s008" || skillId == "s009" || skillId == "s010" || skillId == "s014";
 }
 function formatNowISOString() {
   return formatDateISOString(new Date());
@@ -93,6 +93,9 @@ var DB = (function(){
 
     return l;
   }
+  function remove(id) {
+    LS.removeItem(id);
+  }
 
 
   d.init = function(argument) {
@@ -103,7 +106,7 @@ var DB = (function(){
     var currentVer = currentMig.dbver;
     if (lastUpdDbVer < currentVer) {
 
-      var updateMsg = lastUpdDbVer == "0" ? "初回のデータ登録を行います。" : currentMig.msg + "\r\nデータを更新します。";
+      var updateMsg = lastUpdDbVer == "0" ? "初回のデータ登録を行います。" : currentMig.msg + "<br /><br />データを更新します。";
 
       Dialog.open({
         type: "confirm",
@@ -374,14 +377,16 @@ var DB = (function(){
       "events": events
     });
   };
-
-
   d.loadInportData = function(str) {
     var dt = JSON.parse(str);
     for (var k in dt) {
       setJson(k, dt[k]);
     }
   };
+
+  d.delete = function(id) {
+    remove(id);
+  }
 
   return d;
 })();
@@ -747,7 +752,7 @@ var Dialog = (function(){
       $dialog.find(".editArea").css("display", "none");
       $dialog.find(".confirmArea").css("display", "block");
       $dialog.find(".confirmArea .confirmTxt1").text(prm.text1);
-      $dialog.find(".confirmArea .confirmTxt2").text(prm.text2);
+      $dialog.find(".confirmArea .confirmTxt2").append(prm.text2);
       okCallback = prm.okCallback;
     }
 
