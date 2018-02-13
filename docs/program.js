@@ -22,7 +22,9 @@ var EventLockCount = 0;
 function jq(id) {
   return $(document.getElementById(id));
 }
-
+function isAleCostume(costumeId) {
+  return costumeId == "c021";
+}
 function isEventSkill(skillId) {
   return skillId == "s007" || skillId == "s008" || skillId == "s009" || skillId == "s010" || skillId == "s014";
 }
@@ -219,7 +221,7 @@ var DB = (function(){
     }
     return JSON.stringify(dt);
   };
-  d.getStatisticsCostume = function(method) {
+  d.getStatisticsCostume = function(method, aleCostume) {
     //データの入れる枠を用意
     var mem = JSON.parse(JSON.stringify(_member));
     var len = mem.length;
@@ -253,6 +255,16 @@ var DB = (function(){
         condFunc = function (hr, r) {return !hr && !r;}
         break;
     }
+    var condFunc2;
+    switch (aleCostume) {
+      case "exclude":
+      condFunc2 = function (cos) {return !isAleCostume(cos.id);}
+        break;
+      case "include":
+      default:
+        condFunc2 = function (cos) {return true;}
+        break;
+    }
 
     //衣装を抽出
     var cosList =d.getCostumeList();
@@ -260,7 +272,7 @@ var DB = (function(){
     for (var i = 0; i < cosLen; i++) {
       var cos = cosList[i];
       for (var mid in cos.hr) {
-        if (condFunc(cos.hr[mid], cos.r[mid])) {
+        if (condFunc(cos.hr[mid], cos.r[mid]) && condFunc2(cos)) {
           var m = mem.find(function(e, i, a) {
             return e.id == mid;
           });
@@ -450,7 +462,8 @@ var ListView = (function(){
   };
   v.setStatisticsCostume = function() {
     var method = jq("statisticsCostumeMethod").val();
-    riot.mount("statistics-costume", {mem: DB.getStatisticsCostume(method)});
+    var aleCostume = jq("statisticsAleCostume").val();
+    riot.mount("statistics-costume", {mem: DB.getStatisticsCostume(method, aleCostume)});
     jq("statisticsResultCostume").css("display", "block");
     jq("statisticsResultSkill").css("display", "none");
   };
@@ -514,12 +527,14 @@ var ListView = (function(){
     var cos = DB.getCostumeList();
     var ski = DB.getSkillList();
     for (var i = 0; i < cos.length; i++) {
-      for (var memid in cos[i].hr) {
-        if (cos[i].hr[memid] != null) {
-          cosPer.cntHR += 1;
-          cosPer.cntR += 1;
-          if (cos[i].hr[memid]) cosPer.obtHR += 1;
-          if (cos[i].r[memid]) cosPer.obtR += 1;
+      if (!isAleCostume(cos[i].id)) {
+        for (var memid in cos[i].hr) {
+          if (cos[i].hr[memid] != null) {
+            cosPer.cntHR += 1;
+            cosPer.cntR += 1;
+            if (cos[i].hr[memid]) cosPer.obtHR += 1;
+            if (cos[i].r[memid]) cosPer.obtR += 1;
+          }
         }
       }
     }
