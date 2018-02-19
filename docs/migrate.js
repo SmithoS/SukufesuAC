@@ -228,6 +228,13 @@ Migrate = [
     upd : function(db){
       registCostumeAllMuse(db, 21, "音ノ木坂学院制服(冬服)");
     }
+  },
+  {
+    dbver: "1.00.18",
+    msg: "「トロピカルパレオ」を追加します。",
+    upd : function(db){
+      registCostume(db, 22, "トロピカルパレオ", Unit.LilyWhite);
+    }
   }
 ];
 
