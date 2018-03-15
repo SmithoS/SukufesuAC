@@ -235,6 +235,13 @@ Migrate = [
     upd : function(db){
       registCostume(db, 22, "トロピカルパレオ", Unit.LilyWhite);
     }
+  },
+  {
+    dbver: "1.00.19",
+    msg: "スキル「スターパレード」を追加します。",
+    upd : function(db){
+      registSkill(db, 15, "st3", "スターパレード");
+    }
   }
 ];
 
@@ -272,5 +279,16 @@ function registLive(db, num, name) {
     so: num,
     nm: name,
     cb: {}
+  });
+}
+
+function registSkill(db, num, type, name) {
+  var idval = "s" + ("000" + num).slice(-3);
+  db.save(idval, {
+    id: idval,
+    so: num,
+    nm: name,
+    st: type,
+    val: {m01: 0,m02: 0,m03: 0,m04: 0,m05: 0,m06: 0,m07: 0,m08: 0,m09: 0}
   });
 }
