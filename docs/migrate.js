@@ -242,6 +242,15 @@ Migrate = [
     upd : function(db){
       registSkill(db, 15, "st3", "スターパレード");
     }
+  },
+  {
+    dbver: "1.00.20",
+    msg: "衣装「浴衣風衣装(AC)」「ナインスター・ビーナス」、スキル「花吹雪」を追加します。",
+    upd : function(db){
+      registSkill(db, 16, "st3", "花吹雪");
+      registCostumeAllMuse(db, 23, "浴衣風衣装(AC)");
+      registCostumeAllMuse(db, 24, "ナインスター・ビーナス");
+    }
   }
 ];
 
