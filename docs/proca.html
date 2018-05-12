@@ -1,0 +1,211 @@
+<!DOCTYPE html><html><head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>スクフェスAC部活帳プロカ交換</title>
+	<!-- design -->
+	<link rel="stylesheet" type="text/css" href="./sanitize.css" />
+
+	<!-- script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/zepto/1.2.0/zepto.min.js"></script>
+    <script>
+        $(function(){
+            $(".edittext").on("change", function() {
+                var txt = $(this).val();
+                if (txt.length > 2) {
+                    var size = txt.substring(0, 3);
+                    if (!isNaN(size)) {
+                        $(this).css("font-size", size + "px");
+                        $(this).val(txt.substring(3));
+                    }
+                }
+            });
+        });
+    </script>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    #wrapper {
+        height: 100vh;
+        width: 100vw;
+        background-color: #f8f8f8;
+    }
+    #header {
+        padding: 10px 10px 1.5em 10px;
+    }
+    .balloon {
+        position: relative;
+        background: #f8f8f8;
+        border: 4px solid #ff6666;
+    }
+    .balloon:after, .balloon:before {
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+    .balloon:after {
+        top: calc(100% - 1px);
+        right: calc(18% + 6px);
+        border-color: rgba(248, 248, 248, 0);
+        border-top-color: #f8f8f8;
+        border-width: 30px;
+        margin-left: -30px;
+    }
+    .balloon:before {
+        top: 100%;
+        right: 18%;
+        border-color: rgba(255, 102, 102, 0);
+        border-top-color: #ff6666;
+        border-width: 36px;
+        margin-left: -36px;
+    }
+   .edittext {
+        width: 100%;
+        height: 100%;
+        text-align: center;
+    }
+    #contents {
+        padding: 10px 30px;
+        display: flex;
+        justify-content: space-between;
+        height: 85%;
+    }
+    #contents > div {
+        width: 50%;
+    }
+    #CoverFlow {
+        text-align: center;
+        height: 75%;
+    }
+    #CoverFlow ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 210px;
+        height: 100%;
+        display: inline-block;
+        position: relative;
+    }
+    #CoverFlow li {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        animation: coverflow 16s ease both infinite;
+    }
+    #CoverFlow li:nth-child(2) { animation-delay: 4s; }
+    #CoverFlow li:nth-child(3) { animation-delay: 8s; }
+    #CoverFlow li:nth-child(4) { animation-delay: 12s; }
+    #CoverFlow li img {
+        max-height: 90%;
+        height: auto;
+        width: auto;
+    }
+
+    @keyframes coverflow {
+        0%, 10% {
+            opacity: 1;
+            transform: none;
+            z-index: 10;
+        }
+        25%, 35% {
+            opacity: 0.2;
+            transform: translate3d(-170px, 0, 0) scale(0.4);
+        }
+        50% {
+            opacity: 0;
+            transform: translate3d(-200px, 0, 0) scale(0.4);
+        }
+        60% {
+            opacity: 0;
+            transform: translate3d(200px, 0, 0) scale(0.4);
+        }
+        75%, 85% {
+            opacity: 0.2;
+            transform: translate3d(170px, 0, 0) scale(0.4);
+        }
+    }
+    #notice {
+        height: 25%;
+    }
+    .noticeballoon {
+        margin: 10px ;
+        padding: 10px ;
+        text-align: center ;
+        box-shadow: 0 0 0 5px #ff6666 inset ;
+        position: relative ;
+        z-index: 100 ;
+        background: #fff ;
+        overflow: hidden ;
+        height: 100%;
+    }
+    .noticeballoon::before {
+        border-radius: 50% ;
+        display: block ;
+        position: absolute ;
+        top: -10px ;
+        left: -10px ;
+        width: 20px ;
+        height: 20px ;
+        content: "" ;
+        background-color: #ff6666 ;
+        box-shadow: 0 0 0 2px #f8f8f8, 0 0 0 7px #ff6666 ;
+    }
+    .noticeballoon::after {
+        border-radius: 50% ;
+        display: block ;
+        position: absolute ;
+        bottom: -10px ;
+        right: -10px ;
+        width: 20px ;
+        height: 20px ;
+        content: "" ;
+        background-color: #ff6666 ;
+        box-shadow: 0 0 0 2px #f8f8f8, 0 0 0 7px #ff6666 ;
+    }
+    #announce {
+        text-align: right;
+    }
+    #announce img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <p class="balloon">
+                <input type="text" class="edittext" />
+            </p>
+        </div>
+        <div id="contents">
+            <div>
+                <div id="CoverFlow">
+                    <ul>
+                        <li><img src="https://i.gyazo.com/0beebc12235a35541fd9dc2f0a1a589f.jpg" /></li>
+                        <li><img src="https://i.gyazo.com/4d8652ab857dd0191b253efb586be388.jpg" /></li>
+                        <li><img src="https://i.gyazo.com/db0b7cbc29ed24c48b8bd4527350ff30.jpg" /></li>
+                        <li><img src="https://i.gyazo.com/c184aafc69e69b428b98c31cbb8633dd.jpg" /></li>
+                    </ul>
+                </div>
+                <div id="notice">
+                    <p class="noticeballoon">
+                        <textarea class="edittext"></textarea>
+                    </p>
+                </div>
+            </div>
+            <div id="announce">
+                <img src="https://i.gyazo.com/c4f96fb13ee245bd71c899a11eff884a.png" />
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
