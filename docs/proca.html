@@ -97,6 +97,7 @@
             width: 100%;
             height: 100%;
             text-align: center;
+            margin: 0;
         }
         #contents {
             padding: 10px 30px;
@@ -112,6 +113,7 @@
         }
         #CoverFlow {
             text-align: center;
+            min-height: 450px;
             height: 75%;
         }
         #CoverFlow ul {
@@ -131,12 +133,13 @@
             -webkit-animation: coverflow 16s ease both infinite;
             animation: coverflow 16s ease both infinite;
         }
+        #CoverFlow li:nth-child(1) { -webkit-animation-delay: 0s;  animation-delay: 0s; }
         #CoverFlow li:nth-child(2) { -webkit-animation-delay: 4s;  animation-delay: 4s; }
         #CoverFlow li:nth-child(3) { -webkit-animation-delay: 8s;  animation-delay: 8s; }
         #CoverFlow li:nth-child(4) { -webkit-animation-delay: 12s; animation-delay: 12s; }
         #CoverFlow li img {
-            width:330px;
-            height: auto;
+            height: 430px;
+            width: auto;
         }
     
         @-webkit-keyframes coverflow {
