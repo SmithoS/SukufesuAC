@@ -251,6 +251,14 @@ Migrate = [
       registCostumeAllMuse(db, 23, "浴衣風衣装(AC)");
       registCostumeAllMuse(db, 24, "ナインスター・ビーナス");
     }
+  },
+  {
+    dbver: "1.00.21",
+    msg: "衣装「スチームピーク」「キャンディポッププリンセス」を追加します。",
+    upd : function(db){
+      registCostume(db, 25, "スチームピーク", Unit.BiBi);
+      registCostumeAllMuse(db, 26, "キャンディポッププリンセス");
+    }
   }
 ];
 
