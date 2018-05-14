@@ -527,14 +527,12 @@ var ListView = (function(){
     var cos = DB.getCostumeList();
     var ski = DB.getSkillList();
     for (var i = 0; i < cos.length; i++) {
-      if (!isAleCostume(cos[i].id)) {
-        for (var memid in cos[i].hr) {
-          if (cos[i].hr[memid] != null) {
-            cosPer.cntHR += 1;
-            cosPer.cntR += 1;
-            if (cos[i].hr[memid]) cosPer.obtHR += 1;
-            if (cos[i].r[memid]) cosPer.obtR += 1;
-          }
+      for (var memid in cos[i].hr) {
+        if (cos[i].hr[memid] != null) {
+          cosPer.cntHR += 1;
+          cosPer.cntR += 1;
+          if (cos[i].hr[memid]) cosPer.obtHR += 1;
+          if (cos[i].r[memid]) cosPer.obtR += 1;
         }
       }
     }
