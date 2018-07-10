@@ -259,6 +259,14 @@ Migrate = [
       registCostume(db, 25, "スチームピーク", Unit.BiBi);
       registCostumeAllMuse(db, 26, "キャンディポッププリンセス");
     }
+  },
+  {
+    dbver: "1.00.22",
+    msg: "衣装「フェアリーエンジェル」「スターリング・レースガール」を追加します。",
+    upd : function(db){
+      registCostume(db, 27, "フェアリーエンジェル", Unit.Printemps);
+      registCostumeAllMuse(db, 28, "スターリング・レースガール");
+    }
   }
 ];
 
