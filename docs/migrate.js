@@ -267,6 +267,13 @@ Migrate = [
       registCostume(db, 27, "フェアリーエンジェル", Unit.Printemps);
       registCostumeAllMuse(db, 28, "スターリング・レースガール");
     }
+  },
+  {
+    dbver: "1.00.23",
+    msg: "スキル「メンバーメロディフレーム」を追加します。",
+    upd : function(db){
+      registSkill(db, 17, "st2", "メンバーメロディフレーム");
+    }
   }
 ];
 
