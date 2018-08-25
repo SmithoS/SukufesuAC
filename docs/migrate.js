@@ -274,17 +274,27 @@ Migrate = [
     upd : function(db){
       registSkill(db, 17, "st2", "メンバーメロディフレーム");
     }
+  },
+  {
+    dbver: "1.00.24",
+    msg: "スキル「グラフィティフレーム」「スターライトフレーム」衣装「グレイシーパルフェ」を追加します。",
+    upd : function(db){
+      registCostume(db, 29, "グレイシーパルフェ", Unit.LilyWhite);
+      registSkill(db, 18, "st2", "グラフィティフレーム");
+      registSkill(db, 19, "st2", "スターライトフレーム");
+    }
   }
 ];
 
 var Unit = {
   Printemps: ["m01", "m03", "m08"],
   LilyWhite: ["m04", "m05", "m07"],
-  BiBi: ["m02", "m06", "m09"]
+  BiBi: ["m02", "m06", "m09"],
+  Muse: ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09"]
 };
 
 function registCostumeAllMuse(db, num, name) {
-  registCostume(db, num, name, ["m01", "m02", "m03", "m04", "m05", "m06", "m07", "m08", "m09"]);
+  registCostume(db, num, name, Unit.Muse);
 }
 
 function registCostume(db, num, name, memAry) {

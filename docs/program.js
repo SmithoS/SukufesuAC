@@ -26,7 +26,7 @@ function isAleCostume(costumeId) {
   return costumeId == "c021";
 }
 function isEventSkill(skillId) {
-  return skillId == "s007" || skillId == "s008" || skillId == "s009" || skillId == "s010" || skillId == "s014" || skillId == "s015";
+  return skillId == "s007" || skillId == "s008" || skillId == "s009" || skillId == "s010" || skillId == "s014" || skillId == "s015" || skillId == "s017";
 }
 function formatNowISOString() {
   return formatDateISOString(new Date());
