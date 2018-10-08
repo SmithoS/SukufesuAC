@@ -283,6 +283,14 @@ Migrate = [
       registSkill(db, 18, "st2", "グラフィティフレーム");
       registSkill(db, 19, "st2", "スターライトフレーム");
     }
+  },
+  {
+    dbver: "1.00.25",
+    msg: "衣装「メイド・イン・ワンダーランド」「ビビッド・ネオンガール」を追加します。",
+    upd : function(db){
+      registCostume(db, 30, "メイド・イン・ワンダーランド", Unit.Muse);
+      registCostume(db, 31, "ビビッド・ネオンガール", Unit.BiBi);
+    }
   }
 ];
 
